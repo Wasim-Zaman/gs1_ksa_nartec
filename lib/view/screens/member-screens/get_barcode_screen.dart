@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/models/member-registration/documents_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -113,8 +114,8 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                   ),
                   Divider(color: Theme.of(context).primaryColor, thickness: 4),
                   const SizedBox(height: 10),
-                  const RequiredTextWidget(
-                      title: 'Is your company located in Kingdom '),
+                  RequiredTextWidget(
+                      title: 'Is your company located in Kingdom'.tr),
                   YesNoRadioButtons(
                     onChanged: (value) {
                       setState(() {
@@ -124,7 +125,7 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                     initialValue: isCompanyLocatedInKSA,
                   ),
                   const SizedBox(height: 30),
-                  const RequiredTextWidget(title: 'Did you have CR number ? '),
+                  RequiredTextWidget(title: 'Did you have CR number'.tr),
                   YesNoRadioButtons(
                     onChanged: (value) {
                       setState(() {
@@ -135,19 +136,19 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                   ),
                   const SizedBox(height: 30),
                   hasCrNumber
-                      ? const RequiredTextWidget(title: 'CR Number')
-                      : const RequiredTextWidget(title: 'Document'),
+                      ? RequiredTextWidget(title: 'CR Number'.tr)
+                      : RequiredTextWidget(title: 'Document'.tr),
                   const SizedBox(height: 10),
                   hasCrNumber
                       ? CustomTextField(
                           controller: _crNumberController,
-                          hintText: "Enter CR Number",
+                          hintText: "Enter CR Number".tr,
                           validator: (p0) {
                             if (p0 == null || p0.isEmpty) {
-                              return "Please enter CR Number";
+                              return "Please enter CR Number".tr;
                             }
                             if (p0.length < 10 || p0.length > 10) {
-                              return "Please enter valid CR Number";
+                              return "Please enter valid CR Number".tr;
                             }
                             return null;
                           },
@@ -163,11 +164,11 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return const Center(
+                                  return Center(
                                     child: SizedBox(
                                       height: 40,
                                       child: LinearProgressIndicator(
-                                        semanticsLabel: "Loading",
+                                        semanticsLabel: "Loading".tr,
                                       ),
                                     ),
                                   );
@@ -178,15 +179,16 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        const Text(
-                                          "Something went wrong, refresh the page",
+                                        Text(
+                                          "Something went wrong, refresh the page"
+                                              .tr,
                                         ),
                                         TextButton.icon(
                                           onPressed: () {
                                             setState(() {});
                                           },
                                           icon: const Icon(Icons.refresh),
-                                          label: const Text("Refresh"),
+                                          label: Text("retry".tr),
                                         ),
                                       ],
                                     ),
@@ -238,7 +240,7 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
                   const SizedBox(height: 20),
                   CustomElevatedButton(
                     bgColor: darkBlue,
-                    caption: "Validate",
+                    caption: "Validate".tr,
                     buttonWidth: double.infinity,
                     onPressed: () {
                       _saveForm();

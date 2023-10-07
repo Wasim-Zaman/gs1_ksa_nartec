@@ -67,6 +67,20 @@ class LocalString extends Translations {
           "GLN Total Barcodes": "GLN Total Barcodes",
           "Issued SSC": "Issued SSC",
           "SSC Total Barcodes": "SSC Total Barcodes",
+
+          // Get a barcode screen
+          'Is your company located in Kingdom':
+              'Is your company located in Kingdom ',
+          'Did you have CR number': 'Did you have CR number ?',
+          'CR Number': 'CR Number',
+          'Document': 'Document',
+          'Enter CR Number': 'Enter CR Number',
+          'Please enter CR Number': 'Please enter CR Number',
+          'Please enter valid CR Number': 'Please enter valid CR Number',
+          'Loading': 'Loading',
+          'Something went wrong, refresh the page':
+              'Something went wrong, refresh the page',
+          'Validate': 'Validate',
         },
 
         /// Arabic ///
@@ -134,6 +148,19 @@ class LocalString extends Translations {
           "GLN Total Barcodes": "GLN إجمالي الرموز الشريطية",
           "Issued SSC": "SSC صدر",
           "SSC Total Barcodes": "SSC إجمالي الرموز الشريطية",
+
+          // Get a barcode screen
+          'Is your company located in Kingdom': 'هل تقع شركتك في المملكة',
+          'Did you have CR number': 'هل لديك رقم CR؟',
+          'CR Number': 'رقم CR',
+          'Document': 'وثيقة',
+          'Enter CR Number': 'أدخل رقم CR',
+          'Please enter CR Number': 'الرجاء إدخال رقم CR',
+          'Please enter valid CR Number': 'الرجاء إدخال رقم CR صالح',
+          'Loading': 'جار التحميل',
+          'Something went wrong, refresh the page':
+              'حدث خطأ ما ، قم بتحديث الصفحة',
+          'Validate': 'تحقق',
         },
       };
 }
