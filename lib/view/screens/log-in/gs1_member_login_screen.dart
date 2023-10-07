@@ -80,7 +80,7 @@ class _Gs1MemberLoginScreenState extends State<Gs1MemberLoginScreen> {
           child: ListView(
             children: [
               const LoginLogoWidget(),
-              const RequiredTextWidget(title: "Email Address"),
+              RequiredTextWidget(title: "emailAddress".tr),
               const SizedBox(height: 10),
               TextFieldWidget(
                 controller: emailController,
@@ -109,18 +109,18 @@ class _Gs1MemberLoginScreenState extends State<Gs1MemberLoginScreen> {
                             child: CircularProgressIndicator(
                             color: Colors.white,
                           ))
-                        : const Text("Login Now")),
+                        : Text("loginNow".tr)),
               ),
               const SizedBox(height: 50),
               Row(
                 children: [
-                  const Text("Forgot Password?"),
+                  Text("forgotPassword".tr),
                   const SizedBox(width: 10),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(ResetScreenOne.routeName);
                     },
-                    child: const Text("Click Here to Reset"),
+                    child: Text("clickHereToResetPassword".tr),
                   ),
                 ],
               )

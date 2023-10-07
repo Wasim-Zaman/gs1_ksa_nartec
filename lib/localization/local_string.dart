@@ -30,6 +30,10 @@ class LocalString extends Translations {
 
           // GS1 member login screen
           'gs1MemberLogin': 'GS1 Member Login',
+          'emailAddress': 'Email Address',
+          'loginNow': 'Login Now',
+          'clickHereToReset': 'Click Here To Reset',
+          'forgotPassword': 'Forgot Password?',
         },
         'ar_SA': {
           'helpDesk': 'مكتب المساعدة',
@@ -59,6 +63,10 @@ class LocalString extends Translations {
 
           // GS1 member login screen
           'gs1MemberLogin': 'تسجيل الدخول للأعضاء',
+          'emailAddress': 'عنوان البريد الإلكتروني',
+          'loginNow': 'سجل الان',
+          'clickHereToReset': 'انقر هنا لإعادة تعيين',
+          'forgotPassword': 'هل نسيت كلمة المرور؟',
         },
       };
 }
