@@ -161,13 +161,13 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
               30.heightBox,
               if (icon == 'product-contents')
                 customAppBarWidget(
-                  title: 'Product Contents',
+                  title: 'Product Contents'.tr,
                   icon: Icons.shopping_bag_outlined,
                   backgroundColor: Colors.deepOrange,
                 ),
               if (icon == 'retail-information')
                 customAppBarWidget(
-                    title: 'Retail Information',
+                    title: 'Retail Information'.tr,
                     icon: Icons.shopping_bag_outlined,
                     backgroundColor: Colors.green[800]),
               Padding(
@@ -176,6 +176,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     "Scan QR Code from your device's camera"
+                        .tr
                         .text
                         .color(AppColors.primaryColor)
                         .xl
@@ -187,14 +188,14 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                       children: [
                         RectangularTextButton(
                           onPressed: stopScanning,
-                          caption: "RESET",
+                          caption: "RESET".tr,
                           buttonHeight: context.height * 0.05,
                         ),
                         RectangularTextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          caption: "PREVIOUS PAGE",
+                          caption: "PREVIOUS PAGE".tr,
                           buttonHeight: context.height * 0.05,
                         ),
                       ],
@@ -218,6 +219,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                           : const SizedBox.shrink(),
                     ),
                     "Ready - Click START to scan"
+                        .tr
                         .text
                         .xl
                         .color(AppColors.primaryColor)
@@ -225,7 +227,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                         .centered(),
                     20.heightBox,
                     PrimaryButtonWidget(
-                      caption: 'START',
+                      caption: 'START'.tr,
                       onPressed: startScanning,
                     ).box.make().centered(),
                     const SizedBox(height: 30),

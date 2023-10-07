@@ -97,6 +97,16 @@ class LocalString extends Translations {
           'Unit Of Measuremet Is Incorrect': 'Unit Of Measuremet Is Incorrect',
           'Product Description Not Matching On Physical Product':
               'Product Description Not Matching On Physical Product',
+
+          // Qr code scanning screen
+          "Scan QR Code from your device's camera":
+              "Scan QR Code from your device's camera",
+          "RESET": "RESET",
+          "PREVIOUS PAGE": "PREVIOUS PAGE",
+          "Ready - Click START to scan": "Ready - Click START to scan",
+          'START': 'START',
+          'Product Contents': 'Product Contents',
+          'Retail Information': 'Retail Information',
         },
 
         /// Arabic ///
@@ -193,6 +203,16 @@ class LocalString extends Translations {
           'Unit Of Measuremet Is Incorrect': 'وحدة القياس غير صحيحة',
           'Product Description Not Matching On Physical Product':
               'وصف المنتج لا يتطابق مع المنتج الفعلي',
+
+          // Qr code scanning screen
+          "Scan QR Code from your device's camera":
+              "مسح رمز الاستجابة السريعة من كاميرا جهازك",
+          "RESET": "إعادة تعيين",
+          "PREVIOUS PAGE": "الصفحة السابقة",
+          "Ready - Click START to scan": "جاهز - انقر فوق بدء المسح",
+          'START': 'بداية',
+          'Product Contents': 'محتويات المنتج',
+          'Retail Information': 'معلومات التجزئة',
         },
       };
 }
