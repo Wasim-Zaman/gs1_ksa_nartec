@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -20,8 +21,8 @@ class GtinReporterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text(
-          "GS1 Saudi Arabia",
+        title: Text(
+          "GS1 Saudi Arabia".tr,
           style: TextStyle(
             color: darkBlue,
             fontSize: 30,
@@ -124,7 +125,7 @@ class _ScreenState extends State<Screen> {
 
         const SizedBox(height: 10),
         // Comments section
-        const CustomTextWidget(text: "Write your comment here"),
+        CustomTextWidget(text: "Write your comment here".tr),
         TextFormField(
           maxLines: 5,
           controller: _commentController,
@@ -134,7 +135,7 @@ class _ScreenState extends State<Screen> {
         ),
         const SizedBox(height: 10),
 
-        const CustomTextWidget(text: "Report Barcode"),
+        CustomTextWidget(text: "Report Barcode".tr),
         TextFormField(
           maxLines: 3,
           controller: reportBarcodeController,
@@ -144,7 +145,7 @@ class _ScreenState extends State<Screen> {
         ),
         const SizedBox(height: 10),
 
-        const CustomTextWidget(text: "Mobile Number"),
+        CustomTextWidget(text: "Mobile Number".tr),
         TextFormField(
           controller: mobileNoController,
           decoration: const InputDecoration(
@@ -153,7 +154,7 @@ class _ScreenState extends State<Screen> {
         ),
         const SizedBox(height: 10),
 
-        const CustomTextWidget(text: "Email"),
+        CustomTextWidget(text: "Email".tr),
         TextFormField(
           controller: emailController,
           decoration: const InputDecoration(
@@ -162,7 +163,7 @@ class _ScreenState extends State<Screen> {
         ),
         const SizedBox(height: 10),
         // action section
-        const CustomTextWidget(text: "Select your action"),
+        CustomTextWidget(text: "Select your action".tr),
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -172,10 +173,8 @@ class _ScreenState extends State<Screen> {
           child: FittedBox(
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
-                hint: const FittedBox(
-                  child: Text(
-                    'Select an action',
-                  ),
+                hint: FittedBox(
+                  child: Text('Select an action'.tr),
                 ), // Optional text to show as a hint
                 value: selectedOption,
                 onChanged: (newValue) {
@@ -183,39 +182,39 @@ class _ScreenState extends State<Screen> {
                     selectedOption = newValue;
                   });
                 },
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: 'Photos Are Not Correct',
                     child: Text(
-                      'Photos Are Not Correct',
+                      'Photos Are Not Correct'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
                     value: 'Missing GPC Brick Code',
                     child: Text(
-                      'Missing GPC Brick Code',
+                      'Missing GPC Brick Code'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
                     value: 'Brand Owner Is Incorrect',
                     child: Text(
-                      'Brand Owner Is Incorrect',
+                      'Brand Owner Is Incorrect'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
                     value: 'Country Of Sale Is Wrong',
                     child: Text(
-                      'Country Of Sale Is Wrong',
+                      'Country Of Sale Is Wrong'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
                     value: 'Unit Of Measuremet Is Incorrect',
                     child: Text(
-                      'Unit Of Measuremet Is Incorrect',
+                      'Unit Of Measuremet Is Incorrect'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
@@ -223,7 +222,7 @@ class _ScreenState extends State<Screen> {
                     value:
                         'Product Description Not Matching On Physical Product',
                     child: Text(
-                      'Product Description Not Matching On Physical Product',
+                      'Product Description Not Matching On Physical Product'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),

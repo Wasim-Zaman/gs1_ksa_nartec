@@ -81,6 +81,22 @@ class LocalString extends Translations {
           'Something went wrong, refresh the page':
               'Something went wrong, refresh the page',
           'Validate': 'Validate',
+
+          // Gtin reporter screen
+          'GS1 Saudi Arabia': 'GS1 Saudi Arabia',
+          'Write your comment here': 'Write your comment here',
+          'Report Barcode': 'Report Barcode',
+          'Mobile Number': 'Mobile Number',
+          'Email': 'Email',
+          'Select your action': 'Select your action',
+          'Select an action': 'Select an action',
+          'Photos Are Not Correct': 'Photos Are Not Correct',
+          'Missing GPC Brick Code': 'Missing GPC Brick Code',
+          'Brand Owner Is Incorrect': 'Brand Owner Is Incorrect',
+          'Country Of Sale Is Wrong': 'Country Of Sale Is Wrong',
+          'Unit Of Measuremet Is Incorrect': 'Unit Of Measuremet Is Incorrect',
+          'Product Description Not Matching On Physical Product':
+              'Product Description Not Matching On Physical Product',
         },
 
         /// Arabic ///
@@ -161,6 +177,22 @@ class LocalString extends Translations {
           'Something went wrong, refresh the page':
               'حدث خطأ ما ، قم بتحديث الصفحة',
           'Validate': 'تحقق',
+
+          // Gtin reporter screen
+          'GS1 Saudi Arabia': 'GS1 السعودية',
+          'Write your comment here': 'اكتب تعليقك هنا',
+          'Report Barcode': 'تقرير الرمز الشريطي',
+          'Mobile Number': 'رقم الهاتف المحمول',
+          'Email': 'البريد الإلكتروني',
+          'Select your action': 'حدد إجراءك',
+          'Select an action': 'حدد إجراء',
+          'Photos Are Not Correct': 'الصور غير صحيحة',
+          'Missing GPC Brick Code': 'رمز GPC Brick مفقود',
+          'Brand Owner Is Incorrect': 'مالك العلامة التجارية غير صحيح',
+          'Country Of Sale Is Wrong': 'بلد البيع خاطئ',
+          'Unit Of Measuremet Is Incorrect': 'وحدة القياس غير صحيحة',
+          'Product Description Not Matching On Physical Product':
+              'وصف المنتج لا يتطابق مع المنتج الفعلي',
         },
       };
 }
