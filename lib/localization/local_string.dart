@@ -48,7 +48,28 @@ class LocalString extends Translations {
           'activity': 'Activity',
           'password': 'Password',
           'providePassword': 'Please provide password',
+          'The requested URL was rejected.Please consult with your administrator':
+              'The requested URL was rejected.\nPlease consult with your administrator.',
+          'Please Wait For Admin Approval': 'Please Wait For Admin Approval',
+          'Error happended while logging in':
+              'Error happended while logging in',
+          'Email does not exists': 'Email does not exists',
+
+          // Dashboard Screen
+          'dashboard': 'Dashboard',
+          'yourSubscriptionWillExpireOn': 'Your Subscription Will Expire On',
+          'GCP': 'GCP',
+          'memberId': 'Member ID',
+          'Range Of Barcodes': 'Range Of Barcodes',
+          'Barcodes Issued': 'Barcodes Issued',
+          'Barcodes Remaining': 'Barcodes Remaining',
+          "GLN Issued": "GLN Issued",
+          "GLN Total Barcodes": "GLN Total Barcodes",
+          "Issued SSC": "Issued SSC",
+          "SSC Total Barcodes": "SSC Total Barcodes",
         },
+
+        /// Arabic ///
         'ar_SA': {
           'helpDesk': 'مكتب المساعدة',
           'contactUs': 'اتصل بنا',
@@ -89,6 +110,30 @@ class LocalString extends Translations {
           'provideOtp': 'يرجى تقديم 6 أرقام OTP',
           'cancel': 'إلغاء',
           'confirm': 'تؤكد',
+
+          // Select Activity and Password Screen
+          'selectActivityAndPassword': 'حدد النشاط وكلمة المرور',
+          'activity': 'نشاط',
+          'password': 'كلمه السر',
+          'providePassword': 'يرجى تقديم كلمة المرور',
+          'The requested URL was rejected.Please consult with your administrator':
+              'تم رفض عنوان URL المطلوب.\nيرجى التشاور مع المسؤول الخاص بك.',
+          'Please Wait For Admin Approval': 'يرجى الانتظار لموافقة المشرف',
+          'Error happended while logging in': 'حدث خطأ أثناء تسجيل الدخول',
+          'Email does not exists': 'البريد الإلكتروني غير موجود',
+
+          // Dashboard Screen
+          'dashboard': 'لوحة القيادة',
+          'yourSubscriptionWillExpireOn': 'ستنتهي اشتراكاتك في',
+          'GCP': 'GCP',
+          'memberId': 'معرف العضو',
+          'Range Of Barcodes': 'نطاق الرموز الشريطية',
+          'Barcodes Issued': 'الرموز الشريطية الصادرة',
+          'Barcodes Remaining': 'الرموز الشريطية المتبقية',
+          "GLN Issued": "GLN صدر",
+          "GLN Total Barcodes": "GLN إجمالي الرموز الشريطية",
+          "Issued SSC": "SSC صدر",
+          "SSC Total Barcodes": "SSC إجمالي الرموز الشريطية",
         },
       };
 }

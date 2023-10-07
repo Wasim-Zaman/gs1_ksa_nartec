@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/utils/url.dart';
 import 'package:http/http.dart' as http;
@@ -97,13 +98,21 @@ class LoginServices {
     ).then((response) {
       if (response.statusCode == 200) {
         // handle successful response
+
         final responseBody = json.decode(response.body) as Map<String, dynamic>;
         return responseBody;
       } else if (response.statusCode == 422) {
-        throw Exception('Please Wait For Admin Approval');
+        throw Exception('Please Wait For Admin Approval'.tr);
       } else {
-        throw Exception('Error happended while logging in');
+        throw Exception('Error happended while logging in'.tr);
       }
+    }).onError((error, stackTrace) {
+      if (error is FormatException) {
+        throw Exception(
+            "The requested URL was rejected.Please consult with your administrator"
+                .tr);
+      } else
+        throw Exception(error.toString());
     });
   }
 
@@ -135,7 +144,7 @@ class LoginServices {
 
         return activities;
       } else if (response.statusCode == 404) {
-        throw Exception('Email does not exists');
+        throw Exception('Email does not exists'.tr);
       } else if (response.statusCode == 500) {
         throw Exception(
             'Internal Server Error: ${response.statusCode} status code');

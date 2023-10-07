@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/view/screens/log-in/after-login/dashboard/widgets/rectagular_widget.dart';
 import 'package:gs1_v2_project/view/screens/log-in/widgets/text_widgets/primary_text_widget.dart';
@@ -99,7 +100,7 @@ class Screen extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const PrimaryTextWidget(text: "Your Subscription Will Expire On"),
+          PrimaryTextWidget(text: "yourSubscriptionWillExpireOn".tr),
           PrimaryTextWidget(text: gcpExpiry.toString()),
           const SizedBox(height: 20),
           Row(
@@ -128,14 +129,14 @@ class Screen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const PrimaryTextWidget(text: "GCP:"),
+                            PrimaryTextWidget(text: "GCP".tr + ":"),
                             PrimaryTextWidget(text: gcpGLNID.toString()),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const PrimaryTextWidget(text: "Member Id:"),
+                            PrimaryTextWidget(text: "memberId".tr + ":"),
                             PrimaryTextWidget(text: companyId.toString()),
                           ],
                         ),
@@ -152,9 +153,9 @@ class Screen extends StatelessWidget {
           const SizedBox(height: 10),
           RectangularWidget(
             text1: category.toString(),
-            text2: "$gtinRange Range Of Barcodes",
-            text3: "$issuedGTIN Barcodes Issued",
-            text4: "$remainingGTIN Barcodes Remaining",
+            text2: "$gtinRange" + " Range Of Barcodes".tr,
+            text3: "$issuedGTIN" + " Barcodes Issued".tr,
+            text4: "$remainingGTIN" + " Barcodes Remaining".tr,
           ),
           const SizedBox(height: 10),
           Divider(thickness: 3, color: Theme.of(context).primaryColor),
@@ -162,10 +163,10 @@ class Screen extends StatelessWidget {
           Image.asset("assets/images/dashboard_location.png"),
           const SizedBox(height: 10),
           RectangularWidget(
-            text1: "$issuedGLN GLN Issued",
-            text2: "$glnTotalBarcodes GLN Total Barcodes",
-            text3: "$issuedSSC Issued SSC",
-            text4: "$sscTotalBarcodes SSC Total Barcodes",
+            text1: "$issuedGLN " + "GLN Issued".tr,
+            text2: "$glnTotalBarcodes " + "GLN Total Barcodes".tr,
+            text3: "$issuedSSC " + "Issued SSC".tr,
+            text4: "$sscTotalBarcodes " + "SSC Total Barcodes".tr,
           ),
           const SizedBox(height: 10),
           // CustomCard(
