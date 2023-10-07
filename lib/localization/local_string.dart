@@ -42,6 +42,12 @@ class LocalString extends Translations {
           'provideOtp': 'Please provide 6 digits OTP',
           'cancel': 'Cancel',
           'confirm': 'Confirm',
+
+          // Select Activity and Password Screen
+          'selectActivityAndPassword': 'Select Activity & Password',
+          'activity': 'Activity',
+          'password': 'Password',
+          'providePassword': 'Please provide password',
         },
         'ar_SA': {
           'helpDesk': 'مكتب المساعدة',
@@ -75,6 +81,14 @@ class LocalString extends Translations {
           'loginNow': 'سجل الان',
           'clickHereToReset': 'انقر هنا لإعادة تعيين',
           'forgotPassword': 'هل نسيت كلمة المرور؟',
+
+          // OTP screen
+          'enterAVerificationCode': 'الرجاء إدخال رمز التحقق',
+          'verifyCode': 'تحقق من الرمز',
+          'otpMustBeSix': 'يجب أن يكون OTP من ستة أرقام',
+          'provideOtp': 'يرجى تقديم 6 أرقام OTP',
+          'cancel': 'إلغاء',
+          'confirm': 'تؤكد',
         },
       };
 }

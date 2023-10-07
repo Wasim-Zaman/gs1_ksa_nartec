@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/login/login_services.dart';
@@ -81,7 +82,7 @@ class _SelectActivityAndPasswordScreenState
     return Scaffold(
       backgroundColor: bgGrey,
       appBar: AppBar(
-        title: const Text("Select Activity & Password"),
+        title: Text("selectActivityAndPassword".tr),
         elevation: 0,
         centerTitle: true,
       ),
@@ -90,7 +91,7 @@ class _SelectActivityAndPasswordScreenState
         child: ListView(
           children: [
             const LoginLogoWidget(),
-            const RequiredTextWidget(title: "Activity"),
+            RequiredTextWidget(title: "activity".tr),
             const SizedBox(height: 10),
             DropdownWidget(
               value: activityValue ?? activities.first,
@@ -105,7 +106,7 @@ class _SelectActivityAndPasswordScreenState
               },
             ),
             const SizedBox(height: 20),
-            const RequiredTextWidget(title: "Password"),
+            RequiredTextWidget(title: "password".tr),
             const SizedBox(height: 10),
             Form(
               key: formKey,
@@ -113,7 +114,7 @@ class _SelectActivityAndPasswordScreenState
                 controller: passwordController,
                 validator: (password) {
                   if (password!.isEmpty) {
-                    return "Please provide password";
+                    return "providePassword".tr;
                   }
                   return null;
                 },
@@ -176,7 +177,7 @@ class _SelectActivityAndPasswordScreenState
                   }
                 }
               },
-              child: const Text("Login Now"),
+              child: Text("loginNow".tr),
             ),
           ],
         ),
