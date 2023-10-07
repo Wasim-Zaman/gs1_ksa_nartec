@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
@@ -20,7 +21,7 @@ class VerifyByGS1Screen extends StatelessWidget {
         future: BaseApiService.getData(context),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: Text('No Data'));
+            return Center(child: Text('noDataFound'.tr));
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -83,7 +84,7 @@ class Screen extends StatelessWidget {
                   children: [
                     customAppBarWidget(
                       backgroundColor: Colors.green.shade400,
-                      title: "GS1 Saudi Arabia",
+                      title: "GS1 Saudi Arabia".tr,
                     ),
                     CustomImageWidget(imageUrl: data?.productImageUrl),
                     const SizedBox(height: 20),
@@ -102,7 +103,7 @@ class Screen extends StatelessWidget {
                           const SizedBox(height: 10),
                           // gtin
                           Text(
-                            "GTIN: ${data?.gtin ?? "6281000000113"}",
+                            "GTIN".tr + ": ${data?.gtin}",
                             style: const TextStyle(
                               fontSize: 18,
                             ),
@@ -163,92 +164,45 @@ class GridWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ExpansionRowWidget(
-          keyy: "GTIN",
+          keyy: "GTIN".tr,
           value: gtinNumber ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
         ExpansionRowWidget(
-          keyy: "Brand Name",
+          keyy: "Brand Name".tr,
           value: productBrand ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
-
         ExpansionRowWidget(
-          keyy: "Product Description",
+          keyy: "Product Description".tr,
           value: productDescription ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
-
         ExpansionRowWidget(
-          keyy: "Product Image Url",
+          keyy: "Product Image Url".tr,
           value: productImageUrl ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
-
         ExpansionRowWidget(
-          keyy: "Global Product Category",
+          keyy: "Global Product Category".tr,
           value: globalProductCategory ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
-
         ExpansionRowWidget(
-          keyy: "Net Content",
+          keyy: "Net Content".tr,
           value: netContent ?? "null",
           fontSize: 18,
         ),
         const Divider(thickness: 2),
-
         ExpansionRowWidget(
-            keyy: "Country of Sale",
+            keyy: "Country of Sale".tr,
             value: countryOfSale ?? "null",
             fontSize: 18),
-        // CustomKeyValueWidget(
-        //   heading: "GTIN",
-        //   value: gtinNumber ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Brand Name",
-        //   value: productBrand ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Product Description",
-        //   value: productDescription ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Product Image Url",
-        //   value: productImageUrl ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Global Product Category",
-        //   value: globalProductCategory ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Net Content",
-        //   value: netContent ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
-        // CustomKeyValueWidget(
-        //   heading: "Country of Sale",
-        //   value: countryOfSale ?? "1234567890123",
-        //   headFlex: 2,
-        //   valueFlex: 3,
-        // ),
       ],
     );
   }
@@ -270,15 +224,16 @@ class PageHeader extends StatelessWidget {
           "assets/images/gs1-logo.png",
           width: 100,
         ),
-        title: const Text(
-          "Complete Data",
+        title: Text(
+          "Complete Data".tr,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: const Text(
-          "This number is registered to company. Al Wifaq Factory For Children Cosmetics",
+        subtitle: Text(
+          "This number is registered to company. Al Wifaq Factory For Children Cosmetics"
+              .tr,
           style: TextStyle(
             fontSize: 16,
           ),

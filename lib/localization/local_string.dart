@@ -107,6 +107,17 @@ class LocalString extends Translations {
           'START': 'START',
           'Product Contents': 'Product Contents',
           'Retail Information': 'Retail Information',
+
+          // Verify by GS1 screen
+          "Brand Name": "Brand Name",
+          "Product Description": "Product Description",
+          "Product Image Url": "Product Image Url",
+          "Global Product Category": "Global Product Category",
+          "Net Content": "Net Content",
+          "Country of Sale": "Country of Sale",
+          "Complete Data": "Complete Data",
+          "This number is registered to company. Al Wifaq Factory For Children Cosmetics":
+              "This number is registered to company. Al Wifaq Factory For Children Cosmetics",
         },
 
         /// Arabic ///
