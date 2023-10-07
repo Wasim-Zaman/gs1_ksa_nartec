@@ -34,6 +34,14 @@ class LocalString extends Translations {
           'loginNow': 'Login Now',
           'clickHereToReset': 'Click Here To Reset',
           'forgotPassword': 'Forgot Password?',
+
+          // OTP screen
+          'enterAVerificationCode': 'Please Enter Verification Code',
+          'verifyCode': 'Verify Code',
+          'otpMustBeSix': 'OTP must be six digits',
+          'provideOtp': 'Please provide 6 digits OTP',
+          'cancel': 'Cancel',
+          'confirm': 'Confirm',
         },
         'ar_SA': {
           'helpDesk': 'مكتب المساعدة',

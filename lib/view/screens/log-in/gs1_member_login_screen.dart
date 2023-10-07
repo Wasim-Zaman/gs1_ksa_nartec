@@ -120,7 +120,7 @@ class _Gs1MemberLoginScreenState extends State<Gs1MemberLoginScreen> {
                     onPressed: () {
                       Navigator.of(context).pushNamed(ResetScreenOne.routeName);
                     },
-                    child: Text("clickHereToResetPassword".tr),
+                    child: Text("clickHereToReset".tr),
                   ),
                 ],
               )

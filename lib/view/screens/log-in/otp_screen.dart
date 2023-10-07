@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -77,7 +78,7 @@ class _OTPScreenState extends State<OTPScreen> {
     return Scaffold(
       backgroundColor: bgGrey,
       appBar: AppBar(
-        title: const Text("Please Enter Verification Code"),
+        title: Text("enterAVerificationCode".tr),
       ),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
@@ -88,7 +89,7 @@ class _OTPScreenState extends State<OTPScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const LoginLogoWidget(),
-                const RequiredTextWidget(title: "Verify Code"),
+                RequiredTextWidget(title: "verifyCode".tr),
                 const SizedBox(height: 20),
                 Pinput(
                   length: 6,
@@ -100,10 +101,10 @@ class _OTPScreenState extends State<OTPScreen> {
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.length < 6 || value.length > 6) {
-                      return "OTP must be six digits";
+                      return "otpMustBeSix".tr;
                     }
                     if (value.isEmpty) {
-                      return "Please provide 6 digits OTP";
+                      return "provideOtp".tr;
                     }
                     return null;
                   },
@@ -133,7 +134,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text("Cancel"),
+                      child: Text("cancel".tr),
                     ),
                     ElevatedButton(
                         onPressed: () async {
@@ -172,7 +173,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             }
                           }
                         },
-                        child: const Text('Confirm')),
+                        child: Text('confirm'.tr)),
                   ],
                 ),
               ],
