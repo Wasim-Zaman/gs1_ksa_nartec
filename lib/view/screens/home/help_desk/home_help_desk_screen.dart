@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/controllers/home_help_desk/home_help_desk_controller.dart';
 import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/loading/loading_widget.dart';
@@ -16,7 +17,7 @@ class _HomeHelpDeskScreenState extends State<HomeHelpDeskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Help Desk'),
+        title: Text('helpDesk'.tr),
       ),
       body: FutureBuilder(
         future: HomeHelpDeskController.getHelpDeskData(),
@@ -35,7 +36,7 @@ class _HomeHelpDeskScreenState extends State<HomeHelpDeskScreen> {
                   const SizedBox(height: 20),
                   // retry button
                   PrimaryButtonWidget(
-                    caption: "Retry",
+                    caption: "retry".tr,
                     buttonHeight: 45,
                     onPressed: () {
                       setState(() {});
@@ -58,7 +59,7 @@ class _HomeHelpDeskScreenState extends State<HomeHelpDeskScreen> {
               ),
             );
           }
-          return const Center(child: Text('No Contents To Display'));
+          return Center(child: Text('noDataFound'.tr));
         },
       ),
     );

@@ -15,6 +15,21 @@ class LocalString extends Translations {
           'gtinReporter': 'GTIN Reporter',
           'productTracking': 'Product Tracking',
           'regulatoryAffairs': 'Government / Regulatory Affairs',
+
+          // home screen scaffold
+          'oneBarcodeInfinitePosibility': 'One Barcode Infinite Posibility',
+          'getABarcode': 'Get A Barcode',
+          'memberLogin': 'Member Login',
+          'homeDescription':
+              'Explore how new 2D barcodes combined with the power of GS1 Digital Link, unlock new possibilities for consumers, brands, retailers, government, regulators and more.',
+          'support': 'Support',
+          // Help desk screen
+          'retry': 'Try again',
+          'noDataFound': 'No data found',
+          'noContentsFound': 'No contents found',
+
+          // GS1 member login screen
+          'gs1MemberLogin': 'GS1 Member Login',
         },
         'ar_SA': {
           'helpDesk': 'مكتب المساعدة',
@@ -28,6 +43,22 @@ class LocalString extends Translations {
           'gtinReporter': 'تقرير GTIN',
           'productTracking': 'تتبع المنتج',
           'regulatoryAffairs': 'الشؤون الحكومية / التنظيمية',
+
+          // home screen scaffold
+          'oneBarcodeInfinitePosibility': 'رمز شريطي واحد إمكانية لا حصر لها',
+          'getABarcode': 'احصل على رمز شريطي',
+          'memberLogin': 'تسجيل الدخول للأعضاء',
+          'homeDescription':
+              'استكشف كيف تفتح رموز الاستجابة السريعة الجديدة ثنائية الأبعاد بالاشتراك مع قوة رابط GS1 الرقمي إمكانات جديدة للمستهلكين والعلامات التجارية والتجار والحكومة والجهات التنظيمية وغيرها.',
+          'support': 'الدعم',
+
+          // Help desk screen
+          'retry': 'حاول مرة أخرى',
+          'noDataFound': 'لم يتم العثور على بيانات',
+          'noContentsFound': 'لم يتم العثور على محتويات',
+
+          // GS1 member login screen
+          'gs1MemberLogin': 'تسجيل الدخول للأعضاء',
         },
       };
 }

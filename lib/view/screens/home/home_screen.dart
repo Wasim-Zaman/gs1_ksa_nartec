@@ -25,10 +25,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> names = [
-    'Help Desk',
-    'Contact Us',
-    'Chat with us',
-    'Social Media',
+    'helpDesk',
+    'contactUs',
+    'chatWithUs',
+    'socialMedia',
   ];
 
   @override
@@ -181,37 +181,103 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 ListTile(
-                  leading: Image.asset(DrawerImages.select_language),
                   onTap: () {
-                    Navigator.pop(context);
                     AppDialogs.chooseLanguage(context);
                   },
-                  title: 'selectLanguage'
+                  leading: Image.asset(DrawerImages.select_language),
+                  title: "selectLanguage"
                       .tr
                       .text
                       .color(AppColors.primaryColor)
                       .make(),
                 ),
-                // ... Other ListTile items ...
-
+                // ListTile(
+                //   leading: Image.asset(DrawerImages.staff_login),
+                //   title:
+                //       "Staff Login".text.color(AppColors.primaryColor).make(),
+                // ),
+                ListTile(
+                  onTap: () {
+                    HomeServices.productContentsClick(context);
+                  },
+                  leading: Image.asset(DrawerImages.product_contents),
+                  title: "productContents"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
+                ListTile(
+                  onTap: () {
+                    HomeServices.retailInformationClick(context);
+                  },
+                  leading: Image.asset(DrawerImages.retail_information),
+                  title: "retailInformation"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
+                ListTile(
+                  onTap: () {
+                    HomeServices.verifiedByGS1Click(context);
+                  },
+                  leading: Image.asset(DrawerImages.verified_by_gs1),
+                  title: "verifiedByGS1"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
+                ListTile(
+                  onTap: () {
+                    HomeServices.gtinReporterClick(context);
+                  },
+                  leading: Image.asset(DrawerImages.gtin_reporter),
+                  title: "gtinReporter"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
+                ListTile(
+                  onTap: () {},
+                  leading: Image.asset(DrawerImages.product_tracking),
+                  title: "productTracking"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
+                ListTile(
+                  onTap: () {
+                    HomeServices.regulatoryAffairsClick(context);
+                  },
+                  leading: Image.asset(DrawerImages.regulatory_affairs),
+                  title: "regulatoryAffairs"
+                      .tr
+                      .text
+                      .color(AppColors.primaryColor)
+                      .make(),
+                ),
                 ListTile(
                   leading: Image.asset(DrawerImages.help_desk),
                   title:
-                      'helpDesk'.tr.text.color(AppColors.primaryColor).make(),
+                      "helpDesk".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
                   leading: Image.asset(DrawerImages.contact_us),
                   title:
-                      'contactUs'.tr.text.color(AppColors.primaryColor).make(),
+                      "contactUs".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
                   leading: Image.asset(DrawerImages.chat_with_us),
                   title:
-                      'chatWithUs'.tr.text.color(AppColors.primaryColor).make(),
+                      "chatWithUs".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
                   leading: Image.asset(DrawerImages.social_media),
-                  title: 'socialMedia'
+                  title: "socialMedia"
                       .tr
                       .text
                       .color(AppColors.primaryColor)
@@ -256,7 +322,8 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Center(child: Image.asset(OtherImages.trans_logo)),
               const SizedBox(height: 30),
-              "One Barcode, Infinite Possibility"
+              "oneBarcodeInfinitePosibility"
+                  .tr
                   .text
                   .color(AppColors.primaryColor)
                   .bold
@@ -268,12 +335,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RectangularButton(
-                    caption: "Get a Barcode",
+                    caption: "getABarcode",
                     image: OtherImages.get_a_barcode,
                     onPressed: () => HomeServices.getBarCode(context),
                   ),
                   RectangularButton(
-                    caption: "Member Login",
+                    caption: "memberLogin",
                     image: OtherImages.get_member_login,
                     onPressed: () => Navigator.of(context).pushNamed(
                       Gs1MemberLoginScreen.routeName,
@@ -281,7 +348,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
-              "Explore how new 2D barcodes combined with the power of GS1 Digital Link, unlock new possibilities for consumers, brands, retailers, government, regulators and more."
+              "homeDescription"
+                  .tr
                   .text
                   .semiBold
                   .color(AppColors.primaryColor)
@@ -292,12 +360,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RectangularButton(
-                    caption: "Product Contents",
+                    caption: "productContents",
                     image: OtherImages.product_contents,
                     onPressed: () => HomeServices.productContentsClick(context),
                   ),
                   RectangularButton(
-                    caption: "Retail Information",
+                    caption: "retailInformation",
                     image: OtherImages.retail_information,
                     onPressed: () =>
                         HomeServices.regulatoryAffairsClick(context),
@@ -309,12 +377,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RectangularButton(
-                    caption: "Verified by GS1",
+                    caption: "verifiedByGS1",
                     image: OtherImages.verified_by_gs1,
                     onPressed: () => HomeServices.verifiedByGS1Click(context),
                   ),
                   RectangularButton(
-                    caption: "GTIN Reporter",
+                    caption: "gtinReporter",
                     image: OtherImages.gtin_reporter,
                     onPressed: () => HomeServices.gtinReporterClick(context),
                   ),
@@ -325,19 +393,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RectangularButton(
-                    caption: "Government/regulatory affairs",
+                    caption: "regulatoryAffairs",
                     image: OtherImages.regulatory_affairs,
                     onPressed: () =>
                         HomeServices.regulatoryAffairsClick(context),
                   ),
                   RectangularButton(
-                    caption: "Product Tracking",
+                    caption: "productTracking",
                     image: OtherImages.product_tracking,
                     onPressed: () {},
                   ),
                 ],
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
-              "Support".text.color(AppColors.primaryColor).bold.make().p20(),
+              "support".tr.text.color(AppColors.primaryColor).bold.make().p20(),
               SizedBox(
                 height: context.height * 0.08,
                 child: ListView.builder(
@@ -361,7 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           socialMediaBottomSheet();
                         }
                       },
-                      caption: names[index],
+                      caption: names[index].tr,
                     );
                   },
                   itemCount: names.length,
@@ -409,7 +477,7 @@ class RectangularButton extends StatelessWidget {
             10.widthBox,
             Expanded(
               child: AutoSizeText(
-                caption,
+                caption.tr,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/login/login_services.dart';
@@ -69,7 +70,7 @@ class _Gs1MemberLoginScreenState extends State<Gs1MemberLoginScreen> {
     return Scaffold(
       backgroundColor: bgGrey,
       appBar: AppBar(
-        title: const Text("GS1 Member Login"),
+        title: Text("gs1MemberLogin".tr),
         centerTitle: true,
       ),
       body: Padding(

@@ -75,29 +75,23 @@ class AppDialogs {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Choose Language'),
+        title: Text('selectLanguage'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            RadioListTile(
-              title: const Text('English'),
-              value: 'en_US',
-              groupValue: 'en_US',
-              onChanged: (value) {
-                // update language using getx
+            ListTile(
+              onTap: () {
                 Get.updateLocale(const Locale('en', 'US'));
                 Navigator.pop(context);
               },
+              title: const Text('English'),
             ),
-            RadioListTile(
-              title: const Text('Arabic'),
-              value: 'ar_SA',
-              groupValue: 'en_US',
-              onChanged: (value) {
-                // update language using getx
+            ListTile(
+              onTap: () {
                 Get.updateLocale(const Locale('ar', 'SA'));
                 Navigator.pop(context);
               },
+              title: const Text('Arabic'),
             ),
           ],
         ),

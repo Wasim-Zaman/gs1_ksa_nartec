@@ -23,7 +23,7 @@ class CustomAndBorderGridScreen extends StatelessWidget {
           foregroundColor: whiteColor,
           title: Column(
             children: [
-              const Text("GTIN:"),
+              const Text("GTIN" + ":"),
               Text(dataModel.gtin!),
             ],
           ),

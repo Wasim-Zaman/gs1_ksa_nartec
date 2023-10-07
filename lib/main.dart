@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         translations: LocalString(),
         locale: const Locale('en', 'US'),
-        title: 'GS1 Saudi Arabia',
+        title: 'GS1 V2',
         theme: ThemeData(
           primarySwatch: darkBlue,
           appBarTheme: AppBarTheme(
