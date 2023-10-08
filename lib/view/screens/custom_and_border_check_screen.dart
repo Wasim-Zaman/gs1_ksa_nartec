@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
@@ -24,13 +25,13 @@ class CustomAndBorderCheckScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('Something went wrong'),
+            return Center(
+              child: Text('Something went wrong'.tr),
             );
           }
           if (!snapshot.hasData) {
-            return const Center(
-              child: Text('No data found'),
+            return Center(
+              child: Text('noDataFound'.tr),
             );
           }
           final data = snapshot.data;
@@ -43,12 +44,12 @@ class CustomAndBorderCheckScreen extends StatelessWidget {
                 children: <Widget>[
                   customAppBarWidget(
                     backgroundColor: Colors.green[900],
-                    title: "Custom & Border Check",
+                    title: "Custom & Border Check".tr,
                   ),
                   ExpansionPanelWidget(
                     items: [
                       Item(
-                        headers: 'Company Verification',
+                        headers: 'Company Verification'.tr,
                         body: FirstExpansionWidget(
                           companyName: data?.companyName,
                           licenseKey: data?.licenceKey,
@@ -64,7 +65,7 @@ class CustomAndBorderCheckScreen extends StatelessWidget {
                   ExpansionPanelWidget(
                     items: [
                       Item(
-                        headers: 'Product Verification',
+                        headers: 'Product Verification'.tr,
                         body: SecondExpansionWidget(
                           brandName: data?.brandName,
                           gtin: data?.gtin,

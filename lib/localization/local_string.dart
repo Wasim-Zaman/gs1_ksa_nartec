@@ -118,6 +118,10 @@ class LocalString extends Translations {
           "Complete Data": "Complete Data",
           "This number is registered to company. Al Wifaq Factory For Children Cosmetics":
               "This number is registered to company. Al Wifaq Factory For Children Cosmetics",
+          'Something went wrong': 'Something went wrong',
+          "Custom & Border Check": "Custom & Border Check",
+          'Company Verification': 'Company Verification',
+          'Product Verification': 'Product Verification',
         },
 
         /// Arabic ///
@@ -224,6 +228,21 @@ class LocalString extends Translations {
           'START': 'بداية',
           'Product Contents': 'محتويات المنتج',
           'Retail Information': 'معلومات التجزئة',
+
+          // Verify by GS1 screen
+          "Brand Name": "اسم العلامة التجارية",
+          "Product Description": "وصف المنتج",
+          "Product Image Url": "عنوان صورة المنتج",
+          "Global Product Category": "فئة المنتج العالمية",
+          "Net Content": "المحتوى الصافي",
+          "Country of Sale": "بلد البيع",
+          "Complete Data": "بيانات كاملة",
+          "This number is registered to company. Al Wifaq Factory For Children Cosmetics":
+              "هذا الرقم مسجل للشركة. مصنع الوفاق لمستحضرات التجميل للأطفال",
+          'Something went wrong': 'حدث خطأ ما',
+          "Custom & Border Check": "التفتيش الجمركي والحدودي",
+          'Company Verification': 'التحقق من الشركة',
+          'Product Verification': 'التحقق من المنتج',
         },
       };
 }
