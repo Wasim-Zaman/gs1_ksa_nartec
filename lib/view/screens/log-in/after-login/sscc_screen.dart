@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/view-model/login/after-login/sscc_services.dart';
 import 'package:gs1_v2_project/view/screens/log-in/widgets/text_widgets/table_header_text.dart';
@@ -38,7 +39,7 @@ class _SSCCScreenState extends State<SSCCScreen> {
           response: response,
         ),
         appBar: AppBar(
-          title: const Text("Member SSCC"),
+          title: Text("Member SSCC".tr),
           elevation: 0,
         ),
         body: FutureBuilder(
@@ -53,7 +54,7 @@ class _SSCCScreenState extends State<SSCCScreen> {
               );
             }
             if (!snapshot.hasData) {
-              return const Center(
+              return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -61,7 +62,7 @@ class _SSCCScreenState extends State<SSCCScreen> {
                       Icons.error_outline_sharp,
                       size: 100,
                     ),
-                    Text('No Data'),
+                    Text('noDataFound'.tr),
                   ],
                 ),
               );
@@ -78,13 +79,13 @@ class _SSCCScreenState extends State<SSCCScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text('Something went wring.'),
+                        Text('Something Went Wrong'.tr),
                         TextButton(
                           onPressed: () {
                             setState(() {});
                           },
-                          child: const Text(
-                            'Retry',
+                          child: Text(
+                            'Retry'.tr,
                             style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
@@ -103,46 +104,6 @@ class _SSCCScreenState extends State<SSCCScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  // Table(
-                  //   defaultVerticalAlignment: TableCellVerticalAlignment.top,
-
-                  //   // border: TableBorder.symmetric(
-                  //   //   inside: const BorderSide(
-                  //   //     width: 1,
-                  //   //     color: Colors.white,
-                  //   //   ),
-                  //   // ),
-                  //   children: [
-                  //     TableRow(
-                  //       decoration: BoxDecoration(
-                  //         color: Colors.cyan.shade300,
-                  //       ),
-                  //       children: const [
-                  //         Text(
-                  //           'gcp_GLNID',
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           'SSCC Barcode Number',
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           'SSCC Type',
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -178,16 +139,16 @@ class _SSCCScreenState extends State<SSCCScreen> {
                               width: 2,
                             ),
                           ),
-                          columns: const [
+                          columns: [
                             DataColumn(
-                              label: TableHeaderText(text: 'gcp_GLNID'),
+                              label: TableHeaderText(text: 'GCP GLNID'.tr),
                             ),
                             DataColumn(
-                              label:
-                                  TableHeaderText(text: 'SSCC Barcode Number'),
+                              label: TableHeaderText(
+                                  text: 'SSCC Barcode Number'.tr),
                             ),
                             DataColumn(
-                              label: TableHeaderText(text: 'SSCC Type'),
+                              label: TableHeaderText(text: 'SSCC Type'.tr),
                             ),
                           ],
                           rows: snap!
@@ -206,54 +167,6 @@ class _SSCCScreenState extends State<SSCCScreen> {
                       ),
                     ),
                   ),
-
-                  // const SizedBox(height: 10),
-                  // Expanded(
-                  //     child: ListView.builder(
-                  //   itemCount: snap?.length ?? 0,
-                  //   itemBuilder: (context, index) {
-                  //     return Table(
-                  //       // border: TableBorder.symmetric(
-                  //       //   inside: const BorderSide(
-                  //       //     width: 1,
-                  //       //     color: Colors.black,
-                  //       //   ),
-                  //       // ),
-                  //       defaultVerticalAlignment:
-                  //           TableCellVerticalAlignment.top,
-                  //       children: [
-                  //         TableRow(
-                  //           decoration: BoxDecoration(
-                  //             border: const Border(
-                  //               bottom: BorderSide(
-                  //                 color: Colors.black,
-                  //                 width: 1,
-                  //               ),
-                  //               top: BorderSide(
-                  //                 color: Colors.black,
-                  //                 width: 1,
-                  //               ),
-                  //             ),
-                  //             boxShadow: [
-                  //               BoxShadow(color: Colors.grey.shade200),
-                  //             ],
-                  //             shape: BoxShape.rectangle,
-                  //             gradient: SweepGradient(colors: [
-                  //               Colors.grey.shade300,
-                  //               Colors.grey.shade200,
-                  //               Colors.grey.shade300,
-                  //             ]),
-                  //           ),
-                  //           children: [
-                  //             Text('${snap?[index].gcpGLNID}'),
-                  //             Text('${snap?[index].sSCCBarcodeNumber}'),
-                  //             Text('${snap?[index].ssccType}'),
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     );
-                  //   },
-                  // ))
                 ],
               ),
             );

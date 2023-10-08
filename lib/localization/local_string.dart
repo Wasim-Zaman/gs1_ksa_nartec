@@ -240,6 +240,14 @@ class LocalString extends Translations {
           'Product': 'Product',
           'Price': 'Price',
           'Registered Date': 'Registered Date',
+
+          // SSCC screen
+          "Member SSCC": "Member SSCC",
+          'Something Went Wrong': 'Something Went Wrong',
+          'Retry': 'Retry',
+          'GCP GLNID': 'GCP GLNID',
+          'SSCC Barcode Number': 'SSCC Barcode Number',
+          'SSCC Type': 'SSCC Type',
         },
 
         /// Arabic ///
@@ -477,6 +485,14 @@ class LocalString extends Translations {
           'Product': 'المنتج',
           'Price': 'السعر',
           'Registered Date': 'تاريخ التسجيل',
+
+          // SSCC screen
+          "Member SSCC": "عضو SSCC",
+          'Something Went Wrong': 'حدث خطأ ما',
+          'Retry': 'حاول مرة أخرى',
+          'GCP GLNID': 'GCP GLNID',
+          'SSCC Barcode Number': 'رقم الباركود SSCC',
+          'SSCC Type': 'نوع SSCC',
         },
       };
 }
