@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/icons/app_icons.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
@@ -90,7 +91,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: const Text("Create Ticket"),
+          title: Text("Create Ticket".tr),
           backgroundColor: Theme.of(context).primaryColor,
           elevation: 0,
           centerTitle: true,
@@ -113,14 +114,12 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const RequiredTextWidget(
-                        title: "Title",
-                      ),
+                      RequiredTextWidget(title: "Title".tr),
                       TextFormField(
                         controller: titleController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter title";
+                            return "Please enter title".tr;
                           }
                           return null;
                         },
@@ -132,21 +131,19 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                           FocusScope.of(context)
                               .requestFocus(descriptionFocusNode);
                         },
-                        decoration: const InputDecoration(
-                          hintText: "Enter Title",
+                        decoration: InputDecoration(
+                          hintText: "Enter Title".tr,
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const RequiredTextWidget(
-                        title: "Description",
-                      ),
+                      RequiredTextWidget(title: "Description".tr),
                       TextFormField(
                         controller: descriptionController,
                         maxLines: 7,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter description";
+                            return "Please enter description".tr;
                           }
                           return null;
                         },
@@ -156,13 +153,13 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                         onFieldSubmitted: (value) {
                           descriptionFocusNode.unfocus();
                         },
-                        decoration: const InputDecoration(
-                          hintText: "Enter Description",
+                        decoration: InputDecoration(
+                          hintText: "Enter Description".tr,
                           border: OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 30),
-                      const RequiredTextWidget(title: "Documents/Screenshots"),
+                      RequiredTextWidget(title: "Documents/Screenshots".tr),
                       const SizedBox(height: 10),
                       Container(
                         width: double.infinity,
@@ -185,7 +182,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                             Text(
                               fileName != null
                                   ? getFileName(fileName!)
-                                  : "Browse folders / choose files",
+                                  : "Browse folders / choose files".tr,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -205,12 +202,12 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                             if (formKey.currentState?.validate() ?? false) {
                               if (file == null) {
                                 Common.showToast(
-                                  "Please choose file",
+                                  "Please choose file".tr,
                                   backgroundColor: Colors.red,
                                 );
                               } else {
                                 Common.showToast(
-                                  "Please wait...",
+                                  "Please wait...".tr,
                                 );
                                 await CreateTicketService.createTicket(
                                   description: descriptionController.text,
@@ -226,7 +223,7 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                             backgroundColor: Theme.of(context).primaryColor,
                             fixedSize: const Size(double.infinity, 50),
                           ),
-                          label: const Text("Save"),
+                          label: Text("Save".tr),
                           icon: const Icon(
                             Icons.save_outlined,
                             size: 40,

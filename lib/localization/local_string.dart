@@ -127,6 +127,20 @@ class LocalString extends Translations {
           "Something went wrong, please try again later":
               "Something went wrong, please try again later",
           "Data list is empty": "Data list is empty",
+
+          // Create ticket screen
+          "Create Ticket": "Create Ticket",
+          "Title": "Title",
+          "Please enter title": "Please enter title",
+          "Enter Title": "Enter Title",
+          "Description": "Description",
+          "Please enter description": "Please enter description",
+          "Enter Description": "Enter Description",
+          "Documents/Screenshots": "Documents/Screenshots",
+          "Browse folders / choose files": "Browse folders / choose files",
+          "Please choose file": "Please choose file",
+          "Please wait...": "Please wait...",
+          "Save": "Save",
         },
 
         /// Arabic ///
@@ -253,6 +267,20 @@ class LocalString extends Translations {
           "Something went wrong, please try again later":
               "حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا",
           "Data list is empty": "قائمة البيانات فارغة",
+
+          // Create ticket screen
+          "Create Ticket": "إنشاء تذكرة",
+          "Title": "عنوان",
+          "Please enter title": "الرجاء إدخال العنوان",
+          "Enter Title": "أدخل العنوان",
+          "Description": "وصف",
+          "Please enter description": "الرجاء إدخال الوصف",
+          "Enter Description": "أدخل الوصف",
+          "Documents/Screenshots": "المستندات / لقطات الشاشة",
+          "Browse folders / choose files": "تصفح المجلدات / اختيار الملفات",
+          "Please choose file": "الرجاء اختيار الملف",
+          "Please wait...": "الرجاء الانتظار...",
+          "Save": "حفظ",
         },
       };
 }
