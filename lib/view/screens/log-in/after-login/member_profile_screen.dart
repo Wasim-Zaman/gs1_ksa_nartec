@@ -35,7 +35,7 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
   late Map? args;
   late DashboardModel? response;
   late int? userId;
-  String? title = 'Member Details';
+  String? title = 'Member Details'.tr;
   int _selectedIndex = 0;
   PageController pageController = PageController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -75,7 +75,7 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                       size: 60,
                       color: AppColors.primaryColor,
                     ),
-                    Text("noDataFound".tr),
+                    Text("noDataFound".tr), // use the key and add .tr with it
                     ElevatedButton.icon(
                       onPressed: () {
                         setState(() {});

@@ -28,8 +28,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: GetMaterialApp(
-        translations: LocalString(),
-        locale: const Locale('en', 'US'),
+        translations: LocalString(), // instance of the class you just defined
+        locale:
+            const Locale('en', 'US'), // select the default or first language
         title: 'GS1 V2',
         theme: ThemeData(
           primarySwatch: darkBlue,
