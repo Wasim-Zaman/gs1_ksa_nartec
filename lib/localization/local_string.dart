@@ -154,6 +154,16 @@ class LocalString extends Translations {
           'Status': 'Status',
           'Back': 'Back',
           'Total Tickets': 'Total Tickets',
+
+          // Member GLN screen
+          'Close': 'Close',
+          'Member GLN': 'Member GLN',
+          'Select': 'Select',
+          'GLN Id': 'GLN Id',
+          'gcp GLNID': 'gcp GLNID',
+          'location Name En': 'location Name En',
+          'location Name Ar': 'location Name Ar',
+          'GLN Barcode Number': 'GLN Barcode Number',
         },
 
         /// Arabic ///

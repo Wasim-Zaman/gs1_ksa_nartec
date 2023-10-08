@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/controllers/login/gln/gln_controller.dart';
@@ -81,7 +82,7 @@ class _MemberGLNScreenState extends State<MemberGLNScreen> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Close'),
+                          child: Text('Close'.tr),
                         ),
                       ],
                     ),
@@ -128,7 +129,7 @@ class _MemberGLNScreenState extends State<MemberGLNScreen> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: const Text('Member GLN'),
+          title: Text('Member GLN'.tr),
           centerTitle: true,
         ),
         drawer: CustomDrawerWidget(
@@ -174,44 +175,44 @@ class _MemberGLNScreenState extends State<MemberGLNScreen> {
                         columns: [
                           DataColumn(
                             label: Text(
-                              'Select',
+                              'Select'.tr,
                               style: TextStyle(color: AppColors.white),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           DataColumn(
                               label: Text(
-                            'GLN Id',
+                            'GLN Id'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
                           DataColumn(
                               label: Text(
-                            'gcp GLNID',
+                            'gcp GLNID'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
                           DataColumn(
                               label: Text(
-                            'location Name En',
+                            'location Name En'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
                           DataColumn(
                               label: Text(
-                            'location Name Ar',
+                            'location Name Ar'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
                           DataColumn(
                               label: Text(
-                            'GLN Barcode Number',
+                            'GLN Barcode Number'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
                           DataColumn(
                               label: Text(
-                            'Status',
+                            'Status'.tr,
                             style: TextStyle(color: AppColors.white),
                             textAlign: TextAlign.center,
                           )),
