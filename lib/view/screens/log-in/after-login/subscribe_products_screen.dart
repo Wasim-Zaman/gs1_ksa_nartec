@@ -1,6 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/models/login-models/profile/subscription_model.dart';
@@ -64,13 +65,13 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
             },
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
-                title: const Text('GTIN Subscription'),
+                title: Text('GTIN Subscription'.tr),
                 icon: const Icon(Icons.home),
                 activeColor: Theme.of(context).primaryColor,
                 inactiveColor: Theme.of(context).primaryColorLight,
               ),
               BottomNavyBarItem(
-                title: const Text('Other Subscription'),
+                title: Text('Other Subscription'.tr),
                 icon: const Icon(Icons.apps),
                 activeColor: Theme.of(context).primaryColor,
                 inactiveColor: Theme.of(context).primaryColorLight,
@@ -78,7 +79,7 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
             ],
           ),
           appBar: AppBar(
-            title: const Text("Subscribe Products"),
+            title: Text("Subscribe Products".tr),
             backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
           ),
@@ -98,13 +99,13 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
                         size: 60,
                         color: AppColors.primaryColor,
                       ),
-                      const Text("No Data Found"),
+                      Text("No Data Found".tr),
                       ElevatedButton.icon(
                         onPressed: () {
                           setState(() {});
                         },
                         icon: const Icon(Icons.refresh),
-                        label: const Text("Refresh The Page"),
+                        label: Text("Refresh The Page".tr),
                       ),
                     ],
                   ),
@@ -114,7 +115,7 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
                   child: (snapshot.error
                           .toString()
                           .toLowerCase()
-                          .contains("required to update your profile"))
+                          .contains("Required to update your profile".tr))
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -133,6 +134,7 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
                                 .centered(),
                             const SizedBox(height: 20),
                             "Please update your profile to continue"
+                                .tr
                                 .text
                                 .make()
                                 .centered(),
@@ -157,7 +159,7 @@ class _SubscribeProductsScreenState extends State<SubscribeProductsScreen> {
                               onPressed: () {
                                 setState(() {});
                               },
-                              child: const Text("Retry"),
+                              child: Text("Retry".tr),
                             ),
                           ],
                         ),
@@ -246,15 +248,16 @@ class _OtherSubscriptionState extends State<OtherSubscription> {
                             width: 2,
                           ),
                         ),
-                        columns: const [
+                        columns: [
                           DataColumn(
-                            label: TableHeaderText(text: 'Product'),
+                            label: TableHeaderText(text: 'Product'.tr),
                           ),
                           DataColumn(
-                            label: TableHeaderText(text: 'Registration Date'),
+                            label:
+                                TableHeaderText(text: 'Registration Date'.tr),
                           ),
                           DataColumn(
-                            label: TableHeaderText(text: 'Expiry'),
+                            label: TableHeaderText(text: 'Expiry'.tr),
                           ),
                         ],
                         rows: widget.response.otherSubscription!
@@ -309,7 +312,7 @@ class _GtinSubscriptionState extends State<GtinSubscription> {
             child: Column(
               children: [
                 Text(
-                  "Your Subscription Will Expire On:",
+                  "Your Subscription Will Expire On:".tr,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
@@ -326,7 +329,7 @@ class _GtinSubscriptionState extends State<GtinSubscription> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "Subscription Details",
+                  "Subscription Details".tr,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -366,15 +369,16 @@ class _GtinSubscriptionState extends State<GtinSubscription> {
                             width: 2,
                           ),
                         ),
-                        columns: const [
+                        columns: [
                           DataColumn(
-                            label: TableHeaderText(text: 'Product'),
+                            label: TableHeaderText(text: 'Product'.tr),
                           ),
                           DataColumn(
-                            label: TableHeaderText(text: 'Registration Date'),
+                            label:
+                                TableHeaderText(text: 'Registration Date'.tr),
                           ),
                           DataColumn(
-                            label: TableHeaderText(text: 'Expiry'),
+                            label: TableHeaderText(text: 'Expiry'.tr),
                           ),
                         ],
                         rows: [
@@ -396,73 +400,7 @@ class _GtinSubscriptionState extends State<GtinSubscription> {
                     ),
                   ),
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     border: Border.all(),
-                //   ),
-                //   child: SingleChildScrollView(
-                //     scrollDirection: Axis.horizontal,
-                //     child: SingleChildScrollView(
-                //       scrollDirection: Axis.vertical,
-                //       child: DataTable(
-                //         dataRowColor: MaterialStateProperty.resolveWith<Color>(
-                //           (Set<MaterialState> states) {
-                //             if (states.contains(MaterialState.selected)) {
-                //               return Theme.of(context)
-                //                   .colorScheme
-                //                   .primary
-                //                   .withOpacity(0.08);
-                //             }
-                //             return Colors.white;
-                //           },
-                //         ),
-                //         decoration: BoxDecoration(
-                //           color: Theme.of(context).primaryColor,
-                //           border: Border.all(color: Colors.grey, width: 1),
-                //         ),
-                //         dividerThickness: 2,
-                //         border: const TableBorder(
-                //           horizontalInside: BorderSide(
-                //             color: Colors.grey,
-                //             width: 2,
-                //           ),
-                //           verticalInside: BorderSide(
-                //             color: Colors.grey,
-                //             width: 2,
-                //           ),
-                //         ),
-                //         columns: const [
-                //           DataColumn(
-                //             label: TableHeaderText(text: 'Product'),
-                //           ),
-                //           DataColumn(
-                //             label: TableHeaderText(text: 'Registration Date'),
-                //           ),
-                //           DataColumn(
-                //             label: TableHeaderText(text: 'Expiry'),
-                //           ),
-                //         ],
-                //         rows: widget.response.otherSubscription!
-                //             .map(
-                //               (e) => DataRow(
-                //                 cells: [
-                //                   DataCell(Text(widget
-                //                       .response.gtinSubscription!.gtin
-                //                       .toString())),
-                //                   DataCell(Text(widget
-                //                       .response.gtinSubscription!.registerDate
-                //                       .toString())),
-                //                   DataCell(Text(widget
-                //                       .response.gtinSubscription!.expiry
-                //                       .toString())),
-                //                 ],
-                //               ),
-                //             )
-                //             .toList(),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(height: 40),
                 // const Text(
                 //   "Actions",
@@ -497,7 +435,7 @@ class _GtinSubscriptionState extends State<GtinSubscription> {
                         ),
                       ),
                     ),
-                    child: const Text("Renew Membership"),
+                    child: Text("Renew Membership".tr),
                   ),
                 ),
               ],

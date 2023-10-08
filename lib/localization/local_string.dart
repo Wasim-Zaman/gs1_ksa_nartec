@@ -248,6 +248,19 @@ class LocalString extends Translations {
           'GCP GLNID': 'GCP GLNID',
           'SSCC Barcode Number': 'SSCC Barcode Number',
           'SSCC Type': 'SSCC Type',
+
+          // Subscribed Products Screen
+          'GTIN Subscription': 'GTIN Subscription',
+          'Other Subscription': 'Other Subscription',
+          "Subscribe Products": "Subscribe Products",
+          "No Data Found": "No Data Found",
+          "Required to update your profile": "Required to update your profile",
+          'Registration Date': 'Registration Date',
+          'Expiry': 'Expiry',
+          "Your Subscription Will Expire On:":
+              "Your Subscription Will Expire On:",
+          "Subscription Details": "Subscription Details",
+          "Renew Membership": "Renew Membership",
         },
 
         /// Arabic ///
@@ -493,6 +506,18 @@ class LocalString extends Translations {
           'GCP GLNID': 'GCP GLNID',
           'SSCC Barcode Number': 'رقم الباركود SSCC',
           'SSCC Type': 'نوع SSCC',
+
+          // Subscribed Products Screen
+          'GTIN Subscription': 'اشتراك GTIN',
+          'Other Subscription': 'اشتراك آخر',
+          "Subscribe Products": "اشترك في المنتجات",
+          "No Data Found": "لم يتم العثور على بيانات",
+          "Required to update your profile": "مطلوب لتحديث ملفك الشخصي",
+          'Registration Date': 'تاريخ التسجيل',
+          'Expiry': 'انتهاء',
+          "Your Subscription Will Expire On:": "ستنتهي اشتراكاتك في:",
+          "Subscription Details": "تفاصيل الاشتراك",
+          "Renew Membership": "تجديد العضوية",
         },
       };
 }
