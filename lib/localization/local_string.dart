@@ -286,6 +286,9 @@ class LocalString extends Translations {
           "Verify Code": "Verify Code",
           "Please enter verification code": "Please enter verification code",
           "Verify Now": "Verify Now",
+          'Warning': 'Warning',
+          'Please select an activity and give a password':
+              'Please select an activity and give a password',
         },
 
         /// Arabic ///
@@ -556,6 +559,22 @@ class LocalString extends Translations {
           "Activity": "نشاط",
           "Sent verification code to your email":
               "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+          "Send Verification Code": "إرسال رمز التحقق",
+          "Login Again?": "تسجيل الدخول مرة أخرى؟",
+          "Login Now": "سجل الان",
+          "Password reset successfully": "تم إعادة تعيين كلمة المرور بنجاح",
+          "Enter New Password": "أدخل كلمة مرور جديدة",
+          "New Password": "كلمة السر الجديدة",
+          "Please enter password": "الرجاء إدخال كلمة المرور",
+          "Confirm Password": "تأكيد كلمة المرور",
+          "Password does not match": "كلمة المرور غير متطابقة",
+          "Create your new password": "أنشئ كلمة مرورك الجديدة",
+          "Verify Code": "تحقق من الرمز",
+          "Please enter verification code": "الرجاء إدخال رمز التحقق",
+          "Verify Now": "تحقق الآن",
+          'Warning': 'تحذير',
+          'Please select an activity and give a password':
+              'يرجى تحديد نشاط وإعطاء كلمة مرور',
         },
       };
 }
