@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/view-model/login/after-login/help_desk_services.dart';
@@ -45,7 +46,7 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
           response: response,
         ),
         appBar: AppBar(
-          title: const Text("Help Desk"),
+          title: Text("Help Desk".tr),
           backgroundColor: Theme.of(context).primaryColor,
           elevation: 0,
         ),
@@ -59,7 +60,7 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                 child: (snapshot.error
                         .toString()
                         .toLowerCase()
-                        .contains("required to update your profile"))
+                        .contains("required to update your profile".tr))
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -78,19 +79,20 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                               .centered(),
                           const SizedBox(height: 20),
                           "Please update your profile to continue"
+                              .tr
                               .text
                               .make()
                               .centered(),
                         ],
                       )
-                    : const Column(
+                    : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.error_outline_sharp,
                             size: 100,
                           ),
-                          Text('Something went wrong!'),
+                          Text('Something went wrong'.tr),
                         ],
                       ),
               );
@@ -105,13 +107,13 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                       size: 60,
                       color: AppColors.primaryColor,
                     ),
-                    const Text("No Data Found"),
+                    Text("noDataFound".tr),
                     ElevatedButton.icon(
                       onPressed: () {
                         setState(() {});
                       },
                       icon: const Icon(Icons.refresh),
-                      label: const Text("Refresh The Page"),
+                      label: Text("Refresh The Page".tr),
                     ),
                   ],
                 ),
@@ -131,8 +133,8 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                           imageUrl: "assets/images/help_desk_image.png",
                         ),
                         const SizedBox(height: 10),
-                        const Center(
-                          child: RequiredTextWidget(title: "Ticket Details"),
+                        Center(
+                          child: RequiredTextWidget(title: "Ticket Details".tr),
                         ),
                         const SizedBox(height: 10),
                         SizedBox(
@@ -172,19 +174,20 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                                     width: 2,
                                   ),
                                 ),
-                                columns: const [
+                                columns: [
+                                  DataColumn(
+                                    label: TableHeaderText(
+                                        text: 'Ticket Number'.tr),
+                                  ),
+                                  DataColumn(
+                                    label: TableHeaderText(text: 'Title'.tr),
+                                  ),
                                   DataColumn(
                                     label:
-                                        TableHeaderText(text: 'Ticket Number'),
+                                        TableHeaderText(text: 'Assigned To'.tr),
                                   ),
                                   DataColumn(
-                                    label: TableHeaderText(text: 'Title'),
-                                  ),
-                                  DataColumn(
-                                    label: TableHeaderText(text: 'Assigned To'),
-                                  ),
-                                  DataColumn(
-                                    label: TableHeaderText(text: 'Status'),
+                                    label: TableHeaderText(text: 'Status'.tr),
                                   ),
                                 ],
                                 rows: snap!
@@ -215,7 +218,7 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                                 onPressed: () {
                                   scaffoldKey.currentState?.openDrawer();
                                 },
-                                label: const Text('Back'),
+                                label: Text('Back'.tr),
                                 icon: const Icon(
                                   Icons.arrow_circle_left_outlined,
                                 ),
@@ -226,8 +229,8 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                               height: 50,
                               child: TextFormField(
                                 initialValue: snap.length.toString(),
-                                decoration: const InputDecoration(
-                                  labelText: 'Total Tickets',
+                                decoration: InputDecoration(
+                                  labelText: 'Total Tickets'.tr,
                                   border: OutlineInputBorder(),
                                 ),
                               ),

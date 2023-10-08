@@ -141,6 +141,19 @@ class LocalString extends Translations {
           "Please choose file": "Please choose file",
           "Please wait...": "Please wait...",
           "Save": "Save",
+
+          // Help desk screen
+          "Help Desk": "Help Desk",
+          "required to update your profile": "required to update your profile",
+          "Please update your profile to continue":
+              "Please update your profile to continue",
+          "Refresh The Page": "Refresh The Page",
+          "Ticket Details": "Ticket Details",
+          'Ticket Number': 'Ticket Number',
+          'Assigned To': 'Assigned To',
+          'Status': 'Status',
+          'Back': 'Back',
+          'Total Tickets': 'Total Tickets',
         },
 
         /// Arabic ///
