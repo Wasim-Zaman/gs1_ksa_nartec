@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/recipe/recipe_grid_services.dart';
@@ -23,7 +24,7 @@ class CustomAndBorderGridScreen extends StatelessWidget {
           foregroundColor: whiteColor,
           title: Column(
             children: [
-              const Text("GTIN" + ":"),
+              Text("GTIN".tr + ":"),
               Text(dataModel.gtin!),
             ],
           ),

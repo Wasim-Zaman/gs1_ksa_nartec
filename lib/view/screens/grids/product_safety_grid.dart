@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/models/safety_info_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -24,7 +25,7 @@ class ProductSafetyGrid extends StatelessWidget {
           foregroundColor: whiteColor,
           title: Column(
             children: [
-              const Text("GTIN:"),
+              Text("GTIN".tr + ":"),
               Text(dataModel.gtin!),
             ],
           ),
@@ -32,8 +33,8 @@ class ProductSafetyGrid extends StatelessWidget {
         ),
       ),
       body: dataModel == null
-          ? const Center(
-              child: Text("Data list is empty"),
+          ? Center(
+              child: Text("Data list is empty".tr),
             )
           : FutureBuilder(
               future: ProductSafetyServices.getFutureData(context,
@@ -47,7 +48,7 @@ class ProductSafetyGrid extends StatelessWidget {
                 final List<SafetyInfoModel>? safetyModel = snapshot.data;
 
                 return safetyModel == null
-                    ? const Center(child: Text("No data found"))
+                    ? Center(child: Text("noDataFound".tr))
                     : ListView.builder(
                         itemCount: safetyModel.length,
                         itemBuilder: (context, index) => GestureDetector(
@@ -74,11 +75,6 @@ class ProductSafetyGrid extends StatelessWidget {
                                     color: darkBlue,
                                   ),
                                 ),
-                                // subtitle: Text(
-                                //   "${safetyModel[index].process}",
-                                //   textAlign: TextAlign.justify,
-                                //   style: const TextStyle(fontSize: 15),
-                                // ),
                               ),
                             ),
                           ),

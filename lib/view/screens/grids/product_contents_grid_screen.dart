@@ -21,7 +21,7 @@ class ProductContentsGridScreen extends StatelessWidget {
           foregroundColor: whiteColor,
           title: Column(
             children: [
-              const Text("GTIN:"),
+              Text("GTIN".tr + ":"),
               Text(dataModel.gtin!),
             ],
           ),
@@ -29,8 +29,8 @@ class ProductContentsGridScreen extends StatelessWidget {
         ),
       ),
       body: dataModel.isBlank == true
-          ? const Center(
-              child: Text("Data list is empty"),
+          ? Center(
+              child: Text("Data list is empty".tr),
             )
           : FutureBuilder(
               future: IngredientsServices.getFutureData(
@@ -47,7 +47,7 @@ class ProductContentsGridScreen extends StatelessWidget {
                 final dataModel = ModalRoute.of(context)!.settings.arguments
                     as ProductContentsListModel;
                 return data == null
-                    ? const Center(child: Text('No data found'))
+                    ? Center(child: Text('noDataFound'.tr))
                     : ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) => GestureDetector(

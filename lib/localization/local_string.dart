@@ -122,6 +122,11 @@ class LocalString extends Translations {
           "Custom & Border Check": "Custom & Border Check",
           'Company Verification': 'Company Verification',
           'Product Verification': 'Product Verification',
+
+          // Grid Screens
+          "Something went wrong, please try again later":
+              "Something went wrong, please try again later",
+          "Data list is empty": "Data list is empty",
         },
 
         /// Arabic ///
@@ -243,6 +248,11 @@ class LocalString extends Translations {
           "Custom & Border Check": "التفتيش الجمركي والحدودي",
           'Company Verification': 'التحقق من الشركة',
           'Product Verification': 'التحقق من المنتج',
+
+          // Grid Screens
+          "Something went wrong, please try again later":
+              "حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا",
+          "Data list is empty": "قائمة البيانات فارغة",
         },
       };
 }

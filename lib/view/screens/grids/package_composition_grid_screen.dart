@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/package-composition/pkg_comp_grid_services.dart';
@@ -21,7 +22,7 @@ class PackageCompositionGridScreen extends StatelessWidget {
           foregroundColor: whiteColor,
           title: Column(
             children: [
-              const Text("GTIN:"),
+              Text("GTIN".tr + ":"),
               Text(dataModel.gtin!),
             ],
           ),
@@ -37,19 +38,19 @@ class PackageCompositionGridScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return const Center(
-              child: Text("Something went wrong, please try again later"),
+            return Center(
+              child: Text("Something went wrong, please try again later".tr),
             );
           }
           if (!snapshot.hasData) {
-            return const Center(
-              child: Text("No data found"),
+            return Center(
+              child: Text("noDataFound".tr),
             );
           }
           final pkgCompModel = snapshot.data;
 
           return pkgCompModel!.isEmpty
-              ? const Center(child: Text('No data found'))
+              ? Center(child: Text('noDataFound'.tr))
               : ListView.builder(
                   itemCount: pkgCompModel.length,
                   itemBuilder: (context, index) => GestureDetector(
