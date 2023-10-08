@@ -4,6 +4,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/constants/icons/app_icons.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
@@ -74,13 +75,13 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                       size: 60,
                       color: AppColors.primaryColor,
                     ),
-                    const Text("No Data Found"),
+                    Text("noDataFound".tr),
                     ElevatedButton.icon(
                       onPressed: () {
                         setState(() {});
                       },
                       icon: const Icon(Icons.refresh),
-                      label: const Text("Refresh The Page"),
+                      label: Text("Refresh The Page".tr),
                     ),
                   ],
                 ),
@@ -103,7 +104,7 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                         setState(() {});
                       },
                       icon: const Icon(Icons.refresh),
-                      label: const Text("Refresh The Page"),
+                      label: Text("Refresh The Page".tr),
                     ),
                   ],
                 ),
@@ -115,9 +116,9 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
                 controller: pageController,
                 onPageChanged: (index) {
                   if (_selectedIndex == 0) {
-                    title = 'Member Details';
+                    title = 'Member Details'.tr;
                   } else if (_selectedIndex == 1) {
-                    title = 'Member Profile';
+                    title = 'Member Profile'.tr;
                   }
                   setState(() {
                     _selectedIndex = index;
@@ -143,9 +144,9 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
           onItemSelected: (index) => setState(() {
             _selectedIndex = index;
             if (_selectedIndex == 0) {
-              title = 'Member Details';
+              title = 'Member Details'.tr;
             } else if (_selectedIndex == 1) {
-              title = 'Member Profile';
+              title = 'Member Profile'.tr;
             }
             pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 300),
@@ -154,12 +155,12 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
           items: [
             BottomNavyBarItem(
               icon: const Icon(Icons.apps),
-              title: const Text('Details'),
+              title: Text('Details'.tr),
               activeColor: Theme.of(context).primaryColor,
             ),
             BottomNavyBarItem(
               icon: const Icon(Icons.person),
-              title: const Text('Profile'),
+              title: Text('Profile'.tr),
               activeColor: Theme.of(context).primaryColor,
             ),
           ],
@@ -278,8 +279,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}image_section.png"),
-                        title: const Text(
-                          'Image',
+                        title: Text(
+                          'Image'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -307,12 +308,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   if (loadingProgress == null) return child;
                                   return const LoadingWidget();
                                 },
-                                // frameBuilder: (context, child, frame,
-                                //         wasSynchronouslyLoaded) =>
-                                //     LoadingAnimationWidget.threeArchedCircle(
-                                //   color: Colors.pink,
-                                //   size: 50,
-                                // ),
                                 cacheHeight: 256,
                                 cacheWidth: 256,
                                 errorBuilder: (context, error, stackTrace) =>
@@ -340,7 +335,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   });
                                 });
                               },
-                              child: const Text('Choose Image'),
+                              child: Text('Choose Image'.tr),
                             ),
                           ),
                         ),
@@ -353,7 +348,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}company_details_section.png"),
-                        title: const Text('Company Details',
+                        title: Text('Company Details'.tr,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -366,8 +361,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(
-                                title: "Company Name [English]"),
+                            RequiredTextWidget(
+                              title: "Company Name [English]".tr,
+                            ),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -377,8 +373,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ?.memberProfile?.companyNameEng,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(
-                                title: "Company Name [Arabic]"),
+                            RequiredTextWidget(
+                                title: "Company Name [Arabic]".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -388,7 +384,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ?.memberProfile?.companyNameArabic,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Mobile"),
+                            RequiredTextWidget(title: "Mobile".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -398,7 +394,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   .memberProfileModel?.memberProfile?.mobile,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Extension"),
+                            RequiredTextWidget(title: "Extension".tr),
                             TextFormField(
                               enabled: true,
                               controller: mobileExtensionController,
@@ -418,8 +414,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}country_details_section.png"),
-                        title: const Text(
-                          'Country Details',
+                        title: Text(
+                          'Country Details'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -433,7 +429,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "County"),
+                            RequiredTextWidget(title: "County".tr),
                             TextField(
                               enabled: true,
                               controller: countryNameController,
@@ -442,8 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(
-                                title: "Country Short Name"),
+                            RequiredTextWidget(title: "Country Short Name".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -453,7 +448,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ?.memberProfile?.address?.countryShortName,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "State"),
+                            RequiredTextWidget(title: "State".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -463,7 +458,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ?.memberProfile?.address?.stateName,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "City"),
+                            RequiredTextWidget(title: "City".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -484,8 +479,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}country_zip_and_mobile_section.png"),
-                        title: const Text(
-                          'Country Zip, & Mobile',
+                        title: Text(
+                          'Country Zip, & Mobile'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -499,7 +494,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "Zip"),
+                            RequiredTextWidget(title: "Zip".tr),
                             TextFormField(
                               enabled: false,
                               decoration: const InputDecoration(
@@ -509,7 +504,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ?.memberProfile?.address?.zip,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Address Line 1"),
+                            RequiredTextWidget(title: "Address Line 1".tr),
                             TextFormField(
                               enabled: true,
                               decoration: const InputDecoration(
@@ -519,8 +514,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   .memberProfileModel?.memberProfile?.address1,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(
-                                title: "Other Mobile Number"),
+                            RequiredTextWidget(title: "Other Mobile Number".tr),
                             Row(
                               children: [
                                 Expanded(
@@ -550,11 +544,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     keyboardType: TextInputType.number,
                                     validator: (value) {
                                       if (value!.isEmpty) {
-                                        return "Please enter mobile number";
+                                        return "Please enter mobile number".tr;
                                       }
                                       if (value.length < 13 ||
                                           value.length > 13) {
-                                        return "Please enter valid mobile number";
+                                        return "Please enter valid mobile number"
+                                            .tr;
                                       }
                                       return null;
                                     },
@@ -573,8 +568,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}other_details_section.png"),
-                        title: const Text(
-                          'Other Details',
+                        title: Text(
+                          'Other Details'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -588,8 +583,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(
-                                title: "Other Landline Number"),
+                            RequiredTextWidget(
+                                title: "Other Landline Number".tr),
                             Row(
                               children: [
                                 Expanded(
@@ -619,11 +614,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     keyboardType: TextInputType.number,
                                     validator: (value) {
                                       if (value!.isEmpty) {
-                                        return "Please enter mobile number";
+                                        return "Please enter mobile number".tr;
                                       }
                                       if (value.length < 13 ||
                                           value.length > 13) {
-                                        return "Please enter valid mobile number";
+                                        return "Please enter valid mobile number"
+                                            .tr;
                                       }
                                       return null;
                                     },
@@ -632,7 +628,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "District"),
+                            RequiredTextWidget(title: "District".tr),
                             TextFormField(
                               controller: districtController,
                               decoration: const InputDecoration(
@@ -640,9 +636,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Website"),
+                            RequiredTextWidget(title: "Website".tr),
                             CustomTextField(
-                              hintText: "Website",
+                              hintText: "Website".tr,
                               controller: websiteController,
                             )
                           ],
@@ -656,8 +652,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}building_and_unit_section.png"),
-                        title: const Text(
-                          'Building & Unit',
+                        title: Text(
+                          'Building & Unit'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -671,15 +667,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "Building Number"),
+                            RequiredTextWidget(title: "Building Number".tr),
                             CustomTextField(
-                              hintText: "Building Number",
+                              hintText: "Building Number".tr,
                               controller: buildingNoController,
                             ),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Unit Number"),
+                            RequiredTextWidget(title: "Unit Number".tr),
                             CustomTextField(
-                              hintText: "Unit Number",
+                              hintText: "Unit Number".tr,
                               controller: unitNoController,
                             ),
                           ],
@@ -693,8 +689,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}qrcode_section.png"),
-                        title: const Text(
-                          'QR Code',
+                        title: Text(
+                          'QR Code'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -708,9 +704,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "QR-Code Number"),
+                            RequiredTextWidget(title: "QR-Code Number".tr),
                             CustomTextField(
-                              hintText: "QR-Code Number",
+                              hintText: "QR-Code Number".tr,
                               controller: qrCodeNoController,
                             ),
                           ],
@@ -724,8 +720,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}company_id_section.png"),
-                        title: const Text(
-                          'Company ID',
+                        title: Text(
+                          'Company ID'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -739,9 +735,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "Company Id"),
+                            RequiredTextWidget(title: "Company ID".tr),
                             CustomTextField(
-                              hintText: "Company Id",
+                              hintText: "Company ID".tr,
                               controller: companyIdController,
                               readOnly: true,
                             ),
@@ -756,8 +752,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return ListTile(
                         leading: Image.asset(
                             "${AppIcons.membershipIconsBasePath}company_id_section.png"),
-                        title: const Text(
-                          'CR Number and Activities',
+                        title: Text(
+                          'CR Number and Activities'.tr,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -771,9 +767,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const RequiredTextWidget(title: "CR Number"),
+                            RequiredTextWidget(title: "CR Number".tr),
                             CustomTextField(
-                              hintText: "CR Number",
+                              hintText: "CR Number".tr,
                               controller: crNumberController,
                               readOnly: false,
                             ),
@@ -782,7 +778,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onPressed: () async {
                                 // call api to validate cr number
                                 if (crNumberController.text.trim().isEmpty) {
-                                  Common.showToast("Please enter CR Number");
+                                  Common.showToast("Please enter CR Number".tr);
                                   return;
                                 }
                                 AppDialogs.loadingDialog(context);
@@ -792,21 +788,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 if (isValidate) {
                                   AppDialogs.closeDialog();
                                   Common.showToast(
-                                      "CR Number is valided, you can now update",
+                                      "CR Number is valided, you can now update"
+                                          .tr,
                                       backgroundColor: Colors.green);
                                 } else {
                                   AppDialogs.closeDialog();
                                   Common.showToast(
-                                      "CR Number is not valid, please enter valid CR Number",
+                                      "CR Number is not valid, please enter valid CR Number"
+                                          .tr,
                                       backgroundColor: Colors.red);
                                 }
                               },
-                              caption: "Validate CR Number",
+                              caption: "Validate CR Number".tr,
                             ).box.make().wFull(context),
                             const SizedBox(height: 10),
-                            const RequiredTextWidget(title: "Activities"),
+                            RequiredTextWidget(title: "Activities".tr),
                             CustomTextField(
-                              hintText: "Activities",
+                              hintText: "Activities".tr,
                               controller: activitiesController,
                               readOnly: true,
                             ),
@@ -827,8 +825,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Image.asset(
                     "${AppIcons.membershipIconsBasePath}logout_section.png",
                   ),
-                  title: const Text(
-                    "Log out",
+                  title: Text(
+                    "Log out".tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -843,11 +841,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 child: Column(
                   children: [
-                    const Text(
-                      'Address Photo',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Text(
+                      'Address Photo'.tr,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     addressImageFile?.path != null
                         ? Image.file(addressImageFile!)
@@ -881,8 +877,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         });
                       },
-                      child: const Text(
-                        'Upload',
+                      child: Text(
+                        'Upload'.tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -901,10 +897,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               await update(context);
               AppDialogs.closeDialog();
             } else {
-              Common.showToast("Please validate CR Number");
+              Common.showToast("Please validate CR Number".tr);
             }
           },
-          label: const Text('Update'),
+          label: Text('Update'.tr),
           icon: const Icon(Icons.update),
         ),
       ),
@@ -913,7 +909,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   update(BuildContext context) async {
     if (imageFile == null && addressImageFile == null) {
-      Common.showToast('Please select image');
+      Common.showToast('Please select image'.tr);
       return;
     }
     AppDialogs.loadingDialog(context);
@@ -950,19 +946,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
       AppDialogs.closeDialog();
       if (status == 200) {
         Common.showToast(
-          'Successfully Updated Profile',
+          'Successfully Updated Profile'.tr,
           backgroundColor: Colors.purple,
         );
       } else {
         Common.showToast(
-          'Failed to Update Profile',
+          'Failed to Update Profile'.tr,
           backgroundColor: Colors.red,
         );
       }
     } catch (e) {
       AppDialogs.closeDialog();
       Common.showToast(
-        'Failed to Update Profile',
+        'Failed to Update Profile'.tr,
         backgroundColor: Colors.red,
       );
     }
@@ -982,132 +978,16 @@ class DetailsScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        // body: ListView(
-        //   children: [
-        //     ExpansionTile(
-        //       initiallyExpanded: false,
-        //       clipBehavior: Clip.hardEdge,
-        //       childrenPadding: const EdgeInsets.all(10),
-        //       title: const Text(
-        //         'Company Information',
-        //         style: TextStyle(
-        //           fontWeight: FontWeight.bold,
-        //           // color: Colors.white,
-        //           fontSize: 20,
-        //         ),
-        //       ),
-        //       backgroundColor: Colors.pink.shade100,
-        //       collapsedBackgroundColor: Colors.pink[300],
-        //       children: [
-        //         TwoTextWidget(
-        //           title: "CR Number",
-        //           subTitle: memberProfileModel?.memberDetails?.crNumber,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "CR Document",
-        //           subTitle: memberProfileModel?.memberDetails?.crDocument,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Company Name [English]",
-        //           subTitle: memberProfileModel?.memberProfile?.companyNameEng,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Company GCP",
-        //           subTitle: memberProfileModel?.memberDetails?.companyGcp,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Mobile",
-        //           subTitle: memberProfileModel?.memberProfile?.mobile,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Membership Type",
-        //           subTitle: memberProfileModel?.memberDetails?.memberCategory,
-        //         ),
-        //         const SizedBox(height: 20),
-        //         const Text(
-        //           'Products',
-        //           style: TextStyle(
-        //             fontSize: 18,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //         Column(
-        //           children: [
-        //             FittedBox(
-        //               child: Row(
-        //                 children: memberProfileModel?.memberDetails?.products
-        //                         ?.map((e) => FittedBox(
-        //                               child: Container(
-        //                                 margin: const EdgeInsets.all(5),
-        //                                 padding: const EdgeInsets.all(5),
-        //                                 decoration: BoxDecoration(
-        //                                   color: Colors.pink.shade300,
-        //                                   borderRadius: BorderRadius.circular(10),
-        //                                 ),
-        //                                 child: Text(e),
-        //                               ),
-        //                             ))
-        //                         .toList() ??
-        //                     [],
-        //               ),
-        //             ),
-        //           ],
-        //         )
-        //       ],
-        //     ),
-        //     ExpansionTile(
-        //       initiallyExpanded: false,
-        //       clipBehavior: Clip.hardEdge,
-        //       childrenPadding: const EdgeInsets.all(10),
-        //       title: const Text(
-        //         'Company Activity',
-        //         style: TextStyle(
-        //           fontWeight: FontWeight.bold,
-        //           // color: Colors.white,
-        //           fontSize: 20,
-        //         ),
-        //       ),
-        //       backgroundColor: Colors.purple.shade100,
-        //       collapsedBackgroundColor: Colors.purple[300],
-        //       children: [
-        //         TwoTextWidget(
-        //           title: "CR Activity",
-        //           subTitle: memberProfileModel?.memberDetails?.crActivity,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "CR Document Number",
-        //           subTitle: memberProfileModel?.memberDetails?.documentNumber,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Company Name [Arabic]",
-        //           subTitle: memberProfileModel?.memberProfile?.companyNameArabic,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Contact Person Name",
-        //           subTitle: memberProfileModel?.memberDetails?.contactPerson,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "Company Landline",
-        //           subTitle: memberProfileModel?.memberDetails?.companyLandLine,
-        //         ),
-        //         TwoTextWidget(
-        //           title: "GCP (GLOBAL PRODUCT CLASSIFICATION)",
-        //           subTitle: memberProfileModel?.memberDetails?.gpc,
-        //         ),
-        //       ],
-        //     ),
-        //   ],
-        // ),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Text(
-                "Company Information",
+                "Company Information".tr,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                "Company Activities",
+                "Company Activities".tr,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -1128,7 +1008,7 @@ class DetailsScreen extends StatelessWidget {
                     const Divider(thickness: 2, color: Colors.grey),
                     Row(
                       children: [
-                        const PrimaryTextWidget(text: "CR Number: "),
+                        PrimaryTextWidget(text: "CR Number".tr + ": "),
                         PrimaryTextWidget(
                           text: memberProfileModel?.memberDetails?.crNumber ??
                               "null",
@@ -1140,7 +1020,7 @@ class DetailsScreen extends StatelessWidget {
                     const Divider(thickness: 2, color: Colors.grey),
                     Row(
                       children: [
-                        const PrimaryTextWidget(text: "CR Document: "),
+                        PrimaryTextWidget(text: "CR Document".tr + ": "),
                         PrimaryTextWidget(
                           text: memberProfileModel
                                   ?.memberDetails?.documentNumber ??
@@ -1151,7 +1031,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Company Name [Eng]:"),
+                    PrimaryTextWidget(text: "Company Name [Eng]".tr + ":"),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberProfile?.companyNameEng ??
                           "null",
@@ -1161,7 +1041,7 @@ class DetailsScreen extends StatelessWidget {
                     const Divider(thickness: 2, color: Colors.grey),
                     Row(
                       children: [
-                        const PrimaryTextWidget(text: "Company GCP: "),
+                        PrimaryTextWidget(text: "Company GCP".tr + ": "),
                         PrimaryTextWidget(
                           text: memberProfileModel?.memberDetails?.companyGcp ??
                               "null",
@@ -1173,7 +1053,7 @@ class DetailsScreen extends StatelessWidget {
                     const Divider(thickness: 2, color: Colors.grey),
                     Row(
                       children: [
-                        const PrimaryTextWidget(text: "Mobile: "),
+                        PrimaryTextWidget(text: "Mobile".tr + ": "),
                         PrimaryTextWidget(
                           text: memberProfileModel?.memberProfile?.mobile ??
                               "null",
@@ -1183,7 +1063,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Membership Type: "),
+                    PrimaryTextWidget(text: "Membership Type".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberDetails?.memberCategory ??
                           "null",
@@ -1191,7 +1071,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Products: "),
+                    PrimaryTextWidget(text: "Products".tr + ": "),
                     Column(
                       children: [
                         FittedBox(
@@ -1237,7 +1117,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "CR Activity: "),
+                    PrimaryTextWidget(text: "CR Activity".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberDetails?.crActivity ??
                           "null",
@@ -1245,7 +1125,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "CR Document Number: "),
+                    PrimaryTextWidget(text: "CR Document Number".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberDetails?.crDocument ??
                           "null",
@@ -1253,7 +1133,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Company Name [Arabic]: "),
+                    PrimaryTextWidget(text: "Company Name [Arabic]".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel
                               ?.memberProfile?.companyNameArabic ??
@@ -1262,7 +1142,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Contact Person: "),
+                    PrimaryTextWidget(text: "Contact Person".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberDetails?.contactPerson ??
                           "null",
@@ -1270,7 +1150,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "Company Landline: "),
+                    PrimaryTextWidget(text: "Company Landline".tr + ": "),
                     PrimaryTextWidget(
                       text:
                           memberProfileModel?.memberDetails?.companyLandLine ??
@@ -1279,7 +1159,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Divider(thickness: 2, color: Colors.grey),
-                    const PrimaryTextWidget(text: "GCP: "),
+                    PrimaryTextWidget(text: "GCP".tr + ": "),
                     PrimaryTextWidget(
                       text: memberProfileModel?.memberDetails?.gpc ?? "null",
                       fontWeight: FontWeight.normal,
