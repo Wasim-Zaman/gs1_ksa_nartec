@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/view-model/login/after-login/products_services.dart';
 import 'package:gs1_v2_project/widgets/custom_drawer_widget.dart';
@@ -36,7 +37,7 @@ class _ProductsState extends State<Products> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: const Text('Manage Products'),
+          title: Text('Manage Products'.tr),
         ),
         drawer: CustomDrawerWidget(
           userId: response.memberData?.user?.id ?? userId,
@@ -49,7 +50,7 @@ class _ProductsState extends State<Products> {
               return const LoadingWidget();
             }
             if (!snapshot.hasData) {
-              return const Center(
+              return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -57,7 +58,7 @@ class _ProductsState extends State<Products> {
                       Icons.error_outline_sharp,
                       size: 100,
                     ),
-                    Text('No Data Found'),
+                    Text('noDataFound'.tr),
                   ],
                 ),
               );
@@ -86,9 +87,10 @@ class _ProductsState extends State<Products> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CustomBoxText(text: "Member Id: $userId"),
+                      CustomBoxText(text: "Member Id".tr + ": $userId"),
                       CustomBoxText(
-                        text: "GCP: ${response.memberData?.user?.gcpGLNID}",
+                        text: "GCP".tr +
+                            ": ${response.memberData?.user?.gcpGLNID}",
                       ),
                     ],
                   ),
@@ -105,88 +107,6 @@ class _ProductsState extends State<Products> {
                   ),
                   const SizedBox(height: 20),
                   const Divider(thickness: 2),
-                  // Table(
-                  //   defaultVerticalAlignment: TableCellVerticalAlignment.top,
-                  //   border: TableBorder.symmetric(
-                  //     inside: const BorderSide(
-                  //       color: Colors.white,
-                  //       width: 1,
-                  //     ),
-                  //   ),
-                  //   children: [
-                  //     TableRow(
-                  //       decoration: BoxDecoration(
-                  //         color: Colors.blue.shade300,
-                  //       ),
-                  //       children: const [
-                  //         Text(
-                  //           'Product Name',
-                  //           style: TextStyle(
-                  //             fontSize: 17,
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           'Barcode',
-                  //           style: TextStyle(
-                  //             fontSize: 17,
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           'Brand Name',
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontSize: 17,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     )
-                  //   ],
-                  // ),
-                  // Expanded(
-                  //   child: ListView.builder(
-                  //     itemCount: snap?.length,
-                  //     itemBuilder: (context, index) {
-                  //       final productName = snap?[index].productnameenglish;
-                  //       final barcode = snap?[index].barcode;
-                  //       final brandName = snap?[index].brandName;
-                  //       return Table(
-                  //         defaultVerticalAlignment:
-                  //             TableCellVerticalAlignment.top,
-                  //         children: [
-                  //           TableRow(
-                  //             decoration: const BoxDecoration(
-                  //               border: Border(
-                  //                 bottom: BorderSide(
-                  //                   color: Colors.black,
-                  //                   width: 1,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             children: [
-                  //               Text(
-                  //                 productName.toString(),
-                  //                 textAlign: TextAlign.left,
-                  //               ),
-                  //               Text(
-                  //                 barcode.toString(),
-                  //                 textAlign: TextAlign.left,
-                  //               ),
-                  //               Text(
-                  //                 brandName.toString(),
-                  //                 textAlign: TextAlign.left,
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ],
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: snap?.length,
@@ -196,8 +116,6 @@ class _ProductsState extends State<Products> {
                         final brandName = snap?[index].brandName;
                         final frontImage =
                             "$imagePath/${snap?[index].frontImage}";
-                        // final backImage =
-                        //     "$imagePath/${snap?[index].backImage}";
 
                         return Card(
                           elevation: 2,

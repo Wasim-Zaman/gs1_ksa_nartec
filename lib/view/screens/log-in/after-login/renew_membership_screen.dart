@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/models/login-models/profile/subscription_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
@@ -45,7 +46,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
     ).then((_) {
       AppDialogs.closeDialog();
       Common.showToast(
-        'Renewal Successful',
+        'Renewal Successful'.tr,
         backgroundColor: Colors.blue,
       );
       Navigator.of(context).pop();
@@ -78,7 +79,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
         automaticallyImplyLeading: true,
         actions: [
           ElevatedButton.icon(
-            label: const Text('Continue to payment'),
+            label: Text('Continue to payment'.tr),
             onPressed: continueToPayment,
             icon: const Icon(Icons.save),
             style: ElevatedButton.styleFrom(
@@ -95,14 +96,14 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Expiry Year: $expiryYear',
+                'Expiry Year'.tr + ': $expiryYear',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
               const SizedBox(height: 20),
-              const RequiredTextWidget(title: "Product Name"),
+              RequiredTextWidget(title: "Product Name".tr),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -112,9 +113,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                 enabled: false,
               ),
               const SizedBox(height: 20),
-              const RequiredTextWidget(
-                title: "Total Number Of Barcodes",
-              ),
+              RequiredTextWidget(title: "Total Number Of Barcodes".tr),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -124,9 +123,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                 controller: barcodesController,
               ),
               const SizedBox(height: 20),
-              const RequiredTextWidget(
-                title: "Yearly Subscription Fee",
-              ),
+              RequiredTextWidget(title: "Yearly Subscription Fee".tr),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -137,7 +134,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
               ),
               const SizedBox(height: 30),
               Text(
-                'Next Expiry Year: $nextExpiryYear',
+                'Next Expiry Year'.tr + ': $nextExpiryYear',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -150,9 +147,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     if (subscriptionModel.otherSubscription?.isEmpty ?? true) {
-                      return const Center(
-                        child: Text('No Data'),
-                      );
+                      return Center(child: Text('noDataFound'.tr));
                     }
                     return Dismissible(
                       background: Container(
@@ -183,8 +178,8 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                           children: [
                             TableRow(
                               children: [
-                                const Text(
-                                  'Product',
+                                Text(
+                                  'Product'.tr,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -203,8 +198,8 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                             ),
                             TableRow(
                               children: [
-                                const Text(
-                                  'Price',
+                                Text(
+                                  'Price'.tr,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -224,8 +219,8 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                             ),
                             TableRow(
                               children: [
-                                const Text(
-                                  'Registered Date',
+                                Text(
+                                  'Registered Date'.tr,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,

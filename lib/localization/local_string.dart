@@ -224,6 +224,22 @@ class LocalString extends Translations {
           "CR Document Number": "CR Document Number",
           "Contact Person": "Contact Person",
           "Company Landline": "Company Landline",
+
+          // Products Screen
+          'Manage Products': 'Manage Products',
+          "Member Id": "Member Id",
+
+          // Renew membership screen
+          'Renewal Successful': 'Renewal Successful',
+          'Continue to payment': 'Continue to payment',
+          'Expiry Year': 'Expiry Year',
+          "Product Name": "Product Name",
+          "Total Number Of Barcodes": "Total Number Of Barcodes",
+          "Yearly Subscription Fee": "Yearly Subscription Fee",
+          'Next Expiry Year': 'Next Expiry Year',
+          'Product': 'Product',
+          'Price': 'Price',
+          'Registered Date': 'Registered Date',
         },
 
         /// Arabic ///
@@ -445,6 +461,22 @@ class LocalString extends Translations {
           "CR Document Number": "رقم مستند CR",
           "Contact Person": "شخص الاتصال",
           "Company Landline": "هاتف الشركة",
+
+          // Products Screen
+          'Manage Products': 'إدارة المنتجات',
+          "Member Id": "معرف العضو",
+
+          // Renew membership screen
+          'Renewal Successful': 'تم التجديد بنجاح',
+          'Continue to payment': 'متابعة الدفع',
+          'Expiry Year': 'سنة الانتهاء',
+          "Product Name": "اسم المنتج",
+          "Total Number Of Barcodes": "إجمالي عدد الرموز الشريطية",
+          "Yearly Subscription Fee": "رسوم الاشتراك السنوي",
+          'Next Expiry Year': 'السنة القادمة',
+          'Product': 'المنتج',
+          'Price': 'السعر',
+          'Registered Date': 'تاريخ التسجيل',
         },
       };
 }
