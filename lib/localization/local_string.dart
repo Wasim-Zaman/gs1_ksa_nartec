@@ -261,6 +261,31 @@ class LocalString extends Translations {
               "Your Subscription Will Expire On:",
           "Subscription Details": "Subscription Details",
           "Renew Membership": "Renew Membership",
+
+          // Reset screens
+          "Select Activity": "Select Activity",
+          "User on this email not found": "User on this email not found",
+          "Reset Password": "Reset Password",
+          "Email Address": "Email Address",
+          "Enter your email": "Enter your email",
+          "Please enter your email": "Please enter your email",
+          "Please enter a valid email": "Please enter a valid email",
+          "Activity": "Activity",
+          "Sent verification code to your email":
+              "Sent verification code to your email",
+          "Send Verification Code": "Send Verification Code",
+          "Login Again?": "Login Again?",
+          "Login Now": "Login Now",
+          "Password reset successfully": "Password reset successfully",
+          "Enter New Password": "Enter New Password",
+          "New Password": "New Password",
+          "Please enter password": "Please enter password",
+          "Confirm Password": "Confirm Password",
+          "Password does not match": "Password does not match",
+          "Create your new password": "Create your new password",
+          "Verify Code": "Verify Code",
+          "Please enter verification code": "Please enter verification code",
+          "Verify Now": "Verify Now",
         },
 
         /// Arabic ///
@@ -518,6 +543,19 @@ class LocalString extends Translations {
           "Your Subscription Will Expire On:": "ستنتهي اشتراكاتك في:",
           "Subscription Details": "تفاصيل الاشتراك",
           "Renew Membership": "تجديد العضوية",
+
+          // Reset screens
+          "Select Activity": "حدد النشاط",
+          "User on this email not found":
+              "المستخدم على هذا البريد الإلكتروني غير موجود",
+          "Reset Password": "إعادة تعيين كلمة المرور",
+          "Email Address": "عنوان البريد الإلكتروني",
+          "Enter your email": "أدخل بريدك الإلكتروني",
+          "Please enter your email": "الرجاء إدخال بريدك الإلكتروني",
+          "Please enter a valid email": "الرجاء إدخال بريد إلكتروني صالح",
+          "Activity": "نشاط",
+          "Sent verification code to your email":
+              "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
         },
       };
 }

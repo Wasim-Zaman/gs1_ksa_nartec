@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/view-model/login/reset-password/reset_password_services.dart';
@@ -40,7 +41,7 @@ class _ResetScreenThreeState extends State<ResetScreenThree> {
         activityId.toString(),
       ).then((_) {
         AppDialogs.closeDialog();
-        Common.showToast("Password reset successfully");
+        Common.showToast("Password reset successfully".tr);
         Navigator.pushNamedAndRemoveUntil(
           context,
           Gs1MemberLoginScreen.routeName,
@@ -70,7 +71,7 @@ class _ResetScreenThreeState extends State<ResetScreenThree> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: AppBar(
-          title: const Text("Enter New Password"),
+          title: Text("Enter New Password".tr),
           centerTitle: true,
         ),
       ),
@@ -82,30 +83,30 @@ class _ResetScreenThreeState extends State<ResetScreenThree> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const RequiredTextWidget(title: "New Password"),
+                RequiredTextWidget(title: "New Password".tr),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: newPasswordController,
                   hintText: "**********",
                   validator: (password) {
                     if (password == null || password.isEmpty) {
-                      return "Please enter password";
+                      return "Please enter password".tr;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
-                const RequiredTextWidget(title: "Confirm Password"),
+                RequiredTextWidget(title: "Confirm Password".tr),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: confirmPasswordController,
                   hintText: "**********",
                   validator: (password) {
                     if (password == null || password.isEmpty) {
-                      return "Please enter password";
+                      return "Please enter password".tr;
                     }
                     if (password != newPasswordController.text) {
-                      return "Password does not match";
+                      return "Password does not match".tr;
                     }
                     return null;
                   },
@@ -117,12 +118,12 @@ class _ResetScreenThreeState extends State<ResetScreenThree> {
                       resetPassword();
                     }
                   },
-                  child: const Text("Reset Password"),
+                  child: Text("Reset Password".tr),
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Text("Login Again?"),
+                    Text("Login Again?".tr),
                     const SizedBox(width: 10),
                     TextButton(
                       onPressed: () {
@@ -131,7 +132,7 @@ class _ResetScreenThreeState extends State<ResetScreenThree> {
                           Gs1MemberLoginScreen.routeName,
                         );
                       },
-                      child: const Text("Login Now"),
+                      child: Text("Login Now".tr),
                     ),
                   ],
                 ),

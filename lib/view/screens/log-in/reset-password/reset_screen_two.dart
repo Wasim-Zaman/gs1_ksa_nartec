@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/providers/login_provider.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
@@ -47,7 +48,7 @@ class _ResetScreenTwoState extends State<ResetScreenTwo> {
         codeController.text.trim(),
       ).then((_) {
         AppDialogs.closeDialog();
-        Common.showToast("Create your new password");
+        Common.showToast("Create your new password".tr);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -87,7 +88,7 @@ class _ResetScreenTwoState extends State<ResetScreenTwo> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: AppBar(
-          title: const Text("Reset Password"),
+          title: Text("Reset Password".tr),
           centerTitle: true,
         ),
       ),
@@ -99,14 +100,14 @@ class _ResetScreenTwoState extends State<ResetScreenTwo> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const RequiredTextWidget(title: "Verify Code"),
+                RequiredTextWidget(title: "Verify Code".tr),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: codeController,
                   hintText: "00000",
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter verification code";
+                      return "Please enter verification code".tr;
                     }
                     return null;
                   },
@@ -118,12 +119,12 @@ class _ResetScreenTwoState extends State<ResetScreenTwo> {
                       verifyCode();
                     }
                   },
-                  child: const Text("Verify Now"),
+                  child: Text("Verify Now".tr),
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Text("Login Again?"),
+                    Text("Login Again?".tr),
                     const SizedBox(width: 10),
                     TextButton(
                       onPressed: () {
@@ -132,7 +133,7 @@ class _ResetScreenTwoState extends State<ResetScreenTwo> {
                           Gs1MemberLoginScreen.routeName,
                         );
                       },
-                      child: const Text("Login Now"),
+                      child: Text("Login Now".tr),
                     ),
                   ],
                 ),

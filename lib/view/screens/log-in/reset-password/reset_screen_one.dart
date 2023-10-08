@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/providers/login_provider.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
@@ -48,7 +49,7 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const RequiredTextWidget(title: "Select Activity"),
+                RequiredTextWidget(title: "Select Activity".tr),
                 const SizedBox(height: 10),
                 FutureBuilder(
                     future: LoginServices.getActivities(
@@ -60,8 +61,8 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                         );
                       }
                       if (snapshot.hasError) {
-                        return const Center(
-                          child: Text("User on this email not found"),
+                        return Center(
+                          child: Text("User on this email not found".tr),
                         );
                       }
                       final snap = snapshot.data;
@@ -97,42 +98,6 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                           });
                         },
                       );
-
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   height: 60,
-                      //   child: FittedBox(
-                      //     child: SizedBox(
-                      //       height: 100,
-                      //       child: Card(
-                      //         elevation: 5,
-                      //         child: DropdownButton(
-                      //             value: activityValue,
-                      //             items: activities
-                      //                 .where((element) => element.isNotEmpty)
-                      //                 .map<DropdownMenuItem<String>>(
-                      //                   (String v) => DropdownMenuItem<String>(
-                      //                     value: v,
-                      //                     child: FittedBox(child: Text(v)),
-                      //                   ),
-                      //                 )
-                      //                 .toList(),
-                      //             onChanged: (String? newValue) {
-                      //               setState(() {
-                      //                 activityValue = newValue!;
-                      //                 Provider.of<LoginProvider>(context,
-                      //                         listen: false)
-                      //                     .setActivity(activityValue);
-                      //                 Provider.of<LoginProvider>(context,
-                      //                         listen: false)
-                      //                     .setEmail(emailController.text);
-                      //                 Navigator.of(context).pop();
-                      //               });
-                      //             }),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // );
                     }),
               ],
             ),
@@ -148,7 +113,7 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: AppBar(
-          title: const Text("Reset Password"),
+          title: Text("Reset Password".tr),
           centerTitle: true,
         ),
       ),
@@ -160,17 +125,17 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const RequiredTextWidget(title: "Email Address"),
+                RequiredTextWidget(title: "Email Address".tr),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: emailController,
-                  hintText: "Enter your email",
+                  hintText: "Enter your email".tr,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter your email";
+                      return "Please enter your email".tr;
                     }
                     if (EmailValidator.validate(value) == false) {
-                      return "Please enter a valid email";
+                      return "Please enter a valid email".tr;
                     }
                     return null;
                   },
@@ -180,7 +145,7 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 20),
-                          const RequiredTextWidget(title: "Activity"),
+                          RequiredTextWidget(title: "Activity".tr),
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.all(10),
@@ -227,7 +192,7 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                         ).then((value) {
                           AppDialogs.closeDialog();
                           Common.showToast(
-                            "Sent verification code to your email",
+                            "Sent verification code to your email".tr,
                             backgroundColor: Theme.of(context).primaryColor,
                           );
                           Navigator.push(
@@ -260,12 +225,12 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                       }
                     }
                   },
-                  child: const Text("Send Verification Code"),
+                  child: Text("Send Verification Code".tr),
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Text("Login Again?"),
+                    Text("Login Again?".tr),
                     const SizedBox(width: 10),
                     TextButton(
                       onPressed: () {
@@ -274,7 +239,7 @@ class _ResetScreenOneState extends State<ResetScreenOne> {
                           Gs1MemberLoginScreen.routeName,
                         );
                       },
-                      child: const Text("Login Now"),
+                      child: Text("Login Now".tr),
                     ),
                   ],
                 ),
