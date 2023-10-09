@@ -101,10 +101,8 @@ class _ScreenState extends State<Screen> {
                         const SizedBox(height: 10),
                         // gtin
                         Text(
-                          "GTIN: ${data?.gtin}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
+                          "GTIN".tr + ": ${data?.gtin}",
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
@@ -184,35 +182,35 @@ class _ScreenState extends State<Screen> {
                 },
                 items: [
                   DropdownMenuItem(
-                    value: 'Photos Are Not Correct',
+                    value: 'Photos Are Not Correct'.tr,
                     child: Text(
                       'Photos Are Not Correct'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
-                    value: 'Missing GPC Brick Code',
+                    value: 'Missing GPC Brick Code'.tr,
                     child: Text(
                       'Missing GPC Brick Code'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
-                    value: 'Brand Owner Is Incorrect',
+                    value: 'Brand Owner Is Incorrect'.tr,
                     child: Text(
                       'Brand Owner Is Incorrect'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
-                    value: 'Country Of Sale Is Wrong',
+                    value: 'Country Of Sale Is Wrong'.tr,
                     child: Text(
                       'Country Of Sale Is Wrong'.tr,
                       style: TextStyle(color: darkBlue),
                     ),
                   ),
                   DropdownMenuItem(
-                    value: 'Unit Of Measuremet Is Incorrect',
+                    value: 'Unit Of Measuremet Is Incorrect'.tr,
                     child: Text(
                       'Unit Of Measuremet Is Incorrect'.tr,
                       style: TextStyle(color: darkBlue),
@@ -220,7 +218,8 @@ class _ScreenState extends State<Screen> {
                   ),
                   DropdownMenuItem(
                     value:
-                        'Product Description Not Matching On Physical Product',
+                        'Product Description Not Matching On Physical Product'
+                            .tr,
                     child: Text(
                       'Product Description Not Matching On Physical Product'.tr,
                       style: TextStyle(color: darkBlue),

@@ -9,6 +9,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/models/member-registration/get_all_cities_model.dart';
 import 'package:gs1_v2_project/models/member-registration/get_all_countries.dart';
@@ -84,7 +85,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
 
   // for drop down lists
   String? activityValue;
-  String? countryName = 'Saudi Arabia';
+  String? countryName = 'Saudi Arabia'.tr;
   String? countryShortName;
   int countryId = 0;
   String? stateName;
@@ -114,7 +115,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   // payment methods
   bool isBank = true;
   PaymentGateway paymentValue = PaymentGateway.bank;
-  String? bankType = 'bank_transfer';
+  String? bankType = 'bank_transfer'.tr;
 
   // others
   Set<String> addedGPC = {};
@@ -228,9 +229,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(226, 227, 231, 1),
       appBar: AppBar(
-        title: const Text(
-          "Member Registration",
-        ),
+        title: Text("Member Registration".tr),
         leading: Container(
             margin: const EdgeInsets.all(10),
             child: Image.asset('assets/images/user_registration.png')),
@@ -263,18 +262,17 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: TabWidget(
-                            isNextClicked: isFirstClicked, title: "1"),
-                      ),
+                          child: TabWidget(
+                              isNextClicked: isFirstClicked, title: "1".tr)),
                       Expanded(
                           child: TabWidget(
-                              isNextClicked: isSecondClicked, title: "2")),
+                              isNextClicked: isSecondClicked, title: "2".tr)),
                       Expanded(
                           child: TabWidget(
-                              isNextClicked: isThirdClicked, title: "3")),
+                              isNextClicked: isThirdClicked, title: "3".tr)),
                       Expanded(
                           child: TabWidget(
-                              isNextClicked: isFourthClicked, title: "4")),
+                              isNextClicked: isFourthClicked, title: "4".tr)),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -298,16 +296,19 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const RequiredTextWidget(
-                                                    title: "Document Number"),
+                                                RequiredTextWidget(
+                                                    title:
+                                                        "Document Number".tr),
                                                 const SizedBox(height: 5),
                                                 CustomTextField(
                                                   controller:
                                                       documentNoContoller,
-                                                  hintText: "Document Number",
+                                                  hintText:
+                                                      "Document Number".tr,
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
-                                                      return "Document Number is required";
+                                                      return "Document Number is required"
+                                                          .tr;
                                                     }
                                                     return null;
                                                   },
@@ -319,8 +320,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const RequiredTextWidget(
-                                                    title: "CR Activities"),
+                                                RequiredTextWidget(
+                                                    title: "CR Activities".tr),
                                                 const SizedBox(height: 5),
                                                 FutureBuilder(
                                                     future: ActivitiesService
@@ -333,21 +334,22 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                               .connectionState ==
                                                           ConnectionState
                                                               .waiting) {
-                                                        return const Center(
+                                                        return Center(
                                                           child: SizedBox(
                                                             height: 40,
                                                             child:
                                                                 LinearProgressIndicator(
                                                               semanticsLabel:
-                                                                  "Loading",
+                                                                  "Loading".tr,
                                                             ),
                                                           ),
                                                         );
                                                       }
                                                       if (snapshot.hasError) {
-                                                        return const Center(
+                                                        return Center(
                                                           child: Text(
-                                                              "Something went wrong, try again later"),
+                                                              "Something went wrong, try again later"
+                                                                  .tr),
                                                         );
                                                       }
                                                       final snap = snapshot.data
@@ -415,56 +417,59 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                               ],
                                             ),
                                       const SizedBox(height: 20),
-                                      const RequiredTextWidget(title: 'Email'),
+                                      RequiredTextWidget(title: 'Email'.tr),
                                       const SizedBox(height: 5),
                                       CustomTextField(
-                                        hintText: "Enter Valid Email",
+                                        hintText: "Enter Valid Email".tr,
                                         controller: emailController,
                                         validator: (email) {
                                           if (EmailValidator.validate(email!)) {
                                             return null;
                                           } else {
-                                            return 'Please enter a valid email';
+                                            return 'Please enter a valid email'
+                                                .tr
+                                                .tr;
                                           }
                                         },
                                       ),
                                       const SizedBox(height: 20),
-                                      const RequiredTextWidget(
-                                          title: 'Company Name English'),
+                                      RequiredTextWidget(
+                                          title: 'Company Name English'.tr),
                                       const SizedBox(height: 5),
                                       CustomTextField(
-                                        hintText: "Company Name English",
+                                        hintText: "Company Name English".tr,
                                         controller: companyNameEnController,
                                         keyboardType: TextInputType.text,
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Company Name is required';
+                                            return 'Company Name is required'
+                                                .tr;
                                           }
                                           return null;
                                         },
                                       ),
                                       const SizedBox(height: 20),
-                                      const RequiredTextWidget(
-                                          title: 'Company Name Arabic'),
+                                      RequiredTextWidget(
+                                          title: 'Company Name Arabic'.tr),
                                       const SizedBox(height: 5),
                                       CustomTextField(
-                                        hintText: "Company Name Arabic",
+                                        hintText: "Company Name Arabic".tr,
                                         controller: companyNameArController,
                                         keyboardType: TextInputType.text,
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'Company Name is required';
+                                            return 'Company Name is required'
+                                                .tr;
                                           }
                                           return null;
                                         },
                                       ),
                                       const SizedBox(height: 20),
-                                      const TitleTextWidget(
-                                        text: 'Contact Person',
-                                      ),
+                                      TitleTextWidget(
+                                          text: 'Contact Person'.tr),
                                       const SizedBox(height: 5),
                                       CustomTextField(
-                                        hintText: "Contact Person",
+                                        hintText: "Contact Person".tr,
                                         controller: contactPersonController,
                                         keyboardType: TextInputType.text,
                                       ),
@@ -495,8 +500,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const TitleTextWidget(
-                                          text: 'Company Landline'),
+                                      TitleTextWidget(
+                                          text: 'Company Landline'.tr),
                                       const SizedBox(height: 5),
                                       TextFormField(
                                         decoration: InputDecoration(
@@ -523,8 +528,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                         keyboardType: TextInputType.number,
                                       ),
                                       const SizedBox(height: 20),
-                                      const RequiredTextWidget(
-                                          title: 'Mobile No (Omit Zero)'),
+                                      RequiredTextWidget(
+                                          title: 'Mobile No (Omit Zero)'.tr),
                                       const SizedBox(height: 5),
                                       Row(
                                         children: [
@@ -557,11 +562,13 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                   .onUserInteraction,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return "Please enter mobile number";
+                                                  return "Please enter mobile number"
+                                                      .tr;
                                                 }
                                                 if (value.length < 13 ||
                                                     value.length > 13) {
-                                                  return "Please enter valid mobile number";
+                                                  return "Please enter valid mobile number"
+                                                      .tr;
                                                 }
                                                 return null;
                                               },
@@ -570,15 +577,14 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                         ],
                                       ),
                                       const SizedBox(height: 20),
-                                      const TitleTextWidget(text: 'Extension'),
+                                      TitleTextWidget(text: 'Extension'.tr),
                                       const SizedBox(height: 5),
                                       CustomTextField(
-                                        hintText: "Extension",
+                                        hintText: "Extension".tr,
                                         controller: extensionController,
                                       ),
                                       const SizedBox(height: 20),
-                                      const RequiredTextWidget(
-                                          title: "Zip Code"),
+                                      RequiredTextWidget(title: "Zip Code".tr),
                                       const SizedBox(height: 5),
                                       TextFormField(
                                         decoration: InputDecoration(
@@ -597,7 +603,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                         keyboardType: TextInputType.number,
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return "Kindly provide zip code";
+                                            return "Kindly provide zip code".tr;
                                           }
 
                                           return null;
@@ -614,10 +620,11 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             AutovalidateMode.onUserInteraction,
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return "Kindly provide website";
+                                            return "Kindly provide website".tr;
                                           }
                                           if (!value.contains('https://')) {
-                                            return "Kindly provide valid website";
+                                            return "Kindly provide valid website"
+                                                .tr;
                                           }
 
                                           return null;
@@ -665,8 +672,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const RequiredTextWidget(
-                                        title: "Search GPC"),
+                                    RequiredTextWidget(title: "Search GPC".tr),
                                     const SizedBox(height: 5),
                                     Row(
                                       children: [
@@ -727,8 +733,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                     ),
 
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                        title: "Added GPC"),
+                                    RequiredTextWidget(title: "Added GPC".tr),
                                     const SizedBox(height: 5),
                                     Column(
                                         children: addedGPC
@@ -749,8 +754,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             .toList()),
                                     const SizedBox(height: 20),
                                     const Divider(thickness: 3),
-                                    const RequiredTextWidget(
-                                      title: "Select Country",
+                                    RequiredTextWidget(
+                                      title: "Select Country".tr,
                                     ),
                                     FutureBuilder(
                                         future:
@@ -767,9 +772,10 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             );
                                           }
                                           if (snapshot.hasError) {
-                                            return const Center(
+                                            return Center(
                                               child: Text(
-                                                  "Something went wrong, please try again later"),
+                                                  "Something went wrong, please try again later"
+                                                      .tr),
                                             );
                                           }
                                           final snap = snapshot.data
@@ -821,8 +827,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           );
                                         }),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                        title: "Select State"),
+                                    RequiredTextWidget(
+                                        title: "Select State".tr),
 
                                     FutureBuilder(
                                         future: GetAllStatesServices.getList(
@@ -841,14 +847,13 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             return Center(
                                               child: Column(
                                                 children: [
-                                                  const Text(
-                                                      "Something went wrong"),
+                                                  Text("Something went wrong"
+                                                      .tr),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {});
                                                     },
-                                                    child:
-                                                        const Text("Refresh"),
+                                                    child: Text("Refresh".tr),
                                                   ),
                                                 ],
                                               ),
@@ -899,8 +904,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           );
                                         }),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                        title: "Select City"),
+                                    RequiredTextWidget(title: "Select City".tr),
                                     FutureBuilder(
                                         future: GetAllCitiesServices.getData(
                                             stateId ?? 0),
@@ -916,9 +920,10 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             );
                                           }
                                           if (snapshot.hasError) {
-                                            return const Center(
+                                            return Center(
                                               child: Text(
-                                                  "Something went wrong, please try again later"),
+                                                  "Something went wrong, please try again later"
+                                                      .tr),
                                             );
                                           }
                                           final snap = snapshot.data
@@ -964,9 +969,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           );
                                         }),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                      title: "Select Category",
-                                    ),
+                                    RequiredTextWidget(
+                                        title: "Select Category".tr),
                                     5.heightBox,
                                     DropdownWidget(
                                       list: categories,
@@ -1005,7 +1009,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                       },
                                     ).box.make().wFull(context),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(title: "GTIN"),
+                                    RequiredTextWidget(title: "GTIN".tr),
 
                                     DropdownWidget(
                                       value: memberCategory ??
@@ -1059,8 +1063,9 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const RequiredTextWidget(
-                                                  title: "Other Products"),
+                                              RequiredTextWidget(
+                                                title: "Other Products".tr,
+                                              ),
                                               addedProducts.isNotEmpty
                                                   ? ListView.builder(
                                                       shrinkWrap: true,
@@ -1146,8 +1151,9 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             ],
                                           ),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                        title: "Upload Company Documents"),
+                                    RequiredTextWidget(
+                                      title: "Upload Company Documents".tr,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -1160,7 +1166,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             height: 32,
                                             fit: BoxFit.contain,
                                           ),
-                                          label: const Text('Browse'),
+                                          label: Text('Browse'.tr),
                                         ),
                                         pdfFileName != null
                                             ? Expanded(
@@ -1196,16 +1202,17 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                       ],
                                     ),
                                     const SizedBox(height: 20),
-                                    const RequiredTextWidget(
-                                        title:
-                                            "Upload national address (QR Code)"),
+                                    RequiredTextWidget(
+                                      title: "Upload national address (QR Code)"
+                                          .tr,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         TextButton.icon(
                                           onPressed: uploadImage,
-                                          label: const Text('Browse'),
+                                          label: Text('Browse'.tr),
                                           icon: Image.asset(
                                             'assets/images/browse_doc.png',
                                             width: 30,
@@ -1290,7 +1297,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                   });
                                                 },
                                               ),
-                                              const Text('Bank'),
+                                              Text('Bank'.tr),
                                             ],
                                           )
                                         ],
@@ -1349,8 +1356,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                         });
                                       },
                                     ),
-                                    const Text(
-                                      "I accept the Terms and Conditions",
+                                    Text(
+                                      "I accept the Terms and Conditions".tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: AppColors.primaryColor,
@@ -1365,7 +1372,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           "https://gs1ksa.org/index.php/TermsAndConditions"));
                                     },
                                     child: Text(
-                                      "(Download Terms & Conditions)",
+                                      "(Download Terms & Conditions)".tr,
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: AppColors.redColor,
@@ -1384,7 +1391,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                       // do not submit the form if any of the value is empty
                                       if (!isChecked) {
                                         Common.showToast(
-                                            "Please accept the terms and conditions");
+                                            "Please accept the terms and conditions"
+                                                .tr);
                                       } else if (emailController.text.isEmpty ||
                                           companyNameEnController
                                               .text.isEmpty ||
@@ -1403,7 +1411,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           file == null ||
                                           bankType == null) {
                                         Common.showToast(
-                                            "Please fill the required fields");
+                                            "Please fill the required fields"
+                                                .tr);
                                       } else {
                                         isSubmit
                                             ? () {}
@@ -1507,7 +1516,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                         //         color: Colors.white,
                                         //       ))
                                         //     :
-                                        const Text('Submit'),
+                                        Text('Submit'.tr),
                                   ),
                                 ),
                                 const SizedBox(height: 20),
@@ -1703,7 +1712,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         // final responseBody = await response.stream.bytesToString();
         // print('response body:---- $responseBody');
 
-        Common.showToast('Registration successful');
+        Common.showToast('Registration successful'.tr);
 
         setState(() {
           isSubmit = false;
@@ -1714,7 +1723,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         AppDialogs.closeDialog();
         // showSpinner = false;
         Fluttertoast.showToast(
-          msg: 'Something went wrong, please try again',
+          msg: 'Something went wrong, please try again'.tr,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -1846,7 +1855,7 @@ class TabWidget extends StatelessWidget {
               ? const Color.fromRGBO(4, 215, 25, 1)
               : Theme.of(context).primaryColor,
           child: Text(
-            "Step",
+            "Step".tr,
             style: TextStyle(
               fontSize: 17,
               color: isNextClicked! ? Colors.black : Colors.white,
@@ -1888,10 +1897,10 @@ class NextPrevButtons extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Text(
-                      'Next',
+                      'Next'.tr,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -1939,7 +1948,7 @@ class _FileUploaderWidgetState extends State<FileUploaderWidget> {
       children: [
         ElevatedButton(
           onPressed: _selectFile,
-          child: const Text('Select File'),
+          child: Text('Select File'.tr),
         ),
         // if (_selectedFile != null) Text(_selectedFile!.path),
         // ElevatedButton(
@@ -1966,7 +1975,7 @@ class PreviousButtonWidget extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: const Row(
+        child: Row(
           children: [
             Icon(
               Icons.keyboard_double_arrow_left,
@@ -1975,7 +1984,7 @@ class PreviousButtonWidget extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              'Prev',
+              'Prev'.tr,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
