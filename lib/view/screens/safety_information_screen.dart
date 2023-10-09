@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/safety_info_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
@@ -41,7 +42,7 @@ class SafetyInformationScreen extends StatelessWidget {
       body: Column(
         children: [
           customAppBarWidget(
-            title: "Safety Information",
+            title: "Safety Information".tr,
             // backgroundColor: Colors.green[900],
             backgroundColor: darkBlue,
           ),
@@ -124,8 +125,8 @@ class PageSingleInstance extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.4,
-              child: const Text(
-                "Cerrified Processes",
+              child: Text(
+                "Cerrified Processes".tr,
                 softWrap: true,
                 style: TextStyle(
                   color: Colors.black,

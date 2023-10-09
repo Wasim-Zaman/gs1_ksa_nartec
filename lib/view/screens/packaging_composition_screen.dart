@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/package_composition_model.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
@@ -17,7 +18,7 @@ class PackagingCompositionScreen extends StatelessWidget {
       body: ListView(
         children: [
           customAppBarWidget(
-            title: "Packaging Composition",
+            title: "Packaging Composition".tr,
             backgroundColor: Colors.green[900],
           ),
           Padding(
@@ -68,7 +69,7 @@ class PageSingleInstance extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title ?? "Dal Giardino Risotto Rice With Mashrooms",
+          title ?? "",
           softWrap: true,
           style: const TextStyle(
             color: Colors.black,
@@ -78,7 +79,7 @@ class PageSingleInstance extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          "GTIN: $gtin",
+          "GTIN".tr + ": $gtin",
           style: const TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -87,7 +88,7 @@ class PageSingleInstance extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          "Consumer Product Variant: $consumerProductVariant",
+          "Consumer Product Variant".tr + ": $consumerProductVariant",
           style: const TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -100,18 +101,12 @@ class PageSingleInstance extends StatelessWidget {
   }
 
   thirdSection() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomRowWidget(
-          heading: "Packaging",
-        ),
-        CustomRowWidget(
-          heading: "Material(s)",
-        ),
-        CustomRowWidget(
-          heading: "Recyclability",
-        ),
+        CustomRowWidget(heading: "Packaging".tr),
+        CustomRowWidget(heading: "Material".tr),
+        CustomRowWidget(heading: "Recyclability".tr),
       ],
     );
   }
@@ -127,8 +122,8 @@ class PageSingleInstance extends StatelessWidget {
           secondSection(context),
           thirdSection(),
           const SizedBox(height: 20),
-          const Text(
-            "Data provided by Dal Giardino",
+          Text(
+            "Data provided by Dal Giardino".tr,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -160,7 +155,7 @@ class CustomRowWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                heading ?? "Packaging",
+                heading ?? "",
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -173,7 +168,7 @@ class CustomRowWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                value ?? "Paperboard",
+                value ?? "",
                 style: const TextStyle(
                   color: Colors.black,
                 ),

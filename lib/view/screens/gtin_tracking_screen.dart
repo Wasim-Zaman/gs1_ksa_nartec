@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/view/screens/home/home_screen.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -19,7 +20,7 @@ class _GtinTrackingScreenState extends State<GtinTrackingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan QR Code'),
+        title: Text('Scan QR Code'.tr),
       ),
       body: Column(
         children: [
@@ -34,7 +35,7 @@ class _GtinTrackingScreenState extends State<GtinTrackingScreen> {
             flex: 1,
             child: Center(
               child: Text(
-                'Scanned QR Code: $qrText',
+                'Scanned QR Code'.tr + ': $qrText',
                 style: const TextStyle(fontSize: 16),
               ),
             ),

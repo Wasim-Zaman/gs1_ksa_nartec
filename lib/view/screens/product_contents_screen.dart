@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
@@ -33,8 +34,8 @@ class ProductContentsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SecondaryAppBarWidget(
-                      title1: "Retailer",
+                    SecondaryAppBarWidget(
+                      title1: "Retailer".tr,
                       title2: "",
                       color: Colors.pink,
                       leadingIcon: Icons.shopping_cart,
@@ -52,7 +53,7 @@ class ProductContentsScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "GTIN: ${data.gtin}",
+                      "GTIN".tr + ": ${data.gtin}",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -65,9 +66,9 @@ class ProductContentsScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
+            return Center(
               child: Center(
-                child: Text('Something went wrong!'),
+                child: Text('Something went wrong'.tr),
               ),
             );
           }
@@ -91,43 +92,43 @@ class TabsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomListTileButton(
-          title: "Safety Information",
+          title: "Safety Information".tr,
           onPressed: () {
             Navigator.pushNamed(context, SafetyInformationScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Promotional Offers",
+          title: "Promotional Offers".tr,
           onPressed: () {
             Navigator.pushNamed(context, PromotionalOffersScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Product Contents",
+          title: "Product Contents".tr,
           onPressed: () {
             Navigator.pushNamed(context, ProductContentsScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Product Conrormance",
+          title: "Product Conrormance".tr,
           onPressed: () {
             Navigator.pushNamed(context, ProductContentsScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Product Composition",
+          title: "Product Composition".tr,
           onPressed: () {
             Navigator.pushNamed(context, ProductContentsScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Customs And Border Check",
+          title: "Customs And Border Check".tr,
           onPressed: () {
             Navigator.pushNamed(context, ProductContentsScreen.routeName);
           },
         ),
         CustomListTileButton(
-          title: "Product Tracking",
+          title: "Product Tracking".tr,
           onPressed: () {
             Navigator.pushNamed(context, ProductContentsScreen.routeName);
           },
@@ -152,7 +153,7 @@ class CustomListTileButton extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: ListTile(
-        title: Text(title ?? 'Title'),
+        title: Text(title ?? ''),
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: pinkColor,

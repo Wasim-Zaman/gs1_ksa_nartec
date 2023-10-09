@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/offers_nearMe_screen.dart';
@@ -68,7 +69,7 @@ class Screen extends StatelessWidget {
           const SizedBox(height: 10),
           // gtin
           Text(
-            "GTIN: ${data?.gtin ?? "6281000000113"}",
+            "GTIN".tr + ": ${data?.gtin}",
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -81,18 +82,14 @@ class Screen extends StatelessWidget {
             child: Column(
               children: [
                 CustomReusableButton(
-                  text: "Offers Near Me",
+                  text: "Offers Near Me".tr,
                   onTap: () => Navigator.of(context).pushNamed(
                     OffersNearMeScreen.routeName,
                     arguments: data,
                   ),
                 ),
-                const CustomReusableButton(
-                  text: "Competitive Price",
-                ),
-                const CustomReusableButton(
-                  text: "Top Seller",
-                ),
+                CustomReusableButton(text: "Competitive Price".tr),
+                CustomReusableButton(text: "Top Seller".tr),
               ],
             ),
           ),

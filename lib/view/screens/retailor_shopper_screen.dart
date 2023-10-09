@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/providers/product.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -76,8 +77,8 @@ class RetailorShopperScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SecondaryAppBarWidget(
-                      title1: "Retailer",
+                    SecondaryAppBarWidget(
+                      title1: "Retailer".tr,
                       title2: "",
                       color: pinkColor,
                       leadingIcon: Icons.shopping_cart,
@@ -100,7 +101,7 @@ class RetailorShopperScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "GTIN: ${data.gtin}",
+                            "GTIN".tr + ": ${data.gtin}",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -125,9 +126,9 @@ class RetailorShopperScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
+            return Center(
               child: Center(
-                child: Text('Something went wrong!'),
+                child: Text('Something went wrong'.tr),
               ),
             );
           }
@@ -149,7 +150,7 @@ class TabsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomListTileButton(
-          title: "Ingredients & Allergens",
+          title: "Ingredients & Allergens".tr,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -159,7 +160,7 @@ class TabsWidget extends StatelessWidget {
           },
         ),
         CustomListTileButton(
-          title: "Recipes",
+          title: "Recipes".tr,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -169,7 +170,7 @@ class TabsWidget extends StatelessWidget {
           },
         ),
         CustomListTileButton(
-          title: "Logistics information",
+          title: "Logistics information".tr,
           onPressed: () {
             Navigator.pushNamed(
               context,

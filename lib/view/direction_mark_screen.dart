@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gs1_v2_project/models/lat_long_model.dart';
 
@@ -18,10 +19,8 @@ class DirectionMarkScreen extends StatelessWidget {
     Marker marker = Marker(
       markerId: MarkerId(address),
       position: LatLng(lat, long),
-      infoWindow: const InfoWindow(
-        title: 'My Marker',
-        snippet: 'This is my marker',
-      ),
+      infoWindow:
+          InfoWindow(title: 'My Marker'.tr, snippet: 'This is my marker'.tr),
     );
     Set<Marker> markers = {marker};
     return GoogleMap(

@@ -344,6 +344,88 @@ class LocalString extends Translations {
           'Next': 'Next',
           'Select File': 'Select File',
           'Prev': 'Prev',
+
+          // First Screen
+          "GTIN Tracker V.2.0": "GTIN Tracker V.2.0",
+          "GTIN Tracking": "GTIN Tracking",
+
+          // Gtin tracking screen
+          'Scan QR Code': 'Scan QR Code',
+          'Scanned QR Code': 'Scanned QR Code',
+
+          // Ingredients and allergens screen
+          "Ingredients & Allergens": "Ingredients & Allergens",
+          "Retailer": "Retailer",
+          "Calories": "Calories",
+          "Fat": "Fat",
+          "Salt": "Salt",
+          "Sugar": "Sugar",
+          "Ingredients": "Ingredients",
+          "Allergen Information": "Allergen Information",
+
+          // Logistic information screen
+          'Failed to load data': 'Failed to load data',
+          "Logistic Information": "Logistic Information",
+          "GLNID": "GLNID",
+          "Batch": "Batch",
+          "Manufecture Date": "Manufecture Date",
+          "Best Before Date": "Best Before Date",
+          "Serial Number": "Serial Number",
+
+          // Packaging composition screen
+          "Packaging Composition": "Packaging Composition",
+          "Consumer Product Variant": "Consumer Product Variant",
+          "Packaging": "Packaging",
+          "Material": "Materials",
+          "Recyclability": "Recyclability",
+          "Data provided by Dal Giardino": "Data provided by Dal Giardino",
+
+          // Product contents screen
+          "Safety Information": "Safety Information",
+          "Promotional Offers": "Promotional Offers",
+          "Product Conrormance": "Product Conrormance",
+          "Product Composition": "Product Composition",
+          "Customs And Border Check": "Customs And Border Check",
+          "Product Tracking": "Product Tracking",
+
+          // Promotional Offers Screen
+          "Product ID": "Product ID",
+          "Language": "Language",
+          "Target URL": "Target URL",
+          'Expiry Date': 'Expiry Date',
+          "LinkType": "LinkType",
+
+          // Recipe Screen
+          'Recipes': 'Recipes',
+          'From our chef': 'From our chef',
+
+          // Regulatory Affairs Screen
+          "Regulatory Affairs": "Regulatory Affairs",
+          "Product Safety (Conformance)": "Product Safety (Conformance)",
+          "Customs & Border Check": "Customs and Border Check",
+          "Quality Assurance": "Quality Assurance",
+          "ISO Compliance": "ISO Compliance",
+          "SASO Conformance": "SASO Conformance",
+
+          // Retail Information Screen
+          "Offers Near Me": "Offers Near Me",
+          "Competitive Price": "Competitive Price",
+          "Top Seller": "Top Seller",
+
+          // Retailer shopper screen
+          "Logistics information": "Logistics information",
+
+          // Safety Information screen
+          "Cerrified Processes": "Cerrified Processes",
+
+          // Single event screen
+          "Single Event": "Single Event",
+          "ADDRESS": "ADDRESS",
+          "View": "View",
+
+          // direction marker screen
+          'My Marker': 'My Marker',
+          'This is my marker': 'This is my marker',
         },
 
         /// Arabic ///
@@ -684,6 +766,88 @@ class LocalString extends Translations {
           'Next': 'التالى',
           'Select File': 'اختر ملف',
           'Prev': 'السابق',
+
+          // First Screen
+          "GTIN Tracker V.2.0": "GTIN Tracker V.2.0",
+          "GTIN Tracking": "تتبع GTIN",
+
+          // Gtin tracking screen
+          'Scan QR Code': 'مسح رمز الاستجابة السريعة',
+          'Scanned QR Code': 'تم مسح رمز الاستجابة السريعة',
+
+          // Ingredients and allergens screen
+          "Ingredients & Allergens": "المكونات والحساسية",
+          "Retailer": "بائع التجزئة",
+          "Calories": "سعرات حرارية",
+          "Fat": "دهن",
+          "Salt": "ملح",
+          "Sugar": "سكر",
+          "Ingredients": "مكونات",
+          "Allergen Information": "معلومات حساسية",
+
+          // Logistic information screen
+          'Failed to load data': 'فشل في تحميل البيانات',
+          "Logistic Information": "معلومات الخدمة اللوجستية",
+          "GLNID": "GLNID",
+          "Batch": "دفعة",
+          "Manufecture Date": "تاريخ التصنيع",
+          "Best Before Date": "أفضل قبل التاريخ",
+          "Serial Number": "الرقم التسلسلي",
+
+          // Packaging composition screen
+          "Packaging Composition": "تركيب التعبئة والتغليف",
+          "Consumer Product Variant": "المتغير المنتج للمستهلك",
+          "Packaging": "التعبئة والتغليف",
+          "Material": "مواد",
+          "Recyclability": "قابلية إعادة التدوير",
+          "Data provided by Dal Giardino": "البيانات المقدمة من Dal Giardino",
+
+          // Product contents screen
+          "Safety Information": "معلومات السلامة",
+          "Promotional Offers": "عروض ترويجية",
+          "Product Conrormance": "الامتثال للمنتج",
+          "Product Composition": "تركيب المنتج",
+          "Customs And Border Check": "التفتيش الجمركي والحدودي",
+          "Product Tracking": "تتبع المنتج",
+
+          // Promotional Offers Screen
+          "Product ID": "معرف المنتج",
+          "Language": "لغة",
+          "Target URL": "عنوان URL المستهدف",
+          'Expiry Date': 'تاريخ الانتهاء',
+          "LinkType": "نوع الرابط",
+
+          // Recipe Screen
+          'Recipes': 'وصفات',
+          'From our chef': 'من طباخنا',
+
+          // Regulatory Affairs Screen
+          "Regulatory Affairs": "الشؤون الحكومية / التنظيمية",
+          "Product Safety (Conformance)": "سلامة المنتج (الامتثال)",
+          "Customs & Border Check": "التفتيش الجمركي والحدودي",
+          "Quality Assurance": "ضمان الجودة",
+          "ISO Compliance": "الامتثال لمعايير الأيزو",
+          "SASO Conformance": "الامتثال لمعايير SASO",
+
+          // Retail Information Screen
+          "Offers Near Me": "عروض بالقرب مني",
+          "Competitive Price": "سعر تنافسي",
+          "Top Seller": "أعلى بائع",
+
+          // Retailer shopper screen
+          "Logistics information": "معلومات الخدمة اللوجستية",
+
+          // Safety Information screen
+          "Cerrified Processes": "عمليات معتمدة",
+
+          // Single event screen
+          "Single Event": "حدث واحد",
+          "ADDRESS": "عنوان",
+          "View": "رأي",
+
+          // direction marker screen
+          'My Marker': 'علامتي',
+          'This is my marker': 'هذه هي علامتي',
         },
       };
 }

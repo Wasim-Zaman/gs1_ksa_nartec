@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/ingredientsModel.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -27,10 +28,10 @@ class IngredientsAndAllergensScreen extends StatelessWidget {
             children: [
               TwoAppBars(
                 secondBgColor: purpleColor,
-                secondText: "Ingredients & Allergens",
+                secondText: "Ingredients & Allergens".tr,
                 firstBgColor: yellowAppBarColor,
                 firstLeadingIcon: Icons.shopping_bag_outlined,
-                firstText: "Retailer",
+                firstText: "Retailer".tr,
                 firstActions: [
                   IconButton(
                     icon: const Icon(Icons.shopping_cart_outlined),
@@ -104,7 +105,7 @@ class Screen extends StatelessWidget {
         const SizedBox(height: 10),
         // GTIN
         Text(
-          'GTIN: $gtin',
+          'GTIN'.tr + ': $gtin',
           style: const TextStyle(fontSize: 18),
         ),
         const SizedBox(height: 10),
@@ -112,19 +113,19 @@ class Screen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomBoxWidget(
-                type: "Calories",
+                type: "Calories".tr,
                 quantity: calories,
                 percentage: (double.parse(calories!) / 100).toStringAsFixed(2)),
             CustomBoxWidget(
-                type: "Fat",
+                type: "Fat".tr,
                 quantity: fat,
                 percentage: (double.parse(fat!) / 100).toStringAsFixed(2)),
             CustomBoxWidget(
-                type: "Salt",
+                type: "Salt".tr,
                 quantity: salt,
                 percentage: (double.parse(salt!) / 100).toStringAsFixed(2)),
             CustomBoxWidget(
-                type: "Sugar",
+                type: "Sugar".tr,
                 quantity: sugar,
                 percentage: (double.parse(sugar!) / 100).toStringAsFixed(2)),
           ],
@@ -134,8 +135,8 @@ class Screen extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Ingredients",
+            Text(
+              "Ingredients".tr,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -144,8 +145,8 @@ class Screen extends StatelessWidget {
             const SizedBox(height: 10),
             Text(ingredients.toString()),
             const SizedBox(height: 20),
-            const Text(
-              "Allergen Information",
+            Text(
+              "Allergen Information".tr,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,

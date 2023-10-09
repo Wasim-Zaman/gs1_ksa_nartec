@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/promotional_offers_model.dart';
 import 'package:gs1_v2_project/utils/url.dart';
 import 'package:http/http.dart' as http;
@@ -41,7 +42,7 @@ class PromotionalOffersScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        title: const Text("Promotional Offers"),
+        title: Text("Promotional Offers".tr),
       ),
       body: FutureBuilder(
         future: getFutureData(context),
@@ -63,7 +64,7 @@ class PromotionalOffersScreen extends StatelessWidget {
                     return Column(
                       children: [
                         Text(
-                          "Product ID: ${data[index].iD}",
+                          "Product ID".tr + ": ${data[index].iD}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -74,14 +75,14 @@ class PromotionalOffersScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Language: ${data[index].lang}",
+                              "Language".tr + ": ${data[index].lang}",
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              "Target URL: ${data[index].targetURL}",
+                              "Target URL".tr + ": ${data[index].targetURL}",
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -91,19 +92,19 @@ class PromotionalOffersScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          "GTIN:\t ${data[index].gTIN}",
+                          "GTIN".tr + ":\t ${data[index].gTIN}",
                           softWrap: true,
                         ),
                         const SizedBox(height: 10),
                         Card(
                           child: ListTile(
-                            title: const Text('Expiry Date'),
+                            title: Text('Expiry Date'.tr),
                             subtitle: Text("${data[index].expiryDate}"),
                           ),
                         ),
                         const SizedBox(height: 40),
                         Text(
-                          "LinkType:\n ${data[index].linkType}",
+                          "LinkType".tr + ":\n ${data[index].linkType}",
                           softWrap: true,
                         ),
                         const SizedBox(height: 60),

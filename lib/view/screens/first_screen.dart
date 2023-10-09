@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view/screens/qr_code_scanning_screen.dart';
 
@@ -10,7 +11,7 @@ class FirstScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("GTIN Tracker V.2.0"),
+        title: Text("GTIN Tracker V.2.0".tr),
         backgroundColor: darkBlue,
       ),
       body: Padding(
@@ -26,9 +27,9 @@ class FirstScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: orangeColor,
                 ),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("GTIN Tracking"),
+                  child: Text("GTIN Tracking".tr),
                 ),
                 onPressed: () {
                   Navigator.of(context)

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/ingredientsModel.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -42,7 +43,7 @@ class LogisticInformationScreen extends StatelessWidget {
 
       return data;
     } else {
-      throw Exception('Failed to load data');
+      throw Exception('Failed to load data'.tr);
     }
   }
 
@@ -69,7 +70,7 @@ class LogisticInformationScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  customAppBarWidget(title: "Logistic Information"),
+                  customAppBarWidget(title: "Logistic Information".tr),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
@@ -87,7 +88,7 @@ class LogisticInformationScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "GTIN: ${dataModel.gtin}",
+                          "GTIN".tr + ": ${dataModel.gtin}",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -95,27 +96,27 @@ class LogisticInformationScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         CustomListTileWidget(
-                          heading: "GLNID",
+                          heading: "GLNID".tr,
                           data: dataModel.gcpGLNID,
                         ),
                         CustomListTileWidget(
-                          heading: "Batch",
+                          heading: "Batch".tr,
                           data: data?.batch,
                         ),
                         CustomListTileWidget(
-                          heading: "Expiry",
+                          heading: "Expiry".tr,
                           data: data?.expiry,
                         ),
                         CustomListTileWidget(
-                          heading: "Manuf. Date",
+                          heading: "Manufecture Date".tr,
                           data: data?.manufacturingDate,
                         ),
                         CustomListTileWidget(
-                          heading: "Best Before Date",
+                          heading: "Best Before Date".tr,
                           data: data?.bestBeforeDate,
                         ),
                         CustomListTileWidget(
-                          heading: "Serial Number",
+                          heading: "Serial Number".tr,
                           data: data?.serial,
                         ),
                       ],

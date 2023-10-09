@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gs1_v2_project/models/lat_long_model.dart';
 import 'package:gs1_v2_project/providers/gtin.dart';
@@ -78,7 +79,7 @@ class _OffersNearMeScreenState extends State<OffersNearMeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return const Center(child: Text('Error'));
+            return Center(child: Text('Something went wrong'.tr));
           }
 
           final data = snapshot.data as List<LatLongModel>;

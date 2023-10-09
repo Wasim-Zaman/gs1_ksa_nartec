@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/providers/gtin.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -34,7 +35,7 @@ class RegulatoryAffairsScreen extends StatelessWidget {
             return ListView(
               children: [
                 customAppBarWidget(
-                  title: "Regulatory Affairs",
+                  title: "Regulatory Affairs".tr,
                   backgroundColor: Colors.green[900],
                 ),
                 Screen(data: data),
@@ -47,9 +48,9 @@ class RegulatoryAffairsScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
+            return Center(
               child: Center(
-                child: Text('Something went wrong!'),
+                child: Text('Something went wrong'.tr),
               ),
             );
           }
@@ -87,7 +88,7 @@ class Screen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "GTIN: ${data?.gtin}",
+              "GTIN".tr + ": ${data?.gtin}",
               style: const TextStyle(
                 fontSize: 18,
               ),
@@ -113,7 +114,7 @@ class TabsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomListTileButton(
-          title: "Product Safety (Conformance)",
+          title: "Product Safety (Conformance)".tr,
           onPressed: () {
             Navigator.of(context).pushNamed(
               ProductSafetyGrid.routeName,
@@ -122,7 +123,7 @@ class TabsWidget extends StatelessWidget {
           },
         ),
         CustomListTileButton(
-          title: "Packaging Composition",
+          title: "Packaging Composition".tr,
           onPressed: () {
             Navigator.of(context).pushNamed(
               PackageCompositionGridScreen.routeName,
@@ -131,7 +132,7 @@ class TabsWidget extends StatelessWidget {
           },
         ),
         CustomListTileButton(
-          title: "Customs & Border Check",
+          title: "Customs & Border Check".tr,
           onPressed: () {
             // Navigator.of(context)
             //     .pushNamed(CustomAndBorderCheckScreen.routeName);
@@ -141,18 +142,9 @@ class TabsWidget extends StatelessWidget {
             );
           },
         ),
-        CustomListTileButton(
-          title: "Quality Assurance",
-          onPressed: () {},
-        ),
-        CustomListTileButton(
-          title: "ISO Compliance",
-          onPressed: () {},
-        ),
-        CustomListTileButton(
-          title: "SASO Conformance",
-          onPressed: () {},
-        ),
+        CustomListTileButton(title: "Quality Assurance".tr, onPressed: () {}),
+        CustomListTileButton(title: "ISO Compliance".tr, onPressed: () {}),
+        CustomListTileButton(title: "SASO Conformance".tr, onPressed: () {}),
       ],
     );
   }

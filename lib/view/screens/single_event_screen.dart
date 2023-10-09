@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/lat_long_model.dart';
 import 'package:gs1_v2_project/models/single_event_model.dart';
 import 'package:gs1_v2_project/view-model/retail-information/single_event_service.dart';
@@ -16,7 +17,7 @@ class SingleEventScreen extends StatelessWidget {
     final String trxGLNIDTo = args['trxGLNIDTo'];
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Single Event"),
+        title: Text("Single Event".tr),
       ),
       body: FutureBuilder(
         future: SingleEventService.getFutureData(trxGLNIDTo),
@@ -27,8 +28,8 @@ class SingleEventScreen extends StatelessWidget {
             );
           }
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error'),
+            return Center(
+              child: Text('Something went wrong'.tr),
             );
           }
           final data = snapshot.data as List<SingleEventModel>;
@@ -117,7 +118,7 @@ class Screen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "ADDRESS",
+                      "ADDRESS".tr,
                       style: TextStyle(
                         fontSize: 15,
                         color: Theme.of(context).primaryColor,
@@ -132,7 +133,7 @@ class Screen extends StatelessWidget {
                 flex: 1,
                 child: CustomElevatedButton(
                   bgColor: Theme.of(context).primaryColor,
-                  caption: "View",
+                  caption: "View".tr,
                   onPressed: () {
                     // navigate to the direction mark screen
                     Navigator.of(context).pushNamed(

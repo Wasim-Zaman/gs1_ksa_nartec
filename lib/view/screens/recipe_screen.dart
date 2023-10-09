@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/recipe_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
@@ -21,7 +22,7 @@ class RecipeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppBar(
-                title: const Text('Recipes'),
+                title: Text('Recipes'.tr),
                 backgroundColor: purpleColor.shade600,
                 elevation: 0,
                 leading: IconButton(
@@ -74,8 +75,8 @@ class Screen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // title
-            const Text(
-              'From our chef:',
+            Text(
+              'From our chef'.tr + ':',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -115,8 +116,8 @@ class Screen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Ingredients",
+              Text(
+                "Ingredients".tr,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               const SizedBox(height: 10),
