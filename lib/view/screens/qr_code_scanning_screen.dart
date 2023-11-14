@@ -39,7 +39,8 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         gtinCode = scanData.code!;
-        gtinCode = gtinCode.substring(0, 13);
+        // gtinCode = gtinCode.substring(0, 13);
+        gtinCode = gtinCode.split("gtin=")[1];
         if (gtinCode.isNotEmpty &&
             gtinCode.length == 13 &&
             double.tryParse(gtinCode) != null) {

@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   qr_code_scanner: ^1.0.1
+  qr_flutter: ^4.1.0
   http: ^0.13.5
   bulleted_list: ^0.0.1+0.1a
   provider: ^6.0.5
@@ -64,6 +65,7 @@ dependencies:
   ionicons: ^0.2.2
   velocity_x: ^4.1.0
   flutter_html:
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:

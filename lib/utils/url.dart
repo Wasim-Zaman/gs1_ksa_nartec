@@ -1,5 +1,5 @@
 class URL {
-  static String baseUrl = 'https://gtrack.info/api/search/member/gtin';
+  static String baseUrl = 'https://gs1.org.sa/api/search/member/gtin';
   static String digitalLink =
       'https://gtrack.info/api/search/member/gtin/digital/link';
   static String latLong = "https://gtrack.info/api/member/events";

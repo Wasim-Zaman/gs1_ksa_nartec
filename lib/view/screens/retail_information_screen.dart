@@ -7,17 +7,33 @@ import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/secondary_appbar_widget.dart';
 
-class RetailInformationScreen extends StatelessWidget {
+class RetailInformationScreen extends StatefulWidget {
   const RetailInformationScreen({super.key});
 
   static const routeName = '/retail-information-screen';
+
+  @override
+  State<RetailInformationScreen> createState() =>
+      _RetailInformationScreenState();
+}
+
+class _RetailInformationScreenState extends State<RetailInformationScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context),
+        future: BaseApiService.getData(context, gtin: gtin),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

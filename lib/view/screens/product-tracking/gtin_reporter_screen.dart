@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gs1_v2_project/constants/colors/app_colors.dart';
+import 'package:gs1_v2_project/constants/images/other_images.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
@@ -11,32 +13,56 @@ import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view-model/gtin-reporter/gtin_reporter_services.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
+import 'package:gs1_v2_project/widgets/qr_code/qr_image.dart';
 
-class GtinReporterScreen extends StatelessWidget {
+class GtinReporterScreen extends StatefulWidget {
   static const routeName = "/gtin-reporter";
   const GtinReporterScreen({super.key});
 
   @override
+  State<GtinReporterScreen> createState() => _GtinReporterScreenState();
+}
+
+class _GtinReporterScreenState extends State<GtinReporterScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "GS1 Saudi Arabia".tr,
-          style: TextStyle(
-            color: darkBlue,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        foregroundColor: darkBlue,
-        centerTitle: true,
-      ),
       body: ListView(
-        children: const [
+        children: [
+          Container(
+            height: 200,
+            padding: const EdgeInsets.all(50),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primaryColor,
+                  AppColors.white,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Image.asset(OtherImages.logo),
+          ),
+          AppBar(
+            backgroundColor: orangeColor,
+            automaticallyImplyLeading: true,
+            title: Text("GTIN Reporter"),
+            centerTitle: true,
+          ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Screen(),
+            child: Screen(gtin: gtin.toString()),
           ),
         ],
       ),
@@ -45,7 +71,8 @@ class GtinReporterScreen extends StatelessWidget {
 }
 
 class Screen extends StatefulWidget {
-  const Screen({super.key});
+  final String gtin;
+  const Screen({super.key, required this.gtin});
 
   @override
   State<Screen> createState() => _ScreenState();
@@ -73,8 +100,15 @@ class _ScreenState extends State<Screen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        ListTile(
+          tileColor: Colors.greenAccent,
+          leading: Image.asset(OtherImages.verified_by_gs1),
+          title: Text("Complete Data"),
+          subtitle: Text("This number is registered to company:"),
+        ),
+        SizedBox(height: 20),
         FutureBuilder(
-            future: BaseApiService.getData(context),
+            future: BaseApiService.getData(context, gtin: widget.gtin),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {}
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -84,29 +118,46 @@ class _ScreenState extends State<Screen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomImageWidget(imageUrl: data?.productImageUrl),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${data?.productName} - ${data?.productDescription}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child:
+                            CustomImageWidget(imageUrl: data?.productImageUrl),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          children: [
+                            QRImage(data: data?.productImageUrl ?? ""),
+                            Text("${data?.gtin} | ${data?.brandName}"),
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        // gtin
-                        Text(
-                          "GTIN".tr + ": ${data?.gtin}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 20),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(10.0),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text(
+                  //         "${data?.productName} - ${data?.productDescription}",
+                  //         style: const TextStyle(
+                  //           fontSize: 20,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //       const SizedBox(height: 10),
+                  //       // gtin
+                  //       Text(
+                  //         "GTIN".tr + ": ${data?.gtin}",
+                  //         style: const TextStyle(fontSize: 18),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   GridWidget(
                     gtinNumber: data?.gtin.toString(),
                     productBrand: data?.brandName,
@@ -440,41 +491,36 @@ class GridWidget extends StatelessWidget {
           value: gtinNumber ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
+
         ExpansionRowWidget(
           keyy: "Brand Name",
           value: productBrand ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
 
         ExpansionRowWidget(
           keyy: "Product Description",
           value: productDescription ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
 
         ExpansionRowWidget(
           keyy: "Product Image Url",
           value: productImageUrl ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
 
         ExpansionRowWidget(
           keyy: "Global Product Category",
           value: globalProductCategory ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
 
         ExpansionRowWidget(
           keyy: "Net Content",
           value: netContent ?? "null",
           fontSize: 18,
         ),
-        const Divider(thickness: 2),
 
         ExpansionRowWidget(
             keyy: "Country of Sale",

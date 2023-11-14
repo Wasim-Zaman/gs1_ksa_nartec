@@ -9,16 +9,31 @@ import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 
-class VerifyByGS1Screen extends StatelessWidget {
+class VerifyByGS1Screen extends StatefulWidget {
   const VerifyByGS1Screen({super.key});
   static const routeName = "/verify_by_gs1_screen";
+
+  @override
+  State<VerifyByGS1Screen> createState() => _VerifyByGS1ScreenState();
+}
+
+class _VerifyByGS1ScreenState extends State<VerifyByGS1Screen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context),
+        future: BaseApiService.getData(context, gtin: gtin),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(child: Text('noDataFound'.tr));

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
-import 'package:gs1_v2_project/providers/gtin.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/custom_and_border_check_screen.dart';
@@ -10,20 +9,34 @@ import 'package:gs1_v2_project/view/screens/grids/product_safety_grid.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
-import 'package:provider/provider.dart';
 
-class RegulatoryAffairsScreen extends StatelessWidget {
+class RegulatoryAffairsScreen extends StatefulWidget {
   const RegulatoryAffairsScreen({super.key});
 
   static const routeName = '/regulatory-Affairs-Screen';
+
+  @override
+  State<RegulatoryAffairsScreen> createState() =>
+      _RegulatoryAffairsScreenState();
+}
+
+class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context,
-            gtin: Provider.of<GTIN>(context).gtinNumber),
+        future: BaseApiService.getData(context, gtin: gtin),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

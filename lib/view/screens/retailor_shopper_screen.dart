@@ -14,51 +14,33 @@ import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/secondary_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
-class RetailorShopperScreen extends StatelessWidget {
+class RetailorShopperScreen extends StatefulWidget {
   const RetailorShopperScreen({super.key});
 
   static const routeName = '/retailor_shopper_screen';
 
+  @override
+  State<RetailorShopperScreen> createState() => _RetailorShopperScreenState();
+}
+
+class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
+
   // ProductContentsListModel? myData;
-
-  // Future<ProductContentsListModel> getData(BuildContext context) async {
-  //   final String? gtinCode =
-  //       ModalRoute.of(context)!.settings.arguments as String?;
-  //   final http.Response response = await http.post(
-  //     Uri.parse(URL.baseUrl),
-  //     body: json.encode(
-  //       {
-  //         "gtin": gtinCode ?? 6281000010037,
-  //       },
-  //     ),
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     final Map<String, dynamic> body = json.decode(response.body);
-  //     final responseData = body['gtinArr'];
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: const Text("api is working"),
-  //       ),
-  //     );
-  //     myData = ProductContentsListModel.fromJson(responseData);
-  //     return myData!;
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: const Text("api is not working"),
-  //       ),
-  //     );
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context),
+        future: BaseApiService.getData(context, gtin: gtin),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

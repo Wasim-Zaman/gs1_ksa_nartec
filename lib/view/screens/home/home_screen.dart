@@ -145,6 +145,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
+                      print(snapshot.data!.socialLinks![index].socialLink
+                          .toString());
                       AppUrlLauncher.launchUrl(
                         Uri.parse(
                           snapshot.data!.socialLinks![index].socialLink
@@ -362,13 +364,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   RectangularButton(
                     caption: "productContents",
                     image: OtherImages.product_contents,
-                    onPressed: () => HomeServices.productContentsClick(context),
+                    onPressed: () {
+                      HomeServices.productContentsClick(context);
+                    },
                   ),
                   RectangularButton(
                     caption: "retailInformation",
                     image: OtherImages.retail_information,
-                    onPressed: () =>
-                        HomeServices.regulatoryAffairsClick(context),
+                    onPressed: () {
+                      HomeServices.regulatoryAffairsClick(context);
+                    },
                   ),
                 ],
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
@@ -379,12 +384,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   RectangularButton(
                     caption: "verifiedByGS1",
                     image: OtherImages.verified_by_gs1,
-                    onPressed: () => HomeServices.verifiedByGS1Click(context),
+                    onPressed: () {
+                      HomeServices.verifiedByGS1Click(context);
+                    },
                   ),
                   RectangularButton(
                     caption: "gtinReporter",
                     image: OtherImages.gtin_reporter,
-                    onPressed: () => HomeServices.gtinReporterClick(context),
+                    onPressed: () {
+                      HomeServices.gtinReporterClick(context);
+                    },
                   ),
                 ],
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
@@ -395,8 +404,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   RectangularButton(
                     caption: "regulatoryAffairs",
                     image: OtherImages.regulatory_affairs,
-                    onPressed: () =>
-                        HomeServices.regulatoryAffairsClick(context),
+                    onPressed: () {
+                      HomeServices.regulatoryAffairsClick(context);
+                    },
                   ),
                   RectangularButton(
                     caption: "productTracking",

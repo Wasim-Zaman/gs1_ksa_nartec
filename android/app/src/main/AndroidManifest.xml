@@ -1,5 +1,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- INTERNET PERMISSION -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- ACCESS NETWORK STATE PERMISSION (required for Google Maps) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- ACCESS COARSE LOCATION PERMISSION (required for Google Maps) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- ACCESS FINE LOCATION PERMISSION (required for more accurate location with Google Maps) -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- CAMERA PERMISSION (required if you want to use the camera for image picking) -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- READ EXTERNAL STORAGE PERMISSION (required for accessing the gallery or image picker) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="sms" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+    
+
     <application
         android:label="GS1 V2"
         android:name="${applicationName}"
@@ -24,6 +57,7 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
