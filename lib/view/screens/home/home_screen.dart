@@ -37,66 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   socialMediaBottomSheet() {
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => Dialog(
-    //     child: FutureBuilder(
-    //       future: SocialMediaController.getSocialMedias(),
-    //       builder: (context, snapshot) {
-    //         if (snapshot.connectionState == ConnectionState.waiting) {
-    //           return SizedBox(
-    //             height: context.height * 0.4,
-    //             child: const Center(
-    //               child: LoadingWidget(),
-    //             ),
-    //           );
-    //         } else if (snapshot.hasError) {
-    //           return SizedBox(
-    //             height: context.height * 0.4,
-    //             child: Center(
-    //               child: Text(snapshot.error.toString()),
-    //             ),
-    //           );
-    //         }
-    //         return Container(
-    //           decoration: const BoxDecoration(
-    //             color: AppColors.backgroundColor,
-    //             borderRadius: BorderRadius.only(
-    //               topLeft: Radius.circular(20),
-    //               topRight: Radius.circular(20),
-    //             ),
-    //           ),
-    //           height: context.height * 0.4,
-    //           child: GridView.builder(
-    //             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //               crossAxisCount: 3,
-    //               childAspectRatio: 1.5,
-    //               crossAxisSpacing: 20,
-    //               mainAxisSpacing: 20,
-    //             ),
-    //             itemBuilder: (context, index) => GestureDetector(
-    //               onTap: () {
-    //                 AppUrlLauncher.launchUrl(
-    //                   Uri.parse(
-    //                     snapshot.data!.socialLinks![index].socialLink
-    //                         .toString(),
-    //                   ),
-    //                 );
-    //               },
-    //               child: CircleAvatar(
-    //                   backgroundColor: AppColors.greyColor,
-    //                   backgroundImage: NetworkImage(
-    //                     "${snapshot.data!.imagePath}/${snapshot.data!.socialLinks![index].socialIcon}",
-    //                   )),
-    //             ),
-    //             padding: const EdgeInsets.all(20),
-    //             itemCount: snapshot.data?.socialLinks?.length,
-    //           ),
-    //         );
-    //       },
-    //     ),
-    //   ),
-    // );
     showModalBottomSheet(
         context: context,
         enableDrag: true,
@@ -263,21 +203,38 @@ class _HomeScreenState extends State<HomeScreen> {
                       .make(),
                 ),
                 ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeHelpDeskScreen(),
+                      ),
+                    );
+                  },
                   leading: Image.asset(DrawerImages.help_desk),
                   title:
                       "helpDesk".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
+                  onTap: () {
+                    AppUrlLauncher.call();
+                  },
                   leading: Image.asset(DrawerImages.contact_us),
                   title:
                       "contactUs".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
+                  onTap: () {
+                    AppUrlLauncher.whatsapp();
+                  },
                   leading: Image.asset(DrawerImages.chat_with_us),
                   title:
                       "chatWithUs".tr.text.color(AppColors.primaryColor).make(),
                 ),
                 ListTile(
+                  onTap: () {
+                    socialMediaBottomSheet();
+                  },
                   leading: Image.asset(DrawerImages.social_media),
                   title: "socialMedia"
                       .tr
