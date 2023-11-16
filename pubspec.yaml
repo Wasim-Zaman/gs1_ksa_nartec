@@ -64,6 +64,7 @@ dependencies:
   country_code_picker: ^3.0.0
   ionicons: ^0.2.2
   velocity_x: ^4.1.0
+  flutter_barcode_scanner: ^2.0.0
   flutter_html:
   page_transition: ^2.1.0
 

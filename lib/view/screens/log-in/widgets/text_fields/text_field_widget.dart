@@ -11,6 +11,7 @@ class TextFieldWidget extends StatefulWidget {
     this.textInputAction,
     this.keyboardType,
     this.validator,
+    this.maxLines,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -20,6 +21,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+  final int? maxLines;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -41,6 +43,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       ),
       alignment: Alignment.center,
       child: TextFormField(
+        maxLines: widget.maxLines,
         controller: widget.controller,
         focusNode: widget.focusNode ?? FocusNode(),
         onFieldSubmitted: (value) => widget.focusNode?.nextFocus(),
