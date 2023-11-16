@@ -11,17 +11,13 @@ class BaseApiService {
   static Future<ProductContentsListModel> getData(BuildContext context,
       {String? gtin}) async {
     final http.Response response = await http.post(
-      Uri.parse("${BaseUrl.gs1}/api/search/member/gtin"),
-      body: json.encode(
-        {
-          "gtin": gtin,
-        },
-      ),
-    );
+        Uri.parse("${BaseUrl.gs1}/api/search/member/gtin"),
+        body: json.encode({"gtin": gtin}),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Host': BaseUrl.host,
+        });
 
-    print(gtin);
-    print(response.body);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final Map<String, dynamic> body = json.decode(response.body);
       final responseData = body['gtinArr'];
