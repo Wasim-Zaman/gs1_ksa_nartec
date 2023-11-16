@@ -9,17 +9,32 @@ import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/secondary_appbar_widget.dart';
 
-class ProductContentsScreen extends StatelessWidget {
+class ProductContentsScreen extends StatefulWidget {
   const ProductContentsScreen({super.key});
 
   static const routeName = '/product-contents';
+
+  @override
+  State<ProductContentsScreen> createState() => _ProductContentsScreenState();
+}
+
+class _ProductContentsScreenState extends State<ProductContentsScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context),
+        future: BaseApiService.getData(context, gtin: gtin.toString()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -60,7 +75,8 @@ class ProductContentsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const TabsWidget(routeName: routeName),
+                    const TabsWidget(
+                        routeName: ProductContentsScreen.routeName),
                   ],
                 ),
               ),

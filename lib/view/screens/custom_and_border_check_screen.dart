@@ -9,15 +9,33 @@ import 'widgets/first_expansion_widget.dart';
 import 'widgets/item.dart';
 import 'widgets/second_expansion_widget.dart';
 
-class CustomAndBorderCheckScreen extends StatelessWidget {
+class CustomAndBorderCheckScreen extends StatefulWidget {
   const CustomAndBorderCheckScreen({super.key});
   static const routeName = '/custom-&-border-check-Screen';
+
+  @override
+  State<CustomAndBorderCheckScreen> createState() =>
+      _CustomAndBorderCheckScreenState();
+}
+
+class _CustomAndBorderCheckScreenState
+    extends State<CustomAndBorderCheckScreen> {
+  String? gtin;
+  @override
+  void initState() {
+    // get gtin from arguments as string
+    Future.delayed(Duration(seconds: 1), () {
+      gtin = ModalRoute.of(context)?.settings.arguments as String;
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context),
+        future: BaseApiService.getData(context, gtin: gtin.toString()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

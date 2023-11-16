@@ -33,7 +33,7 @@ class _VerifyByGS1ScreenState extends State<VerifyByGS1Screen> {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context, gtin: gtin),
+        future: BaseApiService.getData(context, gtin: gtin.toString()),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(child: Text('noDataFound'.tr));
@@ -87,7 +87,10 @@ class Screen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FutureBuilder(
-              future: BaseApiService.getData(context),
+              future: BaseApiService.getData(
+                context,
+                gtin: gtinNumber.toString(),
+              ),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {}
                 if (snapshot.connectionState == ConnectionState.waiting) {

@@ -33,7 +33,7 @@ class _RetailInformationScreenState extends State<RetailInformationScreen> {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context, gtin: gtin),
+        future: BaseApiService.getData(context, gtin: gtin.toString()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
