@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         translations: LocalString(), // instance of the class you just defined
         locale:
             const Locale('en', 'US'), // select the default or first language
-        title: 'GS1 V2',
+        title: 'GS1 KSA',
         theme: ThemeData(
           primarySwatch: darkBlue,
           appBarTheme: AppBarTheme(

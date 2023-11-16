@@ -34,7 +34,7 @@
     
 
     <application
-        android:label="GS1 V2"
+        android:label="GS1 KSA"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

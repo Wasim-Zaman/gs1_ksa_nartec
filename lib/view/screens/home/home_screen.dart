@@ -329,7 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     caption: "retailInformation",
                     image: OtherImages.retail_information,
                     onPressed: () {
-                      HomeServices.regulatoryAffairsClick(context);
+                      HomeServices.retailInformationClick(context);
                     },
                   ),
                 ],
