@@ -36,7 +36,10 @@ class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context, gtin: gtin.toString()),
+        future: BaseApiService.getData(
+          context,
+          gtin: ModalRoute.of(context)?.settings.arguments as String,
+        ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

@@ -28,8 +28,9 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
   @override
   void initState() {
     // get gtin from arguments as string
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration.zero, () {
       gtin = ModalRoute.of(context)?.settings.arguments as String;
+      print("gtin" + gtin.toString());
     });
     super.initState();
   }
@@ -40,7 +41,10 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context, gtin: gtin.toString()),
+        future: BaseApiService.getData(
+          context,
+          gtin: ModalRoute.of(context)?.settings.arguments as String,
+        ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -102,7 +106,7 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
             return RefreshIndicator(
               onRefresh: () => BaseApiService.getData(
                 context,
-                gtin: gtin.toString(),
+                gtin: ModalRoute.of(context)?.settings.arguments as String,
               ),
               child: Center(
                 child: Center(

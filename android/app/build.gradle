@@ -34,7 +34,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace "com.gs1mobilev2.gs1_v2_project"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

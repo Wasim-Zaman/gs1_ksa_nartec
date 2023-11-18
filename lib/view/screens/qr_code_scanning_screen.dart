@@ -4,7 +4,6 @@ import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/constants/images/other_images.dart';
 import 'package:gs1_v2_project/providers/gtin.dart';
 import 'package:gs1_v2_project/utils/scan_code_utils.dart';
-import 'package:gs1_v2_project/view/screens/log-in/widgets/text_fields/text_field_widget.dart';
 import 'package:gs1_v2_project/view/screens/product-tracking/gtin_reporter_screen.dart';
 import 'package:gs1_v2_project/view/screens/regulatory_affairs_screen.dart';
 import 'package:gs1_v2_project/view/screens/retail_information_screen.dart';
@@ -32,77 +31,8 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
   QRViewController? controller;
   String gtinCode = '';
   bool isStartScanning = false;
-  TextEditingController codeController = TextEditingController();
 
-  void _onQRViewCreated(QRViewController controller) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final icon = args['icon'];
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        gtinCode = scanData.code!;
-        // gtinCode = gtinCode.substring(0, 13);
-        gtinCode = gtinCode.split("gtin=")[1];
-        if (gtinCode.isNotEmpty &&
-            gtinCode.length == 13 &&
-            double.tryParse(gtinCode) != null) {
-          controller.pauseCamera();
-          // Navigate to the page based on the icon clicked
-          /*
-            * If icon is product-contents then navigate to RetailorShopperDetailScreen
-            * If icon is retail-information then navigate to RetailInformationScreen 
-            * if icon is regulatory-affairs then navigate to RegulatoryAffairsScreen
-            * If icon is gtin-reporter then navigate to GtinReporterScreen 
-
-          */
-
-          if (icon == 'product-contents') {
-            Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-            Navigator.of(context).pushNamed(
-              RetailorShopperScreen.routeName,
-              arguments: gtinCode,
-            );
-          }
-          if (icon == 'retail-information') {
-            Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-            Navigator.of(context).pushNamed(
-              RetailInformationScreen.routeName,
-              arguments: gtinCode,
-            );
-          }
-
-          if (icon == "gtin-reporter") {
-            Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-            Navigator.of(context).pushNamed(
-              GtinReporterScreen.routeName,
-              arguments: gtinCode,
-            );
-          }
-          if (icon == "verified-by-gs1") {
-            Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-            Navigator.of(context).pushNamed(
-              VerifyByGS1Screen.routeName,
-              arguments: gtinCode,
-            );
-          }
-
-          if (icon == "regulatory-affairs") {
-            Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-            Navigator.of(context).pushNamed(
-              RegulatoryAffairsScreen.routeName,
-              arguments: gtinCode,
-            );
-          }
-        } else {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Kindly scan appropriate QR Code')),
-          );
-        }
-      });
-    });
-  }
+  TextEditingController gtinController = TextEditingController();
 
   @override
   void dispose() {
@@ -110,22 +40,25 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
     super.dispose();
   }
 
-  startScanning() {
-    // setState(() {
-    //   isStartScanning = true;
-    // });
-    scanCode();
-  }
-
-  stopScanning() {
-    setState(() {
-      isStartScanning = false;
-    });
-  }
-
   Future<void> scanCode() async {
-    gtinCode = await ScanCodeUtils.scanQRCode();
-    codeController.text = gtinCode;
+    var scannedResult = await ScanCodeUtils.scanQRCode();
+
+    gtinController.text = scannedResult;
+    // Remove the special character from the scanned result
+    scannedResult = scannedResult.replaceAll("", "");
+
+    // Check if the barcode is 1D or 2D
+    if (scannedResult.length < 15) {
+      // It means it is 1D, no need to extract
+      setState(() {
+        gtinCode = scannedResult;
+      });
+    } else {
+      // It means it is 2D, extract the GTIN
+      setState(() {
+        gtinCode = scannedResult.substring(2, 15);
+      });
+    }
   }
 
   navigate(String code) {
@@ -250,7 +183,11 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RectangularTextButton(
-                          onPressed: stopScanning,
+                          onPressed: () {
+                            setState(() {
+                              gtinCode = '';
+                            });
+                          },
                           caption: "RESET".tr,
                           buttonHeight: context.height * 0.05,
                         ),
@@ -263,25 +200,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                         ),
                       ],
                     ),
-                    // Container(
-                    //   height: MediaQuery.of(context).size.height * 0.30,
-                    //   width: double.infinity,
-                    //   margin: const EdgeInsets.symmetric(vertical: 10),
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(width: 1),
-                    //     borderRadius: BorderRadius.circular(20),
-                    //   ),
-                    //   child: isStartScanning
-                    //       ? ClipRRect(
-                    //           borderRadius: BorderRadius.circular(20),
-                    //           child: QRView(
-                    //             key: qrKey,
-                    //             onQRViewCreated: _onQRViewCreated,
-                    //           ),
-                    //         )
-                    //       : const SizedBox.shrink(),
-                    // ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 40),
                     "Ready - Click START to scan"
                         .tr
                         .text
@@ -295,19 +214,34 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                       children: [
                         PrimaryButtonWidget(
                           caption: 'START'.tr,
-                          onPressed: startScanning,
+                          onPressed: scanCode,
                         ).box.make().centered(),
                         PrimaryButtonWidget(
                           caption: 'VISIT'.tr,
                           onPressed: () {
-                            navigate(codeController.text.trim());
+                            if (gtinCode == "") {
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Kindly scan QR Code')),
+                              );
+                            } else
+                              navigate(gtinCode);
                           },
                         ).box.make().centered(),
                       ],
                     ),
                     const SizedBox(height: 30),
-                    // Text(gtinCode),
-                    TextFieldWidget(controller: codeController, maxLines: 3),
+                    Text(
+                      gtinCode == "" ? "No Code Scanned" : gtinController.text,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ).box.make().p12().centered(),
+                    const SizedBox(height: 30),
+                    Text(gtinCode),
                   ],
                 ),
               ),

@@ -62,7 +62,9 @@ class _GtinReporterScreenState extends State<GtinReporterScreen> {
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Screen(gtin: gtin.toString()),
+            child: Screen(
+              gtin: ModalRoute.of(context)?.settings.arguments as String,
+            ),
           ),
         ],
       ),

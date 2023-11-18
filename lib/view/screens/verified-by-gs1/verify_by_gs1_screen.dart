@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
@@ -33,13 +34,50 @@ class _VerifyByGS1ScreenState extends State<VerifyByGS1Screen> {
     return Scaffold(
       appBar: HomeAppBarWidget(context),
       body: FutureBuilder(
-        future: BaseApiService.getData(context, gtin: gtin.toString()),
+        future: BaseApiService.getData(
+          context,
+          gtin: ModalRoute.of(context)?.settings.arguments as String,
+        ),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: Text('noDataFound'.tr));
-          }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            // retry screen
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(snapshot.error.toString()),
+                    SizedBox(),
+                    PrimaryButtonWidget(
+                      caption: "Retry",
+                      onPressed: () {
+                        setState(() {});
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else if (!snapshot.hasData) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text("No data found"),
+                    SizedBox(),
+                    PrimaryButtonWidget(
+                      caption: "Retry",
+                      onPressed: () {
+                        setState(() {});
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
           }
           final data = snapshot.data;
           return Screen(

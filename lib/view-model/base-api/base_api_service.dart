@@ -16,10 +16,14 @@ class BaseApiService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Host': BaseUrl.host,
         });
-
+    print(gtin);
+    print(response.body);
     if (response.statusCode == 200) {
       final Map<String, dynamic> body = json.decode(response.body);
       final responseData = body['gtinArr'];
+      if (responseData == []) {
+        return myData;
+      }
       myData = ProductContentsListModel.fromJson(responseData);
       return myData;
     }
