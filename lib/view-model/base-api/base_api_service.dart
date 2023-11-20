@@ -21,7 +21,8 @@ class BaseApiService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> body = json.decode(response.body);
       final responseData = body['gtinArr'];
-      if (responseData == []) {
+      // if responseData is of type list
+      if (responseData is List) {
         return myData;
       }
       myData = ProductContentsListModel.fromJson(responseData);

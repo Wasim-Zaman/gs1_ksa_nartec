@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      sha256: "3820f15f502372d979121de1f6b97bfcf1630ebff8fe1d52fb2b0bfa49be5b49"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.1.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -262,6 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      sha256: e74efb89ee6945bcbce74a5b3a5a3376b088e5f21f55c263fc38cbdc6237faae
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.1.3"
   flutter_exit_app:
     dependency: "direct main"
     description:
@@ -488,6 +504,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  gs1_barcode_parser:
+    dependency: "direct main"
+    description:
+      name: gs1_barcode_parser
+      sha256: "9aaff47bdab7177deaf9248cc861ef41cf611d3f828498cb40b64bedcbf53391"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   html:
     dependency: transitive
     description:
@@ -672,6 +696,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  native_barcode_scanner:
+    dependency: "direct main"
+    description:
+      name: native_barcode_scanner
+      sha256: db12350c77269bed2b9e933dd88ee359f813b6c42732af8a8afae75de52bcaf0
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   nested:
     dependency: transitive
     description:

@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:gs1_v2_project/blocs/gtin/gtin_bloc.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
-import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
-import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
@@ -20,76 +20,78 @@ class VerifyByGS1Screen extends StatefulWidget {
 
 class _VerifyByGS1ScreenState extends State<VerifyByGS1Screen> {
   String? gtin;
+  GtinBloc gtinBloc = GtinBloc();
   @override
   void initState() {
     // get gtin from arguments as string
+    // add event to bloc
     Future.delayed(Duration(seconds: 1), () {
-      gtin = ModalRoute.of(context)?.settings.arguments as String;
+      gtin = ModalRoute.of(context)?.settings.arguments as String?;
+      gtinBloc = gtinBloc
+        ..add(GtinGetDataEvent(
+          context,
+          gtin: gtin.toString(),
+        ));
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('rebuild');
     return Scaffold(
       appBar: HomeAppBarWidget(context),
-      body: FutureBuilder(
-        future: BaseApiService.getData(
-          context,
-          gtin: ModalRoute.of(context)?.settings.arguments as String,
-        ),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocConsumer<GtinBloc, GtinState>(
+        bloc: gtinBloc,
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is GtinLoadingState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            // retry screen
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(snapshot.error.toString()),
-                    SizedBox(),
-                    PrimaryButtonWidget(
-                      caption: "Retry",
-                      onPressed: () {
-                        setState(() {});
-                      },
-                    ),
-                  ],
-                ),
+          } else if (state is GtinErrorState) {
+            Center(
+              child: Column(
+                children: [
+                  Image.asset('assets/images/404.jpeg'),
+                  const SizedBox(height: 10),
+                  Text("The page you are trying to access does not exist"),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          gtinBloc.add(GtinGetDataEvent(
+                            context,
+                            gtin: gtin.toString(),
+                          ));
+                        },
+                        child: const Text('Reload'),
+                      ),
+                      // Back button
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Go back'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
-          } else if (!snapshot.hasData) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text("No data found"),
-                    SizedBox(),
-                    PrimaryButtonWidget(
-                      caption: "Retry",
-                      onPressed: () {
-                        setState(() {});
-                      },
-                    ),
-                  ],
-                ),
-              ),
+          } else if (state is GtinSuccessState) {
+            print(state.model?.brandName.toString());
+            return Screen(
+              countryOfSale: state.model?.countryOfSaleCode,
+              globalProductCategory: state.model?.gpcCategoryCode,
+              gtinNumber: state.model?.gtin,
+              netContent: state.model?.gcpGLNID,
+              productBrand: state.model?.brandName,
+              productDescription: state.model?.productDescription,
+              productImageUrl: state.model?.productImageUrl,
+              data: state.model,
             );
           }
-          final data = snapshot.data;
-          return Screen(
-            countryOfSale: data?.countryOfSaleCode,
-            globalProductCategory: data?.gpcCategoryCode,
-            gtinNumber: data?.gtin,
-            netContent: data?.gcpGLNID,
-            productBrand: data?.brandName,
-            productDescription: data?.productDescription,
-            productImageUrl: data?.productImageUrl,
-            data: data,
-          );
+          return Container();
         },
       ),
     );
@@ -124,53 +126,41 @@ class Screen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FutureBuilder(
-              future: BaseApiService.getData(
-                context,
-                gtin: gtinNumber.toString(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              customAppBarWidget(
+                backgroundColor: Colors.green.shade400,
+                title: "GS1 Saudi Arabia".tr,
               ),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {}
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                data = snapshot.data;
-                return Column(
+              CustomImageWidget(imageUrl: data?.productImageUrl),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    customAppBarWidget(
-                      backgroundColor: Colors.green.shade400,
-                      title: "GS1 Saudi Arabia".tr,
-                    ),
-                    CustomImageWidget(imageUrl: data?.productImageUrl),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${data?.productName} - ${data?.productDescription}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          // gtin
-                          Text(
-                            "GTIN".tr + ": ${data?.gtin}",
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "${data?.productName} - ${data?.productDescription}",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Divider(thickness: 2),
+                    const SizedBox(height: 10),
+                    // gtin
+                    Text(
+                      "GTIN".tr + ": ${data?.gtin}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ],
-                );
-              }),
+                ),
+              ),
+              const Divider(thickness: 2),
+            ],
+          ),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(10.0),

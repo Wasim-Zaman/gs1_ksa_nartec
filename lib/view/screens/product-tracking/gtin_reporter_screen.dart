@@ -112,66 +112,122 @@ class _ScreenState extends State<Screen> {
         FutureBuilder(
             future: BaseApiService.getData(context, gtin: widget.gtin),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {}
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              data = snapshot.data;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Column(
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child:
-                            CustomImageWidget(imageUrl: data?.productImageUrl),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          children: [
-                            QRImage(data: data?.productImageUrl ?? ""),
-                            Text("${data?.gtin} | ${data?.brandName}"),
-                          ],
-                        ),
+                      Image.asset('assets/images/404.jpeg'),
+                      const SizedBox(height: 10),
+                      Text("It seems like there is no data for this GTIN"),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {});
+                            },
+                            child: const Text('Reload'),
+                          ),
+                          // Back button
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Go back'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(10.0),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text(
-                  //         "${data?.productName} - ${data?.productDescription}",
-                  //         style: const TextStyle(
-                  //           fontSize: 20,
-                  //           fontWeight: FontWeight.bold,
-                  //         ),
-                  //       ),
-                  //       const SizedBox(height: 10),
-                  //       // gtin
-                  //       Text(
-                  //         "GTIN".tr + ": ${data?.gtin}",
-                  //         style: const TextStyle(fontSize: 18),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  GridWidget(
-                    gtinNumber: data?.gtin.toString(),
-                    productBrand: data?.brandName,
-                    productDescription: data?.productDescription,
-                    productImageUrl: data?.productImageUrl,
-                    globalProductCategory: data?.gpcCategoryCode,
-                    netContent: data?.gcpGLNID,
-                    countryOfSale: data?.countryOfSaleCode,
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                data = snapshot.data;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: CustomImageWidget(
+                              imageUrl: data?.productImageUrl),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            children: [
+                              QRImage(data: data?.productImageUrl ?? ""),
+                              Text("${data?.gtin} | ${data?.brandName}"),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10.0),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Text(
+                    //         "${data?.productName} - ${data?.productDescription}",
+                    //         style: const TextStyle(
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.bold,
+                    //         ),
+                    //       ),
+                    //       const SizedBox(height: 10),
+                    //       // gtin
+                    //       Text(
+                    //         "GTIN".tr + ": ${data?.gtin}",
+                    //         style: const TextStyle(fontSize: 18),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    GridWidget(
+                      gtinNumber: data?.gtin.toString(),
+                      productBrand: data?.brandName,
+                      productDescription: data?.productDescription,
+                      productImageUrl: data?.productImageUrl,
+                      globalProductCategory: data?.gpcCategoryCode,
+                      netContent: data?.gcpGLNID,
+                      countryOfSale: data?.countryOfSaleCode,
+                    ),
+                    const Divider(thickness: 2),
+                  ],
+                );
+              } else {
+                return Center(
+                  child: Column(
+                    children: [
+                      Image.asset('assets/images/404.jpeg'),
+                      const SizedBox(height: 10),
+                      Text("The page you are trying to access does not exist"),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {});
+                            },
+                            child: const Text('Reload'),
+                          ),
+                          // Back button
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Go back'),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  const Divider(thickness: 2),
-                ],
-              );
+                );
+              }
             }),
 
         const SizedBox(height: 10),

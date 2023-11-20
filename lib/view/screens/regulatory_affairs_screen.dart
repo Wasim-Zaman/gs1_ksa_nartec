@@ -45,8 +45,7 @@ class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }
-          if (snapshot.hasData) {
+          } else if (snapshot.hasData) {
             final data = snapshot.data;
             return ListView(
               children: [
@@ -59,14 +58,58 @@ class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Center(
-                child: Text(snapshot.error.toString()),
+              child: Column(
+                children: [
+                  Image.asset('assets/images/404.jpeg'),
+                  const SizedBox(height: 10),
+                  Text("The page you are trying to access does not exist"),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Text('Reload'),
+                      ),
+                      // Back button
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Go back'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           } else {
             return Center(
-              child: Center(
-                child: Text('Something went wrong'.tr),
+              child: Column(
+                children: [
+                  Image.asset('assets/images/404.jpeg'),
+                  const SizedBox(height: 10),
+                  Text("It seems like there is no data for this GTIN"),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Text('Reload'),
+                      ),
+                      // Back button
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Go back'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           }

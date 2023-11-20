@@ -50,8 +50,7 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }
-          if (snapshot.hasData) {
+          } else if (snapshot.hasData) {
             final data = snapshot.data;
             return ChangeNotifierProvider(
               create: (context) => Product(
@@ -103,15 +102,60 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
               ),
             );
           } else if (snapshot.hasError) {
-            return RefreshIndicator(
-              onRefresh: () => BaseApiService.getData(
-                context,
-                gtin: ModalRoute.of(context)?.settings.arguments as String,
+            // Create beautiful error widget
+            return Center(
+              child: Column(
+                children: [
+                  Image.asset('assets/images/404.jpeg'),
+                  const SizedBox(height: 10),
+                  Text("The page you are trying to access does not exist"),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Text('Reload'),
+                      ),
+                      // Back button
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Go back'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              child: Center(
-                child: Center(
-                  child: Text(snapshot.error.toString()),
-                ),
+            );
+          } else if (!snapshot.hasData) {
+            return Center(
+              child: Column(
+                children: [
+                  Image.asset('assets/images/404.jpeg'),
+                  const SizedBox(height: 10),
+                  Text("It seems like there is no data for this GTIN"),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Text('Reload'),
+                      ),
+                      // Back button
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Go back'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           } else {

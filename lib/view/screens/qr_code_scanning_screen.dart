@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gs1_barcode_parser/gs1_barcode_parser.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/constants/images/other_images.dart';
+import 'package:gs1_v2_project/global/variables/global_variables.dart';
 import 'package:gs1_v2_project/providers/gtin.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/scan_code_utils.dart';
 import 'package:gs1_v2_project/view/screens/product-tracking/gtin_reporter_screen.dart';
 import 'package:gs1_v2_project/view/screens/regulatory_affairs_screen.dart';
 import 'package:gs1_v2_project/view/screens/retail_information_screen.dart';
 import 'package:gs1_v2_project/view/screens/retailor_shopper_screen.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/verified-by-gs1/verify_by_gs1_screen.dart';
 import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/buttons/rectangular_text_button.dart';
@@ -29,7 +33,8 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
   late String cameraText;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
-  String gtinCode = '';
+  String? gtinCode;
+  String? icon;
   bool isStartScanning = false;
 
   TextEditingController gtinController = TextEditingController();
@@ -40,6 +45,29 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
     super.dispose();
   }
 
+  String extractGTINFromBarcode(String barcodeData) {
+    // Remove any non-numeric characters
+    String cleanedBarcode = barcodeData.replaceAll(RegExp(r'[^0-9]'), '');
+
+    // Check the barcode type to determine the GTIN pattern
+    // For example, if you're using EAN-13 format:
+    if (cleanedBarcode.length == 13) {
+      // GS1 Company Prefix: first 7 digits
+      String companyPrefix = cleanedBarcode.substring(1, 7);
+
+      // Item Reference: next 5 digits
+      String itemReference = cleanedBarcode.substring(7, 12);
+
+      // The complete GTIN is the concatenation of the Company Prefix and Item Reference
+      String gtin = '$companyPrefix$itemReference';
+
+      return gtin;
+    }
+
+    // Handle other barcode types or return null if it doesn't match any pattern
+    return "";
+  }
+
   Future<void> scanCode() async {
     var scannedResult = await ScanCodeUtils.scanQRCode();
 
@@ -47,11 +75,13 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
     // Remove the special character from the scanned result
     scannedResult = scannedResult.replaceAll("", "");
 
+    if (scannedResult.startsWith("01") && scannedResult.length > 15) {}
+
     // Check if the barcode is 1D or 2D
     if (scannedResult.length < 15) {
       // It means it is 1D, no need to extract
       setState(() {
-        gtinCode = scannedResult;
+        gtinCode = scannedResult.substring(0, 12);
       });
     } else {
       // It means it is 2D, extract the GTIN
@@ -59,12 +89,37 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
         gtinCode = scannedResult.substring(2, 15);
       });
     }
+
+    if (gtinCode == "") {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Kindly scan QR Code')),
+      );
+    } else if (gtinController.text.length > 15 &&
+        !gtinController.text.startsWith("01")) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid Barcode')),
+      );
+    } else
+      navigate();
   }
 
-  navigate(String code) {
+  navigate() {
+    var barcodeValue = GlobalVariables.barcodeValue.text;
+    var codeType = GlobalVariables.barcodeType.text;
+    gtinCode = extractGtin(barcodeValue, codeType);
+
+    if (gtinCode == null) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid Barcode')),
+      );
+      return;
+    }
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final icon = args['icon'];
+    icon = args['icon'];
 
     // Navigate to the page based on the icon clicked
     /*
@@ -79,14 +134,14 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
       Navigator.of(context).pushNamed(
         RetailorShopperScreen.routeName,
-        arguments: code,
+        arguments: gtinCode,
       );
     }
     if (icon == 'retail-information') {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
       Navigator.of(context).pushNamed(
         RetailInformationScreen.routeName,
-        arguments: code,
+        arguments: gtinCode,
       );
     }
 
@@ -94,14 +149,14 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
       Navigator.of(context).pushNamed(
         GtinReporterScreen.routeName,
-        arguments: code,
+        arguments: gtinCode,
       );
     }
     if (icon == "verified-by-gs1") {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
       Navigator.of(context).pushNamed(
         VerifyByGS1Screen.routeName,
-        arguments: code,
+        arguments: gtinCode,
       );
     }
 
@@ -109,9 +164,40 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
       Navigator.of(context).pushNamed(
         RegulatoryAffairsScreen.routeName,
-        arguments: code,
+        arguments: gtinCode,
       );
     }
+  }
+
+  String? extractGtin(String scannedCode, String codeType) {
+    if (codeType == 'ean13') {
+      return scannedCode;
+    } else if (codeType.toLowerCase() == 'datamatrix') {
+      print(codeType);
+      print(scannedCode);
+      final parser = GS1BarcodeParser.defaultParser();
+      final result = parser.parse(scannedCode);
+      print(result);
+
+      RegExp gtinPattern = RegExp(r'01 \(GTIN\): (\d+)');
+
+      Match? match = gtinPattern.firstMatch(result.toString());
+      if (match != null) {
+        String gtin = match.group(1)!;
+        return gtin;
+      } else {
+        return null;
+      }
+
+      // extract gtin from result
+    }
+    // if (codeType.toLowerCase() == 'datamatrix') {
+    //   scannedCode = scannedCode..replaceAll("", "");
+    //   GlobalVariables.barcodeValue.text =
+    //       extractGTINFromGS1DataMatrix(scannedCode) ?? "";
+    //   return extractGTINFromGS1DataMatrix(scannedCode);
+    // }
+    return null;
   }
 
   @override
@@ -214,34 +300,38 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                       children: [
                         PrimaryButtonWidget(
                           caption: 'START'.tr,
-                          onPressed: scanCode,
-                        ).box.make().centered(),
-                        PrimaryButtonWidget(
-                          caption: 'VISIT'.tr,
                           onPressed: () {
-                            if (gtinCode == "") {
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Kindly scan QR Code')),
-                              );
-                            } else
-                              navigate(gtinCode);
+                            AppNavigator.goToPage(
+                              context: context,
+                              screen: BarcodeScanningScreen(
+                                icon: icon.toString(),
+                              ),
+                            );
                           },
                         ).box.make().centered(),
+                        // PrimaryButtonWidget(
+                        //   caption: 'VISIT'.tr,
+                        //   onPressed: navigate,
+                        // ).box.make().centered(),
                       ],
                     ),
                     const SizedBox(height: 30),
                     Text(
-                      gtinCode == "" ? "No Code Scanned" : gtinController.text,
+                      GlobalVariables.barcodeValue.text == ""
+                          ? "No Code Scanned"
+                          : GlobalVariables.barcodeValue.text,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                       ),
                     ).box.make().p12().centered(),
-                    const SizedBox(height: 30),
-                    Text(gtinCode),
+                    Text(
+                      GlobalVariables.barcodeType.text,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ).box.make().p12().centered(),
                   ],
                 ),
               ),
