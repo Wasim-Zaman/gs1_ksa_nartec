@@ -8,6 +8,7 @@ class AppColors {
   static Color redColor = Colors.red;
   static Color greyColor = Colors.grey.shade300;
   static Color white = Colors.white;
+  static Color black = Colors.black;
   static Color transparentColor = Colors.transparent;
 
   //background: rgba(15, 181, 218, 1);

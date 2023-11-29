@@ -292,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   .centered(),
               const SizedBox(height: 30),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RectangularButton(
                     caption: "getABarcode",
@@ -317,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   .centered()
                   .p20(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RectangularButton(
                     caption: "productContents",
@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
               20.heightBox,
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RectangularButton(
                     caption: "verifiedByGS1",
@@ -357,7 +357,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
               20.heightBox,
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RectangularButton(
                     caption: "regulatoryAffairs",
@@ -374,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ).box.margin(const EdgeInsets.symmetric(horizontal: 10)).make(),
               "support".tr.text.color(AppColors.primaryColor).bold.make().p20(),
-              SizedBox(
+              Container(
                 height: context.height * 0.08,
                 child: ListView.builder(
                   itemBuilder: (context, index) {
@@ -391,7 +391,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           AppUrlLauncher.whatsapp();
                         } else if (index == 3) {
                           // show modal bottm sheet and display social media icons like facebook, twitter, instagram, youtube and linked in
-
                           socialMediaBottomSheet();
                         }
                       },
@@ -400,6 +399,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   itemCount: names.length,
                   scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
                 ),
               ),
               20.heightBox,
@@ -427,20 +427,29 @@ class RectangularButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: context.screenHeight * 0.13,
+        height: context.screenHeight * 0.08,
         width: context.screenWidth * 0.45,
         decoration: BoxDecoration(
-          color: Colors.grey.shade300,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(10),
+          // add shadow
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.4),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
         padding: const EdgeInsets.symmetric(
-          vertical: 20,
+          vertical: 10,
           horizontal: 10,
         ),
         child: Row(
           children: [
             Image.asset(image),
-            5.widthBox,
+            10.widthBox,
             Expanded(
               child: AutoSizeText(
                 caption.tr,
