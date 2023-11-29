@@ -14,7 +14,6 @@ import 'package:gs1_v2_project/view/screens/retailor_shopper_screen.dart';
 import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/verified-by-gs1/verify_by_gs1_screen.dart';
 import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
-import 'package:gs1_v2_project/widgets/buttons/rectangular_text_button.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:provider/provider.dart';
@@ -264,28 +263,28 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                         .xl
                         .make()
                         .centered(),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RectangularTextButton(
-                          onPressed: () {
-                            setState(() {
-                              gtinCode = '';
-                            });
-                          },
-                          caption: "RESET".tr,
-                          buttonHeight: context.height * 0.05,
-                        ),
-                        RectangularTextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          caption: "PREVIOUS PAGE".tr,
-                          buttonHeight: context.height * 0.05,
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 50),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     RectangularTextButton(
+                    //       onPressed: () {
+                    //         setState(() {
+                    //           gtinCode = '';
+                    //         });
+                    //       },
+                    //       caption: "RESET".tr,
+                    //       buttonHeight: context.height * 0.05,
+                    //     ),
+                    //     RectangularTextButton(
+                    //       onPressed: () {
+                    //         Navigator.of(context).pop();
+                    //       },
+                    //       caption: "PREVIOUS PAGE".tr,
+                    //       buttonHeight: context.height * 0.05,
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 40),
                     "Ready - Click START to scan"
                         .tr
@@ -308,7 +307,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
                               ),
                             );
                           },
-                        ).box.make().centered(),
+                        ),
                         // PrimaryButtonWidget(
                         //   caption: 'VISIT'.tr,
                         //   onPressed: navigate,

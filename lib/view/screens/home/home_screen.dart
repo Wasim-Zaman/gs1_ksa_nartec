@@ -428,7 +428,7 @@ class RectangularButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: context.screenHeight * 0.1,
+        height: context.screenHeight * 0.13,
         width: context.screenWidth * 0.45,
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
@@ -441,11 +441,11 @@ class RectangularButton extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(image),
-            10.widthBox,
+            5.widthBox,
             Expanded(
               child: AutoSizeText(
                 caption.tr,
-                maxLines: 2,
+                maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,

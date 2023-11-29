@@ -91,13 +91,17 @@ class _BarcodeScanningScreenState extends State<BarcodeScanningScreen> {
       print(scannedCode);
       final parser = GS1BarcodeParser.defaultParser();
       final result = parser.parse(scannedCode);
-      print(result);
+      // print(result);
 
       RegExp gtinPattern = RegExp(r'01 \(GTIN\): (\d+)');
 
       Match? match = gtinPattern.firstMatch(result.toString());
       if (match != null) {
         String gtin = match.group(1)!;
+        // if gtin is 14 digits, remove the first digit
+        if (gtin.length == 14) {
+          gtin = gtin.substring(1);
+        }
         return gtin;
       } else {
         return null;
