@@ -18,8 +18,8 @@ class RectangularTextButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: buttonHeight ?? context.height * 0.08,
-        width: context.width * 0.36,
+        height: buttonHeight ?? context.height * 0.1,
+        width: context.width * 0.4,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

@@ -6,6 +6,7 @@ import 'package:gs1_v2_project/constants/images/drawer_images.dart';
 import 'package:gs1_v2_project/constants/images/other_images.dart';
 import 'package:gs1_v2_project/controllers/home/social_media_controller.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/app_url_launcher.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/home/home_services.dart';
@@ -380,11 +381,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     return RectangularTextButton(
                       onPressed: () {
                         if (index == 0) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeHelpDeskScreen(),
-                            ),
+                          AppNavigator.goToPage(
+                            context: context,
+                            screen: HomeHelpDeskScreen(),
                           );
                         } else if (index == 1) {
                           AppUrlLauncher.call();
