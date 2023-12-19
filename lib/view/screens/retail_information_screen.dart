@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/offers_nearMe_screen.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/secondary_appbar_widget.dart';
@@ -51,6 +54,7 @@ class _RetailInformationScreenState extends State<RetailInformationScreen> {
                   Text("The page you are trying to access does not exist"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -79,6 +83,7 @@ class _RetailInformationScreenState extends State<RetailInformationScreen> {
                   Text("It seems like there is no data for this GTIN"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -150,6 +155,19 @@ class Screen extends StatelessWidget {
             ),
           ),
           // amount
+          const SizedBox(height: 10),
+
+          PrimaryButtonWidget(
+            caption: 'Scan another barcode'.tr,
+            onPressed: () {
+              AppNavigator.goToPage(
+                context: context,
+                screen: BarcodeScanningScreen(
+                  icon: "retail-information",
+                ),
+              );
+            },
+          ),
           const SizedBox(height: 10),
           // Second Section
           Container(

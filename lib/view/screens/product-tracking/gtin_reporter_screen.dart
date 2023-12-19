@@ -8,10 +8,13 @@ import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/constants/images/other_images.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view-model/gtin-reporter/gtin_reporter_services.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/qr_code/qr_image.dart';
 
@@ -112,6 +115,9 @@ class _ScreenState extends State<Screen> {
         FutureBuilder(
             future: BaseApiService.getData(context, gtin: widget.gtin),
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
               if (!snapshot.hasData) {
                 return Center(
                   child: Column(
@@ -166,6 +172,20 @@ class _ScreenState extends State<Screen> {
                       ],
                     ),
                     const SizedBox(height: 20),
+                    const SizedBox(height: 10),
+                    PrimaryButtonWidget(
+                      caption: 'Scan another barcode'.tr,
+                      onPressed: () {
+                        AppNavigator.goToPage(
+                          context: context,
+                          screen: BarcodeScanningScreen(
+                            icon: "gtin-reporter",
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10),
+
                     // Padding(
                     //   padding: const EdgeInsets.all(10.0),
                     //   child: Column(

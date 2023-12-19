@@ -5,7 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/blocs/gtin/gtin_bloc.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
@@ -56,6 +59,7 @@ class _VerifyByGS1ScreenState extends State<VerifyByGS1Screen> {
                   Text("The page you are trying to access does not exist"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -158,6 +162,21 @@ class Screen extends StatelessWidget {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: PrimaryButtonWidget(
+                  caption: 'Scan another barcode'.tr,
+                  onPressed: () {
+                    AppNavigator.goToPage(
+                      context: context,
+                      screen: BarcodeScanningScreen(
+                        icon: "verified-by-gs1",
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
               const Divider(thickness: 2),
             ],
           ),

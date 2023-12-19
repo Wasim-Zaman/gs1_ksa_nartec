@@ -131,7 +131,7 @@ class _QRCodeScanningScreenState extends State<QRCodeScanningScreen> {
 
     if (icon == 'product-contents') {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         RetailorShopperScreen.routeName,
         arguments: gtinCode,
       );

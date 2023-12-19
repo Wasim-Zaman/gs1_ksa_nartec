@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/custom_and_border_check_screen.dart';
 import 'package:gs1_v2_project/view/screens/grids/package_composition_grid_screen.dart';
 import 'package:gs1_v2_project/view/screens/grids/product_safety_grid.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
@@ -65,6 +68,7 @@ class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
                   Text("The page you are trying to access does not exist"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -93,6 +97,7 @@ class _RegulatoryAffairsScreenState extends State<RegulatoryAffairsScreen> {
                   Text("It seems like there is no data for this GTIN"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -152,6 +157,19 @@ class Screen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+            const SizedBox(height: 10),
+            PrimaryButtonWidget(
+              caption: 'Scan another barcode'.tr,
+              onPressed: () {
+                AppNavigator.goToPage(
+                  context: context,
+                  screen: BarcodeScanningScreen(
+                    icon: "regulatory-affairs",
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
             const Divider(thickness: 2),
             TabsWidget(data: data!),
           ],

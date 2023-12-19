@@ -435,7 +435,7 @@ class RectangularButton extends StatelessWidget {
           // add shadow
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.4),
+              color: AppColors.black.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 4),

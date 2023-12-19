@@ -19,6 +19,14 @@ class BarcodeScanningScreen extends StatefulWidget {
 }
 
 class _BarcodeScanningScreenState extends State<BarcodeScanningScreen> {
+  @override
+  void dispose() {
+    // close scanning | camera
+    BarcodeScanner.stopScanner();
+
+    super.dispose();
+  }
+
   navigate() {
     var barcodeValue = GlobalVariables.barcodeValue.text;
     var codeType = GlobalVariables.barcodeType.text;
@@ -45,14 +53,14 @@ class _BarcodeScanningScreenState extends State<BarcodeScanningScreen> {
 
     if (icon == 'product-contents') {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         RetailorShopperScreen.routeName,
         arguments: gtinCode,
       );
     }
     if (icon == 'retail-information') {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         RetailInformationScreen.routeName,
         arguments: gtinCode,
       );
@@ -60,14 +68,14 @@ class _BarcodeScanningScreenState extends State<BarcodeScanningScreen> {
 
     if (icon == "gtin-reporter") {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         GtinReporterScreen.routeName,
         arguments: gtinCode,
       );
     }
     if (icon == "verified-by-gs1") {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         VerifyByGS1Screen.routeName,
         arguments: gtinCode,
       );
@@ -75,7 +83,7 @@ class _BarcodeScanningScreenState extends State<BarcodeScanningScreen> {
 
     if (icon == "regulatory-affairs") {
       Provider.of<GTIN>(context, listen: false).gtinNumber = gtinCode;
-      Navigator.of(context).pushNamed(
+      Navigator.of(context).pushReplacementNamed(
         RegulatoryAffairsScreen.routeName,
         arguments: gtinCode,
       );

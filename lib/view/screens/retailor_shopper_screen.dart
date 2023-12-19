@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/providers/product.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view/screens/grids/logistic_info_grid_screen.dart';
 import 'package:gs1_v2_project/view/screens/grids/product_contents_grid_screen.dart';
 import 'package:gs1_v2_project/view/screens/grids/recipe_grid_screen.dart';
+import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
+import 'package:gs1_v2_project/widgets/buttons/primary_button_widget.dart';
 import 'package:gs1_v2_project/widgets/custom_image_widget.dart';
 import 'package:gs1_v2_project/widgets/home_appbar_widget.dart';
 import 'package:gs1_v2_project/widgets/secondary_appbar_widget.dart';
@@ -111,6 +114,7 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
                   Text("The page you are trying to access does not exist"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -139,6 +143,7 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
                   Text("It seems like there is no data for this GTIN"),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -182,6 +187,18 @@ class TabsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        PrimaryButtonWidget(
+          caption: 'Scan another barcode'.tr,
+          onPressed: () {
+            AppNavigator.goToPage(
+              context: context,
+              screen: BarcodeScanningScreen(
+                icon: "product-contents",
+              ),
+            );
+          },
+        ),
+        SizedBox(height: 10),
         CustomListTileButton(
           title: "Ingredients & Allergens".tr,
           onPressed: () {

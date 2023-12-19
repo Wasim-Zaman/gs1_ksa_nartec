@@ -5,6 +5,7 @@ class LocalString extends Translations {
   Map<String, Map<String, String>> get keys => {
         /// English ///
         'en_US': {
+          'Scan another barcode': 'Scan another barcode',
           'helpDesk': 'Help Desk',
           'contactUs': 'Contact Us',
           'chatWithUs': 'Chat with us',
@@ -430,6 +431,7 @@ class LocalString extends Translations {
 
         /// Arabic ///
         'ar_SA': {
+          'Scan another barcode': 'فحص رمز الاستجابة السريعة الآخر',
           'helpDesk': 'الدعم والمساعدة',
           'contactUs': 'اتصل بنا',
           'chatWithUs': 'التواصل عن طريق المحادثة الفورية',
