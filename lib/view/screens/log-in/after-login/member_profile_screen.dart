@@ -41,6 +41,14 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void dispose() {
+    pageController.dispose();
+    _scaffoldKey.currentState?.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)?.settings.arguments as Map;
     response = args?['response'];
@@ -140,6 +148,7 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
         ),
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: _selectedIndex,
+
           showElevation: true, // use this to remove appBar's elevation
           onItemSelected: (index) => setState(() {
             _selectedIndex = index;
@@ -148,9 +157,10 @@ class _MemberProfileScreenState extends State<MemberProfileScreen> {
             } else if (_selectedIndex == 1) {
               title = 'Member Profile'.tr;
             }
-            pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease);
+            // pageController.animateToPage(index,
+            //     duration: const Duration(milliseconds: 300),
+            //     curve: Curves.ease);
+            pageController.jumpToPage(index);
           }),
           items: [
             BottomNavyBarItem(
@@ -302,7 +312,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 img ?? "",
                                 height: 256,
                                 width: 256,
-                                filterQuality: FilterQuality.high,
+                                filterQuality: FilterQuality.medium,
                                 loadingBuilder:
                                     (context, child, loadingProgress) {
                                   if (loadingProgress == null) return child;
@@ -311,10 +321,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 cacheHeight: 256,
                                 cacheWidth: 256,
                                 errorBuilder: (context, error, stackTrace) =>
-                                    Placeholder(
-                                  color: Colors.pink.shade400,
-                                  fallbackHeight: 256,
-                                  fallbackWidth: 256,
+                                    SizedBox(
+                                  height: 256,
+                                  width: 256,
+                                  child: Icon(Icons.image_outlined, size: 50),
                                 ),
                               ),
                         Positioned(
@@ -330,8 +340,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     .then((value) {
                                   if (value == null) return;
                                   setState(() {
-                                    imageFile = File(value.path);
-                                    imageFileName = value.path.split('/').last;
+                                    try {
+                                      imageFile = File(value.path);
+                                      imageFileName =
+                                          value.path.split('/').last;
+                                    } catch (error) {
+                                      print(error);
+                                    }
                                   });
                                 });
                               },
@@ -851,11 +866,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             addImg ?? "",
                             height: 80,
                             width: 80,
-
+                            loadingBuilder: (context, child, loadingProgress) =>
+                                loadingProgress == null
+                                    ? child
+                                    : const LoadingWidget(),
                             errorBuilder: (context, error, stackTrace) =>
-                                const Icon(
-                              Icons.image_outlined,
-                              size: 80,
+                                SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: const Icon(
+                                Icons.image_outlined,
+                                size: 80,
+                              ),
                             ),
                             cacheHeight: 80,
                             cacheWidth: 80,
@@ -872,8 +894,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             .then((value) {
                           if (value == null) return;
                           setState(() {
-                            addressImageFile = File(value.path);
-                            addressImageFileName = value.path.split('/').last;
+                            try {
+                              addressImageFile = File(value.path);
+                              addressImageFileName = value.path.split('/').last;
+                            } catch (error) {
+                              print(error);
+                            }
                           });
                         });
                       },

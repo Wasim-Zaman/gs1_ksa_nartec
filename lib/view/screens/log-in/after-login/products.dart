@@ -29,6 +29,8 @@ class _ProductsState extends State<Products> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final response = args['response'] as DashboardModel;
     final userId = args['userId'] as int;
+    print(response.memberData?.user?.id);
+    print(response.memberData?.user?.id ?? userId);
     return WillPopScope(
       onWillPop: () async {
         scaffoldKey.currentState?.openDrawer();

@@ -346,10 +346,12 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                         );
                                                       }
                                                       if (snapshot.hasError) {
+                                                        
                                                         return Center(
                                                           child: Text(
-                                                              "Something went wrong, try again later"
-                                                                  .tr),
+                                                            "Something went wrong, try again later"
+                                                                .tr,
+                                                          ),
                                                         );
                                                       }
                                                       final snap = snapshot.data

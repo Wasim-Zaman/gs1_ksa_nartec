@@ -84,6 +84,7 @@ class MemberProfileServices {
     try {
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
+      print(responseBody);
       if (response.statusCode == 200) {
         return 200;
       } else if (response.statusCode == 422) {
