@@ -7,22 +7,19 @@ import 'package:http/http.dart' as http;
 class ActivitiesService {
   static List<GetAllCrActivitiesModel> listOfActivities = [];
   static Future<List<GetAllCrActivitiesModel>> getActivities(
-      String? crNumber) async {
+    String? crNumber,
+  ) async {
     const baseUrl = '${BaseUrl.gs1}/api/cr/activities';
-
     final uri = Uri.parse(baseUrl);
-
     final response = await http.post(
       uri,
-      body: json.encode(
-        {
-          "cr_number": crNumber,
-        },
-      ),
+      body: json.encode({"cr_number": crNumber}),
       headers: {
         'Content-Type': 'application/json',
       },
     );
+
+    print(response.body);
 
     if (response.statusCode == 200) {
       // handle successful response
@@ -30,7 +27,6 @@ class ActivitiesService {
       for (var element in responseBody) {
         listOfActivities.add(GetAllCrActivitiesModel.fromJson(element));
       }
-
       return listOfActivities;
     } else {
       throw Exception('Error happended while loading data');

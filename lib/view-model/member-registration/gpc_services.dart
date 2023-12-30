@@ -10,15 +10,11 @@ class GpcService {
     List<GPCModel> futureData = [];
 
     try {
-      final response = await http.post(Uri.parse(url),
-          body: jsonEncode(
-            <String, String>{'term': term},
-          ),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Host': BaseUrl.gs1,
-          });
+      final response = await http.post(
+        Uri.parse(url),
+        body: jsonEncode(<String, String>{'term': term}),
+      );
+      print(response.body);
       if (response.statusCode == 200) {
         final responseBody = jsonDecode(response.body);
         final gpcMap = responseBody['gpc'];
@@ -30,6 +26,7 @@ class GpcService {
         throw Exception('Status code is not fine');
       }
     } catch (error) {
+      print(error);
       throw Exception('Failed to load data');
     }
   }

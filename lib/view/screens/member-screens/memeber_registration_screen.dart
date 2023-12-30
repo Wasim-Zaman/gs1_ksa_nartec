@@ -49,11 +49,12 @@ class MemberRegistrationScreen extends StatefulWidget {
   final String document;
   final String crNumber;
   final bool hasCrNumber;
-  const MemberRegistrationScreen(
-      {super.key,
-      required this.document,
-      required this.crNumber,
-      required this.hasCrNumber});
+  const MemberRegistrationScreen({
+    super.key,
+    required this.document,
+    required this.crNumber,
+    required this.hasCrNumber,
+  });
   static const routeName = "/member-registration";
 
   @override
@@ -346,7 +347,6 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                         );
                                                       }
                                                       if (snapshot.hasError) {
-                                                        
                                                         return Center(
                                                           child: Text(
                                                             "Something went wrong, try again later"
@@ -364,6 +364,11 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                             .activity
                                                             .toString());
                                                       }
+                                                      // if (activities
+                                                      //     .isNotEmpty) {
+                                                      //   activityValue =
+                                                      //       activities.first;
+                                                      // }
                                                       return activities.isEmpty
                                                           ? IconButton(
                                                               onPressed: () {
@@ -484,6 +489,10 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                     if (_formKey1.currentState!.validate()) {
                                       isFirstClicked = false;
                                       isSecondClicked = true;
+                                    } else if (activitiesList.isEmpty) {
+                                      Fluttertoast.showToast(
+                                          msg: "Please enter valid CR Number"
+                                              .tr);
                                     }
                                     // isFirstClicked = false;
                                     // isSecondClicked = true;
@@ -722,9 +731,15 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                               temp.then((value) {
                                                 AppDialogs.closeDialog();
                                                 gpcList.clear();
+                                                searchGpcController.clear();
+
                                                 for (var element in value) {
                                                   gpcList.add(element.value!);
                                                 }
+                                              }).catchError((error) {
+                                                AppDialogs.closeDialog();
+                                                Fluttertoast.showToast(
+                                                    msg: error.toString());
                                               });
                                             },
                                             child: Image.asset(
@@ -1416,99 +1431,87 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             "Please fill the required fields"
                                                 .tr);
                                       } else {
-                                        isSubmit
-                                            ? () {}
-                                            : submit(
-                                                selectedCategoryValue:
-                                                    selectedCategoryValue,
-                                                gcpType: gcpType,
-                                                memberCategory: memberCategory,
-                                                paymentType: bankType,
-                                                allowOtherProducts:
-                                                    allowOtherProducts,
-                                                activity:
-                                                    activityValue ?? document,
-                                                crNumber: crNumber ??
-                                                    documentNoContoller.text,
-                                                email: emailController.text,
-                                                companyNameEng:
-                                                    companyNameEnController
-                                                        .text,
-                                                companyNameAr:
-                                                    companyNameArController
-                                                        .text,
-                                                contactPerson:
-                                                    contactPersonController
-                                                        .text,
-                                                companyLandline:
-                                                    landLineController.text,
-                                                mobileNumber:
-                                                    mobileController.text,
-                                                mobileExtension:
-                                                    extensionController.text,
-                                                zipCode: zipCodeController.text,
-                                                website: websiteController.text,
-                                                gpc: addedGPC.toList(),
-                                                countryId: countryId.toString(),
-                                                countryName: countryName,
-                                                countryShortName:
-                                                    countryShortName,
-                                                stateId: stateId.toString(),
-                                                stateName: stateName,
-                                                cityId: cityId.toString(),
-                                                cityName: cityName,
-                                                otherProduct:
-                                                    addedProducts.toList(),
-                                                otherProductId:
-                                                    otherProductsId.toList(),
-                                                quotation: List.generate(
-                                                    addedProducts.isEmpty
-                                                        ? 1
-                                                        : addedProducts.length +
-                                                            1, (index) {
+                                        submit(
+                                          termsAndConditions: isChecked,
+                                          selectedCategoryValue:
+                                              selectedCategoryValue,
+                                          gcpType: gcpType,
+                                          memberCategory: memberCategory,
+                                          paymentType: bankType,
+                                          allowOtherProducts:
+                                              allowOtherProducts,
+                                          activity: activityValue ?? document,
+                                          crNumber: crNumber ??
+                                              documentNoContoller.text,
+                                          email: emailController.text,
+                                          companyNameEng:
+                                              companyNameEnController.text,
+                                          companyNameAr:
+                                              companyNameArController.text,
+                                          contactPerson:
+                                              contactPersonController.text,
+                                          companyLandline:
+                                              landLineController.text,
+                                          mobileNumber: mobileController.text,
+                                          mobileExtension:
+                                              extensionController.text,
+                                          zipCode: zipCodeController.text,
+                                          website: websiteController.text,
+                                          gpc: addedGPC.toList(),
+                                          countryId: countryId.toString(),
+                                          countryName: countryName,
+                                          countryShortName: countryShortName,
+                                          stateId: stateId.toString(),
+                                          stateName: stateName,
+                                          cityId: cityId.toString(),
+                                          cityName: cityName,
+                                          otherProduct: addedProducts.toList(),
+                                          otherProductId:
+                                              otherProductsId.toList(),
+                                          quotation: List.generate(
+                                              addedProducts.isEmpty
+                                                  ? 1
+                                                  : addedProducts.length + 1,
+                                              (index) {
+                                            if (index == 0) {
+                                              return quotation.toString();
+                                            } else {
+                                              return "no";
+                                            }
+                                          }),
+                                          registationFee: List.generate(
+                                              addedProducts.isEmpty
+                                                  ? 1
+                                                  : addedProducts.length + 1,
+                                              (index) {
+                                            if (index == 0) {
+                                              return memberRegistrationFee ?? 0;
+                                            } else {
+                                              return 0;
+                                            }
+                                          }),
+                                          yearlyFee: [
+                                            gtinYearlySubscriptionFee ?? 0,
+                                            ...otherProductsYearlyFee
+                                          ],
+                                          otherPrice:
+                                              otherProductsYearlyFee.toList(),
+                                          product: [
+                                            memberCategoryValue ?? "",
+                                            ...addedProducts.toList(),
+                                          ],
+                                          productType: addedProducts.isEmpty
+                                              ? ['gtin']
+                                              : List.generate(
+                                                  addedProducts.length + 1,
+                                                  (index) {
                                                   if (index == 0) {
-                                                    return quotation.toString();
+                                                    return "gtin";
                                                   } else {
-                                                    return "no";
+                                                    return "other";
                                                   }
                                                 }),
-                                                registationFee: List.generate(
-                                                    addedProducts.isEmpty
-                                                        ? 1
-                                                        : addedProducts.length +
-                                                            1, (index) {
-                                                  if (index == 0) {
-                                                    return memberRegistrationFee ??
-                                                        0;
-                                                  } else {
-                                                    return 0;
-                                                  }
-                                                }),
-                                                yearlyFee: [
-                                                  gtinYearlySubscriptionFee ??
-                                                      0,
-                                                  ...otherProductsYearlyFee
-                                                ],
-                                                otherPrice:
-                                                    otherProductsYearlyFee
-                                                        .toList(),
-                                                product: [
-                                                  memberCategoryValue ?? "",
-                                                  ...addedProducts.toList(),
-                                                ],
-                                                productType: addedProducts
-                                                        .isEmpty
-                                                    ? ['gtin']
-                                                    : List.generate(
-                                                        addedProducts.length +
-                                                            1, (index) {
-                                                        if (index == 0) {
-                                                          return "gtin";
-                                                        } else {
-                                                          return "other";
-                                                        }
-                                                      }),
-                                              );
+                                        );
                                       }
                                     },
                                     child:
@@ -1547,6 +1550,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   }
 
   submit({
+    bool? termsAndConditions,
     String? allowOtherProducts,
     String? activity,
     String? crNumber,
@@ -1608,6 +1612,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     request.fields['allow_other_products'] = allowOtherProducts.toString();
     request.fields['activity'] = activity.toString();
     request.fields['cr_number'] = '$crNumber';
+    request.fields['terms_conditions'] = '$termsAndConditions';
 
     request.fields['email'] = '$email';
     request.fields['company_name_eng'] = '$companyNameEng';
@@ -1711,17 +1716,22 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
       if (response.statusCode == 200) {
         AppDialogs.closeDialog();
 
-        // final responseBody = await response.stream.bytesToString();
-        // print('response body:---- $responseBody');
+        final responseBody = await response.stream.bytesToString();
+        print('response body:---- $responseBody');
 
         Common.showToast('Registration successful'.tr);
-
         setState(() {
           isSubmit = false;
         });
 
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      } else if (response.statusCode == 400 || response.statusCode == 422) {
+        AppDialogs.closeDialog();
+        Common.showToast("The current email or activity is already in used");
       } else {
+        final responseBody = await response.stream.bytesToString();
+        print('response body:---- $responseBody');
+
         AppDialogs.closeDialog();
         // showSpinner = false;
         Fluttertoast.showToast(

@@ -38,9 +38,10 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
         isLoaded = true;
       });
     }).catchError((e) {
-      setState(() {
-        isLoaded = true;
-      });
+      print(e);
+      // setState(() {
+      //   isLoaded = true;
+      // });
     });
     super.initState();
   }
@@ -59,7 +60,7 @@ class _CustomDrawerWidgetState extends State<CustomDrawerWidget> {
           ),
           ListTile(
             leading: Image.asset('assets/images/dashboard_icon.png'),
-            title: const Text("Dashboard"),
+            title: const Text('Dashboard'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(
                 Dashboard.routeName,

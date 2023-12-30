@@ -7,7 +7,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: LoadingAnimationWidget.threeRotatingDots(
+      child: LoadingAnimationWidget.discreteCircle(
         color: AppColors.primaryColor,
         size: 40,
       ),

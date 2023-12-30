@@ -151,7 +151,6 @@ class _SelectActivityAndPasswordScreenState
                       );
                     }).onError((error, stackTrace) {
                       AppDialogs.closeDialog();
-
                       AwesomeDialog(
                         context: context,
                         dialogType: DialogType.warning,

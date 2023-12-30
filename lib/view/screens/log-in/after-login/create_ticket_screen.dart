@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/icons/app_icons.dart';
 import 'package:gs1_v2_project/models/login-models/dashboard_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
+import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/view-model/login/after-login/create_ticker_service.dart';
 import 'package:gs1_v2_project/widgets/custom_drawer_widget.dart';
 import 'package:gs1_v2_project/widgets/images/image_widget.dart';
@@ -206,15 +207,20 @@ class _CreateTicketScreenState extends State<CreateTicketScreen> {
                                   backgroundColor: Colors.red,
                                 );
                               } else {
-                                Common.showToast(
-                                  "Please wait...".tr,
-                                );
+                                AppDialogs.loadingDialog(context);
                                 await CreateTicketService.createTicket(
                                   description: descriptionController.text,
                                   title: titleController.text,
                                   file: file,
                                   userId: userId.toString(),
                                 );
+                                AppDialogs.closeDialog();
+                                titleController.clear();
+                                descriptionController.clear();
+                                setState(() {
+                                  file = null;
+                                  fileName = null;
+                                });
                               }
                             }
                           },
