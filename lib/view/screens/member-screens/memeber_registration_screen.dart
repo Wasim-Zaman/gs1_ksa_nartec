@@ -23,6 +23,7 @@ import 'package:gs1_v2_project/utils/url.dart';
 import 'package:gs1_v2_project/view-model/member-registration/cr_activity_services.dart';
 import 'package:gs1_v2_project/view-model/member-registration/get_all_countries_services.dart';
 import 'package:gs1_v2_project/view-model/member-registration/get_products_by_category_services.dart';
+import 'package:gs1_v2_project/view/screens/home/home_screen.dart';
 import 'package:gs1_v2_project/view/screens/member-screens/get_barcode_screen.dart';
 import 'package:gs1_v2_project/widgets/dropdown_widget.dart';
 import 'package:gs1_v2_project/widgets/required_text_widget.dart';
@@ -1702,7 +1703,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
           isSubmit = false;
         });
 
-        // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
       } else if (response.statusCode == 400 || response.statusCode == 422) {
         AppDialogs.closeDialog();
         Common.showToast("The current email or activity is already in used");
@@ -1742,8 +1743,6 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         status: 1,
       );
       AppDialogs.closeDialog();
-      Common.showToast(
-          "The Cr Number and Activity has been added successfully");
       await Future.delayed(Duration(seconds: 1));
       // when the activity is added successfully, lets register the user now
       submit(
