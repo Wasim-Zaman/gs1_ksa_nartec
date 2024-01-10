@@ -1727,6 +1727,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         });
       }
     } catch (error) {
+      //
       AppDialogs.closeDialog();
       setState(() {
         isSubmit = false;
