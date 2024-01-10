@@ -15,7 +15,7 @@ class ActivitiesModel {
       this.updatedAt});
 
   ActivitiesModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'].toString();
     cr = json['cr'];
     activity = json['activity'];
     status = json['status'];

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gs1_v2_project/providers/gtin.dart';
-import 'package:gs1_v2_project/view/screens/member-screens/get_barcode_screen.dart';
+import 'package:gs1_v2_project/utils/app_navigator.dart';
+import 'package:gs1_v2_project/view/screens/member-screens/memeber_registration_screen.dart';
 import 'package:gs1_v2_project/view/screens/product-tracking/gtin_reporter_screen.dart';
 import 'package:gs1_v2_project/view/screens/qr_code_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/regulatory_affairs_screen.dart';
@@ -72,6 +73,14 @@ class HomeServices {
   }
 
   static getBarCode(BuildContext context) {
-    Navigator.of(context).pushNamed(GetBarcodeScreen.routeName);
+    // Navigator.of(context).pushNamed(GetBarcodeScreen.routeName);
+    AppNavigator.goToPage(
+      context: context,
+      screen: MemberRegistrationScreen(
+          // document: document,
+          // crNumber: crNumber,
+          // hasCrNumber: hasCrNumber,
+          ),
+    );
   }
 }

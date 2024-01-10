@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, non_constant_identifier_names, library_private_types_in_public_api
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:gs1_v2_project/constants/colors/app_colors.dart';
-import 'package:gs1_v2_project/models/member-registration/get_all_cities_model.dart';
+import 'package:gs1_v2_project/models/member-registration/activities_model.dart';
 import 'package:gs1_v2_project/models/member-registration/get_all_countries.dart';
 import 'package:gs1_v2_project/models/member-registration/get_all_cr_model.dart';
 import 'package:gs1_v2_project/models/member-registration/get_all_states_model.dart';
@@ -20,13 +20,9 @@ import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_dialogs.dart';
 import 'package:gs1_v2_project/utils/app_url_launcher.dart';
 import 'package:gs1_v2_project/utils/url.dart';
-import 'package:gs1_v2_project/view-model/member-registration/activities_services.dart';
-import 'package:gs1_v2_project/view-model/member-registration/get_all_cities_services.dart';
+import 'package:gs1_v2_project/view-model/member-registration/cr_activity_services.dart';
 import 'package:gs1_v2_project/view-model/member-registration/get_all_countries_services.dart';
-import 'package:gs1_v2_project/view-model/member-registration/get_all_states_services.dart';
 import 'package:gs1_v2_project/view-model/member-registration/get_products_by_category_services.dart';
-import 'package:gs1_v2_project/view-model/member-registration/gpc_services.dart';
-import 'package:gs1_v2_project/view/screens/home/home_screen.dart';
 import 'package:gs1_v2_project/view/screens/member-screens/get_barcode_screen.dart';
 import 'package:gs1_v2_project/widgets/dropdown_widget.dart';
 import 'package:gs1_v2_project/widgets/required_text_widget.dart';
@@ -46,14 +42,14 @@ bool isSubmit = false;
 enum PaymentGateway { bank, mada }
 
 class MemberRegistrationScreen extends StatefulWidget {
-  final String document;
-  final String crNumber;
-  final bool hasCrNumber;
+  // final String document;
+  // final String crNumber;
+  // final bool hasCrNumber;
   const MemberRegistrationScreen({
     super.key,
-    required this.document,
-    required this.crNumber,
-    required this.hasCrNumber,
+    // required this.document,
+    // required this.crNumber,
+    // required this.hasCrNumber,
   });
   static const routeName = "/member-registration";
 
@@ -76,6 +72,8 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController extensionController = TextEditingController();
   TextEditingController documentNoContoller = TextEditingController();
+  TextEditingController crNumberController = TextEditingController();
+  TextEditingController crActivitiesController = TextEditingController();
 
   // global key for the form
   GlobalKey formKey = GlobalKey<FormState>();
@@ -107,7 +105,7 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
   Set<String> addedProducts = {};
 
   // for files
-  File? file;
+  File? pdfFile;
   String? pdfFileName;
 
   File? imageFile;
@@ -165,9 +163,9 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     _formKey3.currentState?.validate();
     _formKey4.currentState?.validate();
 
-    crNumber = widget.crNumber;
-    hasCrNumber = widget.hasCrNumber;
-    document = widget.document;
+    // crNumber = widget.crNumber;
+    // hasCrNumber = widget.hasCrNumber;
+    // document = widget.document;
 
     // getAllOtherProducts();
     // getAllMemberCategories();
@@ -321,108 +319,158 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                // FutureBuilder(
+                                                //     future: ActivitiesService
+                                                //         .getActivities(
+                                                //       crNumber.toString(),
+                                                //     ),
+                                                //     builder:
+                                                //         (context, snapshot) {
+                                                //       if (snapshot
+                                                //               .connectionState ==
+                                                //           ConnectionState
+                                                //               .waiting) {
+                                                //         return Center(
+                                                //           child: SizedBox(
+                                                //             height: 40,
+                                                //             child:
+                                                //                 LinearProgressIndicator(
+                                                //               semanticsLabel:
+                                                //                   "Loading".tr,
+                                                //             ),
+                                                //           ),
+                                                //         );
+                                                //       }
+                                                //       if (snapshot.hasError) {
+                                                //         return Center(
+                                                //           child: Text(
+                                                //             "Something went wrong, try again later"
+                                                //                 .tr,
+                                                //           ),
+                                                //         );
+                                                //       }
+                                                //       final snap = snapshot.data
+                                                //           as List<
+                                                //               GetAllCrActivitiesModel>;
+                                                //       activitiesList = snap;
+                                                //       for (var element
+                                                //           in activitiesList) {
+                                                //         activities.add(element
+                                                //             .activity
+                                                //             .toString());
+                                                //       }
+                                                //       // if (activities
+                                                //       //     .isNotEmpty) {
+                                                //       //   activityValue =
+                                                //       //       activities.first;
+                                                //       // }
+                                                //       return activities.isEmpty
+                                                //           ? IconButton(
+                                                //               onPressed: () {
+                                                //                 setState(() {});
+                                                //               },
+                                                //               icon: const Icon(
+                                                //                   Icons
+                                                //                       .refresh))
+                                                //           : SizedBox(
+                                                //               height: 50,
+                                                //               child: FittedBox(
+                                                //                 child: DropdownButton(
+                                                //                     value: activityValue,
+                                                //                     items: activities
+                                                //                         .map<DropdownMenuItem<String>>(
+                                                //                           (String v) =>
+                                                //                               DropdownMenuItem<String>(
+                                                //                             value:
+                                                //                                 v,
+                                                //                             child:
+                                                //                                 Column(
+                                                //                               children: [
+                                                //                                 FittedBox(
+                                                //                                   child: Text(
+                                                //                                     v,
+                                                //                                     softWrap: true,
+                                                //                                     style: const TextStyle(
+                                                //                                       color: Colors.black,
+                                                //                                       // fontSize: 10,
+                                                //                                     ),
+                                                //                                   ),
+                                                //                                 ),
+                                                //                               ],
+                                                //                             ),
+                                                //                           ),
+                                                //                         )
+                                                //                         .toList(),
+                                                //                     onChanged: (String? newValue) {
+                                                //                       setState(
+                                                //                           () {
+                                                //                         activityValue =
+                                                //                             newValue;
+                                                //                         activityId =
+                                                //                             snap.firstWhere((element) {
+                                                //                           return element.activity ==
+                                                //                               newValue;
+                                                //                         }).id;
+                                                //                       });
+                                                //                     }),
+                                                //               ),
+                                                //             );
+                                                //     }),
+                                              ],
+                                            ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                RequiredTextWidget(
+                                                    title: "CR No".tr),
+                                                const SizedBox(height: 5),
+                                                CustomTextField(
+                                                  controller:
+                                                      crNumberController,
+                                                  hintText: "CR No".tr,
+                                                  validator: (p0) {
+                                                    if (p0!.isEmpty) {
+                                                      return "CR Number is required"
+                                                          .tr;
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
                                                 RequiredTextWidget(
                                                     title: "CR Activities".tr),
                                                 const SizedBox(height: 5),
-                                                FutureBuilder(
-                                                    future: ActivitiesService
-                                                        .getActivities(
-                                                      crNumber.toString(),
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            height: 40,
-                                                            child:
-                                                                LinearProgressIndicator(
-                                                              semanticsLabel:
-                                                                  "Loading".tr,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      if (snapshot.hasError) {
-                                                        return Center(
-                                                          child: Text(
-                                                            "Something went wrong, try again later"
-                                                                .tr,
-                                                          ),
-                                                        );
-                                                      }
-                                                      final snap = snapshot.data
-                                                          as List<
-                                                              GetAllCrActivitiesModel>;
-                                                      activitiesList = snap;
-                                                      for (var element
-                                                          in activitiesList) {
-                                                        activities.add(element
-                                                            .activity
-                                                            .toString());
-                                                      }
-                                                      // if (activities
-                                                      //     .isNotEmpty) {
-                                                      //   activityValue =
-                                                      //       activities.first;
-                                                      // }
-                                                      return activities.isEmpty
-                                                          ? IconButton(
-                                                              onPressed: () {
-                                                                setState(() {});
-                                                              },
-                                                              icon: const Icon(
-                                                                  Icons
-                                                                      .refresh))
-                                                          : SizedBox(
-                                                              height: 50,
-                                                              child: FittedBox(
-                                                                child: DropdownButton(
-                                                                    value: activityValue,
-                                                                    items: activities
-                                                                        .map<DropdownMenuItem<String>>(
-                                                                          (String v) =>
-                                                                              DropdownMenuItem<String>(
-                                                                            value:
-                                                                                v,
-                                                                            child:
-                                                                                Column(
-                                                                              children: [
-                                                                                FittedBox(
-                                                                                  child: Text(
-                                                                                    v,
-                                                                                    softWrap: true,
-                                                                                    style: const TextStyle(
-                                                                                      color: Colors.black,
-                                                                                      // fontSize: 10,
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                        )
-                                                                        .toList(),
-                                                                    onChanged: (String? newValue) {
-                                                                      setState(
-                                                                          () {
-                                                                        activityValue =
-                                                                            newValue;
-                                                                        activityId =
-                                                                            snap.firstWhere((element) {
-                                                                          return element.activity ==
-                                                                              newValue;
-                                                                        }).id;
-                                                                      });
-                                                                    }),
-                                                              ),
-                                                            );
-                                                    }),
+                                                CustomTextField(
+                                                  controller:
+                                                      crActivitiesController,
+                                                  hintText: "CR Activities".tr,
+                                                  validator: (p0) {
+                                                    if (p0!.isEmpty) {
+                                                      return "CR Activities is required"
+                                                          .tr;
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
                                               ],
                                             ),
+                                          ),
+                                        ],
+                                      ),
                                       const SizedBox(height: 20),
                                       RequiredTextWidget(title: 'Email'.tr),
                                       const SizedBox(height: 5),
@@ -434,7 +482,6 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                             return null;
                                           } else {
                                             return 'Please enter a valid email'
-                                                .tr
                                                 .tr;
                                           }
                                         },
@@ -683,309 +730,309 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    RequiredTextWidget(title: "Search GPC".tr),
-                                    const SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            child: Autocomplete<String>(
-                                              displayStringForOption:
-                                                  (option) => option,
-                                              optionsBuilder:
-                                                  (textEditingValue) {
-                                                if (textEditingValue.text ==
-                                                    '') {
-                                                  return const Iterable<
-                                                      String>.empty();
-                                                }
-                                                return gpcList
-                                                    .where((String option) {
-                                                  return option.contains(
-                                                      textEditingValue.text);
-                                                });
-                                              },
-                                              onSelected: (String selection) {
-                                                // _addedGpcController.text = selection;
-                                                setState(() {
-                                                  addedGPC.add(selection);
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: GestureDetector(
-                                            onTap: () async {
-                                              AppDialogs.loadingDialog(context);
-                                              final temp = GpcService.getGPC(
-                                                  searchGpcController.text);
-                                              temp.then((value) {
-                                                AppDialogs.closeDialog();
-                                                gpcList.clear();
-                                                searchGpcController.clear();
+                                    // RequiredTextWidget(title: "Search GPC".tr),
+                                    // const SizedBox(height: 5),
+                                    // Row(
+                                    //   children: [
+                                    //     Expanded(
+                                    //       flex: 4,
+                                    //       child: Container(
+                                    //         decoration: BoxDecoration(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(10),
+                                    //           border: Border.all(
+                                    //             color: Colors.grey,
+                                    //           ),
+                                    //         ),
+                                    //         child: Autocomplete<String>(
+                                    //           displayStringForOption:
+                                    //               (option) => option,
+                                    //           optionsBuilder:
+                                    //               (textEditingValue) {
+                                    //             if (textEditingValue.text ==
+                                    //                 '') {
+                                    //               return const Iterable<
+                                    //                   String>.empty();
+                                    //             }
+                                    //             return gpcList
+                                    //                 .where((String option) {
+                                    //               return option.contains(
+                                    //                   textEditingValue.text);
+                                    //             });
+                                    //           },
+                                    //           onSelected: (String selection) {
+                                    //             // _addedGpcController.text = selection;
+                                    //             setState(() {
+                                    //               addedGPC.add(selection);
+                                    //             });
+                                    //           },
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //     Expanded(
+                                    //       child: GestureDetector(
+                                    //         onTap: () async {
+                                    //           AppDialogs.loadingDialog(context);
+                                    //           final temp = GpcService.getGPC(
+                                    //               searchGpcController.text);
+                                    //           temp.then((value) {
+                                    //             AppDialogs.closeDialog();
+                                    //             gpcList.clear();
+                                    //             searchGpcController.clear();
 
-                                                for (var element in value) {
-                                                  gpcList.add(element.value!);
-                                                }
-                                              }).catchError((error) {
-                                                AppDialogs.closeDialog();
-                                                Fluttertoast.showToast(
-                                                    msg: error.toString());
-                                              });
-                                            },
-                                            child: Image.asset(
-                                                'assets/images/search.png'),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    //             for (var element in value) {
+                                    //               gpcList.add(element.value!);
+                                    //             }
+                                    //           }).catchError((error) {
+                                    //             AppDialogs.closeDialog();
+                                    //             Fluttertoast.showToast(
+                                    //                 msg: error.toString());
+                                    //           });
+                                    //         },
+                                    //         child: Image.asset(
+                                    //             'assets/images/search.png'),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
 
-                                    const SizedBox(height: 20),
-                                    RequiredTextWidget(title: "Added GPC".tr),
-                                    const SizedBox(height: 5),
-                                    Column(
-                                        children: addedGPC
-                                            .map((e) => ListTile(
-                                                  title: Text(e),
-                                                  trailing: IconButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        addedGPC.remove(e);
-                                                      });
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.delete,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                ))
-                                            .toList()),
-                                    const SizedBox(height: 20),
-                                    const Divider(thickness: 3),
-                                    RequiredTextWidget(
-                                      title: "Select Country".tr,
-                                    ),
-                                    FutureBuilder(
-                                        future:
-                                            GetAllCountriesServices.getList(),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.connectionState ==
-                                              ConnectionState.waiting) {
-                                            return const Center(
-                                              child: SizedBox(
-                                                height: 40,
-                                                child:
-                                                    LinearProgressIndicator(),
-                                              ),
-                                            );
-                                          }
-                                          if (snapshot.hasError) {
-                                            return Center(
-                                              child: Text(
-                                                  "Something went wrong, please try again later"
-                                                      .tr),
-                                            );
-                                          }
-                                          final snap = snapshot.data
-                                              as List<GetCountriesModel>;
-                                          countriesList = snap;
-                                          countries.clear();
-                                          for (var element in snap) {
-                                            countries
-                                                .add(element.nameEn.toString());
-                                          }
+                                    // const SizedBox(height: 20),
+                                    // RequiredTextWidget(title: "Added GPC".tr),
+                                    // const SizedBox(height: 5),
+                                    // Column(
+                                    //     children: addedGPC
+                                    //         .map((e) => ListTile(
+                                    //               title: Text(e),
+                                    //               trailing: IconButton(
+                                    //                 onPressed: () {
+                                    //                   setState(() {
+                                    //                     addedGPC.remove(e);
+                                    //                   });
+                                    //                 },
+                                    //                 icon: const Icon(
+                                    //                   Icons.delete,
+                                    //                   color: Colors.red,
+                                    //                 ),
+                                    //               ),
+                                    //             ))
+                                    //         .toList()),
+                                    // const SizedBox(height: 20),
+                                    // const Divider(thickness: 3),
+                                    // RequiredTextWidget(
+                                    //   title: "Select Country".tr,
+                                    // ),
+                                    // FutureBuilder(
+                                    //     future:
+                                    //         GetAllCountriesServices.getList(),
+                                    //     builder: (context, snapshot) {
+                                    //       if (snapshot.connectionState ==
+                                    //           ConnectionState.waiting) {
+                                    //         return const Center(
+                                    //           child: SizedBox(
+                                    //             height: 40,
+                                    //             child:
+                                    //                 LinearProgressIndicator(),
+                                    //           ),
+                                    //         );
+                                    //       }
+                                    //       if (snapshot.hasError) {
+                                    //         return Center(
+                                    //           child: Text(
+                                    //               "Something went wrong, please try again later"
+                                    //                   .tr),
+                                    //         );
+                                    //       }
+                                    //       final snap = snapshot.data
+                                    //           as List<GetCountriesModel>;
+                                    //       countriesList = snap;
+                                    //       countries.clear();
+                                    //       for (var element in snap) {
+                                    //         countries
+                                    //             .add(element.nameEn.toString());
+                                    //       }
 
-                                          return SizedBox(
-                                            height: 40,
-                                            width: double.infinity,
-                                            child: DropdownButton(
-                                                value: countryName,
-                                                isExpanded: true,
-                                                items: countries
-                                                    .map<
-                                                        DropdownMenuItem<
-                                                            String>>(
-                                                      (String v) =>
-                                                          DropdownMenuItem<
-                                                              String>(
-                                                        value: v,
-                                                        child: AutoSizeText(v),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                                onChanged: (String? newValue) {
-                                                  setState(() {
-                                                    countryName = newValue!;
-                                                    stateName = null;
-                                                    cityName = null;
-                                                    cities.clear();
-                                                    states.clear();
-                                                    countryId = (snap
-                                                        .firstWhere(
-                                                            (element) =>
-                                                                element
-                                                                    .nameEn ==
-                                                                countryName,
-                                                            orElse: () =>
-                                                                GetCountriesModel(
-                                                                    id: null))
-                                                        .id!);
-                                                  });
-                                                }),
-                                          );
-                                        }),
-                                    const SizedBox(height: 20),
-                                    RequiredTextWidget(
-                                        title: "Select State".tr),
+                                    //       return SizedBox(
+                                    //         height: 40,
+                                    //         width: double.infinity,
+                                    //         child: DropdownButton(
+                                    //             value: countryName,
+                                    //             isExpanded: true,
+                                    //             items: countries
+                                    //                 .map<
+                                    //                     DropdownMenuItem<
+                                    //                         String>>(
+                                    //                   (String v) =>
+                                    //                       DropdownMenuItem<
+                                    //                           String>(
+                                    //                     value: v,
+                                    //                     child: AutoSizeText(v),
+                                    //                   ),
+                                    //                 )
+                                    //                 .toList(),
+                                    //             onChanged: (String? newValue) {
+                                    //               setState(() {
+                                    //                 countryName = newValue!;
+                                    //                 stateName = null;
+                                    //                 cityName = null;
+                                    //                 cities.clear();
+                                    //                 states.clear();
+                                    //                 countryId = (snap
+                                    //                     .firstWhere(
+                                    //                         (element) =>
+                                    //                             element
+                                    //                                 .nameEn ==
+                                    //                             countryName,
+                                    //                         orElse: () =>
+                                    //                             GetCountriesModel(
+                                    //                                 id: null))
+                                    //                     .id!);
+                                    //               });
+                                    //             }),
+                                    //       );
+                                    //     }),
+                                    // const SizedBox(height: 20),
+                                    // RequiredTextWidget(
+                                    //     title: "Select State".tr),
 
-                                    FutureBuilder(
-                                        future: GetAllStatesServices.getList(
-                                            countryId),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.connectionState ==
-                                              ConnectionState.waiting) {
-                                            return const Center(
-                                              child: SizedBox(
-                                                  height: 40,
-                                                  child:
-                                                      LinearProgressIndicator()),
-                                            );
-                                          }
-                                          if (snapshot.hasError) {
-                                            return Center(
-                                              child: Column(
-                                                children: [
-                                                  Text("Something went wrong"
-                                                      .tr),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      setState(() {});
-                                                    },
-                                                    child: Text("Refresh".tr),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          }
-                                          final snap = snapshot.data
-                                              as List<GetAllStatesModel>;
-                                          statesList = snap;
-                                          states.clear();
+                                    // FutureBuilder(
+                                    //     future: GetAllStatesServices.getList(
+                                    //         countryId),
+                                    //     builder: (context, snapshot) {
+                                    //       if (snapshot.connectionState ==
+                                    //           ConnectionState.waiting) {
+                                    //         return const Center(
+                                    //           child: SizedBox(
+                                    //               height: 40,
+                                    //               child:
+                                    //                   LinearProgressIndicator()),
+                                    //         );
+                                    //       }
+                                    //       if (snapshot.hasError) {
+                                    //         return Center(
+                                    //           child: Column(
+                                    //             children: [
+                                    //               Text("Something went wrong"
+                                    //                   .tr),
+                                    //               TextButton(
+                                    //                 onPressed: () {
+                                    //                   setState(() {});
+                                    //                 },
+                                    //                 child: Text("Refresh".tr),
+                                    //               ),
+                                    //             ],
+                                    //           ),
+                                    //         );
+                                    //       }
+                                    //       final snap = snapshot.data
+                                    //           as List<GetAllStatesModel>;
+                                    //       statesList = snap;
+                                    //       states.clear();
 
-                                          for (var element in snap) {
-                                            states.add(element.name.toString());
-                                          }
-                                          return SizedBox(
-                                            width: double.infinity,
-                                            height: 40,
-                                            child: DropdownButton(
-                                                value: stateName,
-                                                isExpanded: true,
-                                                items: states
-                                                    .map<
-                                                        DropdownMenuItem<
-                                                            String>>(
-                                                      (String v) =>
-                                                          DropdownMenuItem<
-                                                              String>(
-                                                        value: v,
-                                                        child: Text(v),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                                onChanged: (String? newValue) {
-                                                  setState(() {
-                                                    stateName = newValue!;
-                                                    cityName = null;
-                                                    cities.clear();
-                                                    stateId = (snap
-                                                        .firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                stateName,
-                                                            orElse: () =>
-                                                                GetAllStatesModel(
-                                                                    id: null))
-                                                        .id!);
-                                                  });
-                                                }),
-                                          );
-                                        }),
-                                    const SizedBox(height: 20),
-                                    RequiredTextWidget(title: "Select City".tr),
-                                    FutureBuilder(
-                                        future: GetAllCitiesServices.getData(
-                                            stateId ?? 0),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.connectionState ==
-                                              ConnectionState.waiting) {
-                                            return const Center(
-                                              child: SizedBox(
-                                                height: 40,
-                                                child:
-                                                    LinearProgressIndicator(),
-                                              ),
-                                            );
-                                          }
-                                          if (snapshot.hasError) {
-                                            return Center(
-                                              child: Text(
-                                                  "Something went wrong, please try again later"
-                                                      .tr),
-                                            );
-                                          }
-                                          final snap = snapshot.data
-                                              as List<GetAllCitiesModel>;
+                                    //       for (var element in snap) {
+                                    //         states.add(element.name.toString());
+                                    //       }
+                                    //       return SizedBox(
+                                    //         width: double.infinity,
+                                    //         height: 40,
+                                    //         child: DropdownButton(
+                                    //             value: stateName,
+                                    //             isExpanded: true,
+                                    //             items: states
+                                    //                 .map<
+                                    //                     DropdownMenuItem<
+                                    //                         String>>(
+                                    //                   (String v) =>
+                                    //                       DropdownMenuItem<
+                                    //                           String>(
+                                    //                     value: v,
+                                    //                     child: Text(v),
+                                    //                   ),
+                                    //                 )
+                                    //                 .toList(),
+                                    //             onChanged: (String? newValue) {
+                                    //               setState(() {
+                                    //                 stateName = newValue!;
+                                    //                 cityName = null;
+                                    //                 cities.clear();
+                                    //                 stateId = (snap
+                                    //                     .firstWhere(
+                                    //                         (element) =>
+                                    //                             element.name ==
+                                    //                             stateName,
+                                    //                         orElse: () =>
+                                    //                             GetAllStatesModel(
+                                    //                                 id: null))
+                                    //                     .id!);
+                                    //               });
+                                    //             }),
+                                    //       );
+                                    //     }),
+                                    // const SizedBox(height: 20),
+                                    // RequiredTextWidget(title: "Select City".tr),
+                                    // FutureBuilder(
+                                    //     future: GetAllCitiesServices.getData(
+                                    //         stateId ?? 0),
+                                    //     builder: (context, snapshot) {
+                                    //       if (snapshot.connectionState ==
+                                    //           ConnectionState.waiting) {
+                                    //         return const Center(
+                                    //           child: SizedBox(
+                                    //             height: 40,
+                                    //             child:
+                                    //                 LinearProgressIndicator(),
+                                    //           ),
+                                    //         );
+                                    //       }
+                                    //       if (snapshot.hasError) {
+                                    //         return Center(
+                                    //           child: Text(
+                                    //               "Something went wrong, please try again later"
+                                    //                   .tr),
+                                    //         );
+                                    //       }
+                                    //       final snap = snapshot.data
+                                    //           as List<GetAllCitiesModel>;
 
-                                          states.clear();
+                                    //       states.clear();
 
-                                          for (var element in snap) {
-                                            // print(element.stateId);
-                                            cities.add(element.name.toString());
-                                          }
-                                          return SizedBox(
-                                            width: double.infinity,
-                                            child: DropdownButton(
-                                                value: cityName,
-                                                isExpanded: true,
-                                                items: cities
-                                                    .map<
-                                                        DropdownMenuItem<
-                                                            String>>(
-                                                      (String v) =>
-                                                          DropdownMenuItem<
-                                                              String>(
-                                                        value: v,
-                                                        child: Text(v),
-                                                      ),
-                                                    )
-                                                    .toList(),
-                                                onChanged: (String? newValue) {
-                                                  setState(() {
-                                                    cityName = newValue!;
-                                                    cityId = (snap
-                                                        .firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                cityName,
-                                                            orElse: () =>
-                                                                GetAllCitiesModel(
-                                                                    id: null))
-                                                        .id);
-                                                  });
-                                                }),
-                                          );
-                                        }),
-                                    const SizedBox(height: 20),
+                                    //       for (var element in snap) {
+                                    //         // print(element.stateId);
+                                    //         cities.add(element.name.toString());
+                                    //       }
+                                    //       return SizedBox(
+                                    //         width: double.infinity,
+                                    //         child: DropdownButton(
+                                    //             value: cityName,
+                                    //             isExpanded: true,
+                                    //             items: cities
+                                    //                 .map<
+                                    //                     DropdownMenuItem<
+                                    //                         String>>(
+                                    //                   (String v) =>
+                                    //                       DropdownMenuItem<
+                                    //                           String>(
+                                    //                     value: v,
+                                    //                     child: Text(v),
+                                    //                   ),
+                                    //                 )
+                                    //                 .toList(),
+                                    //             onChanged: (String? newValue) {
+                                    //               setState(() {
+                                    //                 cityName = newValue!;
+                                    //                 cityId = (snap
+                                    //                     .firstWhere(
+                                    //                         (element) =>
+                                    //                             element.name ==
+                                    //                             cityName,
+                                    //                         orElse: () =>
+                                    //                             GetAllCitiesModel(
+                                    //                                 id: null))
+                                    //                     .id);
+                                    //               });
+                                    //             }),
+                                    //       );
+                                    //     }),
+                                    // const SizedBox(height: 20),
                                     RequiredTextWidget(
                                         title: "Select Category".tr),
                                     5.heightBox,
@@ -1215,7 +1262,9 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                                 ),
                                               )
                                             : const Expanded(
-                                                flex: 3, child: SizedBox()),
+                                                flex: 3,
+                                                child: SizedBox(),
+                                              ),
                                       ],
                                     ),
                                     const SizedBox(height: 20),
@@ -1420,98 +1469,21 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
                                           zipCodeController.text.isEmpty ||
                                           websiteController.text.isEmpty ||
                                           websiteController.text.length <= 9 ||
-                                          countryName == null ||
-                                          stateName == null ||
-                                          cityName == null ||
-                                          memberCategory == null ||
+                                          // countryName == null ||
+                                          // stateName == null ||
+                                          // cityName == null ||
+                                          // memberCategory == null ||
+                                          pdfFile == null ||
                                           otherProductsList.isEmpty ||
-                                          file == null ||
                                           bankType == null) {
                                         Common.showToast(
                                             "Please fill the required fields"
                                                 .tr);
+                                      } else if (otherProductsList.length < 1) {
+                                        Common.showToast(
+                                            "Please select other products".tr);
                                       } else {
-                                        submit(
-                                          termsAndConditions: isChecked,
-                                          selectedCategoryValue:
-                                              selectedCategoryValue,
-                                          gcpType: gcpType,
-                                          memberCategory: memberCategory,
-                                          paymentType: bankType,
-                                          allowOtherProducts:
-                                              allowOtherProducts,
-                                          activity: activityValue ?? document,
-                                          crNumber: crNumber ??
-                                              documentNoContoller.text,
-                                          email: emailController.text,
-                                          companyNameEng:
-                                              companyNameEnController.text,
-                                          companyNameAr:
-                                              companyNameArController.text,
-                                          contactPerson:
-                                              contactPersonController.text,
-                                          companyLandline:
-                                              landLineController.text,
-                                          mobileNumber: mobileController.text,
-                                          mobileExtension:
-                                              extensionController.text,
-                                          zipCode: zipCodeController.text,
-                                          website: websiteController.text,
-                                          gpc: addedGPC.toList(),
-                                          countryId: countryId.toString(),
-                                          countryName: countryName,
-                                          countryShortName: countryShortName,
-                                          stateId: stateId.toString(),
-                                          stateName: stateName,
-                                          cityId: cityId.toString(),
-                                          cityName: cityName,
-                                          otherProduct: addedProducts.toList(),
-                                          otherProductId:
-                                              otherProductsId.toList(),
-                                          quotation: List.generate(
-                                              addedProducts.isEmpty
-                                                  ? 1
-                                                  : addedProducts.length + 1,
-                                              (index) {
-                                            if (index == 0) {
-                                              return quotation.toString();
-                                            } else {
-                                              return "no";
-                                            }
-                                          }),
-                                          registationFee: List.generate(
-                                              addedProducts.isEmpty
-                                                  ? 1
-                                                  : addedProducts.length + 1,
-                                              (index) {
-                                            if (index == 0) {
-                                              return memberRegistrationFee ?? 0;
-                                            } else {
-                                              return 0;
-                                            }
-                                          }),
-                                          yearlyFee: [
-                                            gtinYearlySubscriptionFee ?? 0,
-                                            ...otherProductsYearlyFee
-                                          ],
-                                          otherPrice:
-                                              otherProductsYearlyFee.toList(),
-                                          product: [
-                                            memberCategoryValue ?? "",
-                                            ...addedProducts.toList(),
-                                          ],
-                                          productType: addedProducts.isEmpty
-                                              ? ['gtin']
-                                              : List.generate(
-                                                  addedProducts.length + 1,
-                                                  (index) {
-                                                  if (index == 0) {
-                                                    return "gtin";
-                                                  } else {
-                                                    return "other";
-                                                  }
-                                                }),
-                                        );
+                                        addCrActivity();
                                       }
                                     },
                                     child:
@@ -1629,59 +1601,59 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     request.fields['gpc'] =
         gpcArray.toString().replaceAll('[', '').replaceAll(']', '');
 
-    request.fields['country_id'] = '$countryId';
-    request.fields['countryName'] = '$countryName';
+    request.fields['country_id'] = "17"; //'$countryId';
+    request.fields['countryName'] = 'Saudi Arabia'; //'$countryName';
     request.fields['country_shortName'] = '$countryShortName';
-    request.fields['state_id'] = '$stateId';
-    request.fields['stateName'] = '$stateName';
-    request.fields['city_id'] = '$cityId';
-    request.fields['cityName'] = '$cityName';
-    request.fields['member_category'] = '$memberCategory'; // id
+    request.fields['state_id'] = "28"; // '$stateId';
+    request.fields['stateName'] = 'Central Region'; //'$stateName';
+    request.fields['city_id'] = "18"; //'$cityId';
+    request.fields['cityName'] = 'Riyadh'; // '$cityName';
+    request.fields['member_category'] = '$memberCategory';
 
     final otherProductsArray = jsonEncode(otherProduct);
-    request.fields['other_products'] = otherProductsArray
-        .toString()
-        .replaceFirst('[', '')
-        .replaceFirst(']', '');
+    request.fields['other_products'] = otherProductsArray;
+    // .toString()
+    // .replaceFirst('[', '')
+    // .replaceFirst(']', '');
 
     List<String> test = [];
     product?.forEach((element) {
       test.add(element.replaceAll(',', ''));
     });
     final productsArray = jsonEncode(test);
-    request.fields['product'] = productsArray
-        .toString()
-        .replaceFirst('[', '')
-        .replaceFirst(']', '')
-        .replaceAll('"', '');
+    request.fields['product'] = productsArray;
+    // .toString()
+    // .replaceFirst('[', '')
+    // .replaceFirst(']', '')
+    // .replaceAll('"', '');
 
     final quotationArray = jsonEncode(quotation);
-    request.fields['quotation'] =
-        quotationArray.toString().replaceFirst('[', '').replaceFirst(']', '');
+    request.fields['quotation'] = quotationArray;
+    // .toString().replaceFirst('[', '').replaceFirst(']', '');
 
     final registationFeeArray = jsonEncode(registationFee);
-    request.fields['registration_fee'] = registationFeeArray
-        .toString()
-        .replaceFirst('[', '')
-        .replaceFirst(']', '');
+    request.fields['registration_fee'] = registationFeeArray;
+    // .toString()
+    // .replaceFirst('[', '')
+    // .replaceFirst(']', '');
 
     final yearlyFeeArray = jsonEncode(yearlyFee);
-    request.fields['yearly_fee'] =
-        yearlyFeeArray.toString().replaceFirst('[', '').replaceFirst(']', '');
+    request.fields['yearly_fee'] = yearlyFeeArray;
+    // .toString().replaceFirst('[', '').replaceFirst(']', '');
 
     request.fields['gtinprice'] = gtinPrice.toString();
     request.fields['pkgID'] = memberCategoryId.toString();
-    request.fields['gcp_type'] = '$gcpType';
+    request.fields['gcp_type'] = 'GCP'; //'$gcpType';
 
     final productTypeArray = jsonEncode(productType);
-    request.fields['product_type'] =
-        productTypeArray.toString().replaceFirst('[', '').replaceFirst(']', '');
+    request.fields['product_type'] = productTypeArray;
+    // .toString().replaceFirst('[', '').replaceFirst(']', '');
 
     final otherProductsPriceArray = jsonEncode(otherPrice);
-    request.fields['otherprice'] = otherProductsPriceArray
-        .toString()
-        .replaceFirst('[', '')
-        .replaceFirst(']', '');
+    request.fields['otherprice'] = otherProductsPriceArray;
+    // .toString()
+    // .replaceFirst('[', '')
+    // .replaceFirst(']', '');
 
     final otherProductsIdArray = jsonEncode(otherProductId);
     request.fields['otherProdID'] = otherProductsIdArray;
@@ -1692,21 +1664,27 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     request.fields['total'] = totalPrice.toString();
     request.fields['payment_type'] = paymentType.toString();
 
-    // Add image file to request
-    var imageStream = http.ByteStream(imageFile!.openRead());
-    var imageLength = await imageFile?.length();
-    var imageMultipartFile = http.MultipartFile(
-        'address_image', imageStream, imageLength!,
-        filename: imageFile?.path);
-    request.files.add(imageMultipartFile);
+    if (imageFile != null) {
+      // Add image file to request
+      var imageStream = http.ByteStream(imageFile!.openRead());
+      var imageLength = await imageFile?.length();
+      var imageMultipartFile = http.MultipartFile(
+          'address_image', imageStream, imageLength!,
+          filename: imageFile?.path);
+      request.files.add(imageMultipartFile);
+    }
 
     // Add PDF file to request
-    var pdfStream = http.ByteStream(file!.openRead());
-    var pdfLength = await file?.length();
-    var pdfMultipartFile = http.MultipartFile(
-        'documents', pdfStream, pdfLength!,
-        filename: file?.path);
-    request.files.add(pdfMultipartFile);
+    if (pdfFile == null) {
+      // then pass null in the document field
+    } else {
+      var pdfStream = http.ByteStream(pdfFile!.openRead());
+      var pdfLength = await pdfFile?.length();
+      var pdfMultipartFile = http.MultipartFile(
+          'documents', pdfStream, pdfLength!,
+          filename: pdfFile?.path);
+      request.files.add(pdfMultipartFile);
+    }
 
     // getting response
     try {
@@ -1717,20 +1695,20 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         AppDialogs.closeDialog();
 
         final responseBody = await response.stream.bytesToString();
-        print('response body:---- $responseBody');
+        log('response body:---- $responseBody');
 
         Common.showToast('Registration successful'.tr);
         setState(() {
           isSubmit = false;
         });
 
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
       } else if (response.statusCode == 400 || response.statusCode == 422) {
         AppDialogs.closeDialog();
         Common.showToast("The current email or activity is already in used");
       } else {
         final responseBody = await response.stream.bytesToString();
-        print('response body:---- $responseBody');
+        log('response body:---- $responseBody');
 
         AppDialogs.closeDialog();
         // showSpinner = false;
@@ -1755,15 +1733,95 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
     }
   }
 
+  addCrActivity() async {
+    try {
+      AppDialogs.loadingDialog(context);
+      ActivitiesModel model = await CrActivityServices.addActivity(
+        cr: crNumberController.text,
+        activity: crActivitiesController.text,
+        status: 1,
+      );
+      AppDialogs.closeDialog();
+      Common.showToast(
+          "The Cr Number and Activity has been added successfully");
+      await Future.delayed(Duration(seconds: 1));
+      // when the activity is added successfully, lets register the user now
+      submit(
+        termsAndConditions: isChecked,
+        selectedCategoryValue: selectedCategoryValue,
+        gcpType: gcpType,
+        memberCategory: memberCategory,
+        paymentType: bankType,
+        allowOtherProducts: allowOtherProducts,
+        activity: model.activity, //activityValue ?? document,
+        crNumber: model.cr, //crNumber ?? documentNoContoller.text,
+        email: emailController.text,
+        companyNameEng: companyNameEnController.text,
+        companyNameAr: companyNameArController.text,
+        contactPerson: contactPersonController.text,
+        companyLandline: landLineController.text,
+        mobileNumber: mobileController.text,
+        mobileExtension: extensionController.text,
+        zipCode: zipCodeController.text,
+        website: websiteController.text,
+        gpc: addedGPC.toList(),
+        countryId: countryId.toString(),
+        countryName: countryName,
+        countryShortName: countryShortName,
+        stateId: stateId.toString(),
+        stateName: stateName,
+        cityId: cityId.toString(),
+        cityName: cityName,
+        otherProduct: addedProducts.toList(),
+        otherProductId: otherProductsId.toList(),
+        quotation: List.generate(
+            addedProducts.isEmpty ? 1 : addedProducts.length + 1, (index) {
+          if (index == 0) {
+            return quotation.toString();
+          } else {
+            return "no";
+          }
+        }),
+        registationFee: List.generate(
+            addedProducts.isEmpty ? 1 : addedProducts.length + 1, (index) {
+          if (index == 0) {
+            return memberRegistrationFee ?? 0;
+          } else {
+            return 0;
+          }
+        }),
+        yearlyFee: [gtinYearlySubscriptionFee ?? 0, ...otherProductsYearlyFee],
+        otherPrice: otherProductsYearlyFee.toList(),
+        product: [
+          memberCategoryValue ?? "",
+          ...addedProducts.toList(),
+        ],
+        productType: addedProducts.isEmpty
+            ? ['gtin']
+            : List.generate(addedProducts.length + 1, (index) {
+                if (index == 0) {
+                  return "gtin";
+                } else {
+                  return "other";
+                }
+              }),
+      );
+    } catch (err) {
+      AppDialogs.closeDialog();
+      Common.showToast(err.toString());
+      print(err);
+    }
+  }
+
   Future uploadPdf() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf'],
     );
     if (result != null) {
-      file = File(result.files.single.path ?? "");
+      pdfFile = File(result.files.single.path ?? "");
       setState(() {
-        pdfFileName = file?.path.split('/').last;
+        pdfFileName = pdfFile?.path.split('/').last;
       });
     } else {
       // User canceled the picker

@@ -48,10 +48,10 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => MemberRegistrationScreen(
-            crNumber: _crNumberController.text,
-            hasCrNumber: hasCrNumber,
-            document: document ?? "",
-          ),
+              // crNumber: _crNumberController.text,
+              // hasCrNumber: hasCrNumber,
+              // document: document ?? "",
+              ),
         ),
       );
       // Navigator.of(context).pushNamed(
@@ -69,10 +69,10 @@ class _GetBarcodeScreenState extends State<GetBarcodeScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => MemberRegistrationScreen(
-            crNumber: _crNumberController.text,
-            hasCrNumber: hasCrNumber,
-            document: document ?? "",
-          ),
+              // crNumber: _crNumberController.text,
+              // hasCrNumber: hasCrNumber,
+              // document: document ?? "",
+              ),
         ),
       );
       // Navigator.of(context).pushNamed(
