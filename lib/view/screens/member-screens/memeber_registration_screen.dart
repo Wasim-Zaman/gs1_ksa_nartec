@@ -1724,7 +1724,6 @@ class _MemberRegistrationScreenState extends State<MemberRegistrationScreen> {
         );
         setState(() {
           isSubmit = false;
-          //
         });
       }
     } catch (error) {
