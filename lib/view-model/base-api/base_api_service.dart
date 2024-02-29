@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
@@ -17,7 +18,7 @@ class BaseApiService {
           'Host': BaseUrl.host,
         });
     print(gtin);
-    print(response.body);
+    log(response.body);
     if (response.statusCode == 200) {
       final Map<String, dynamic> body = json.decode(response.body);
       final responseData = body['gtinArr'];

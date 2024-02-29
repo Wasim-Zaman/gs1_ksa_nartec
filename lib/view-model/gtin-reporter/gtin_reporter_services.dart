@@ -1,10 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:gs1_v2_project/utils/url.dart';
 import 'package:http/http.dart' as http;
 
 class GtinReporterServices {
-  static Future<void> proceesGtin({
+  static Future<void> proceedGtin({
     String? reportBarcode,
     String? gtinComment,
     String? gtinReportAction,
@@ -15,7 +16,7 @@ class GtinReporterServices {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('${BaseUrl.gs1}/api/gtin/report'),
+        Uri.parse('${BaseUrl.gs1}/api/frontend/gtin/reporter'),
       );
 
       request.fields['report_barcode'] = reportBarcode.toString();
@@ -37,6 +38,12 @@ class GtinReporterServices {
       }
 
       var response = await request.send();
+
+      // print response
+      print(response.statusCode);
+      var parsedResponse = await response.stream.bytesToString();
+      log(parsedResponse);
+
       if (response.statusCode == 200) {
       } else {
         throw Exception('Something went wrong, please try again later');

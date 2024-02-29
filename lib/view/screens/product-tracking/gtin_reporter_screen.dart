@@ -3,14 +3,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:gs1_v2_project/constants/colors/app_colors.dart';
 import 'package:gs1_v2_project/constants/images/other_images.dart';
+import 'package:gs1_v2_project/cubits/gtin_cubit.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/res/common/common.dart';
 import 'package:gs1_v2_project/utils/app_navigator.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
-import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
 import 'package:gs1_v2_project/view-model/gtin-reporter/gtin_reporter_services.dart';
 import 'package:gs1_v2_project/view/screens/scanning/barcode_scanning_screen.dart';
 import 'package:gs1_v2_project/view/screens/widgets/expansion_row_widget.dart';
@@ -33,6 +33,7 @@ class _GtinReporterScreenState extends State<GtinReporterScreen> {
     // get gtin from arguments as string
     Future.delayed(Duration(seconds: 1), () {
       gtin = ModalRoute.of(context)?.settings.arguments as String;
+      print("Laka da maar $gtin");
     });
     super.initState();
   }
@@ -40,29 +41,35 @@ class _GtinReporterScreenState extends State<GtinReporterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: orangeColor,
+        automaticallyImplyLeading: true,
+        title: Text("GTIN Reporter"),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
-          Container(
-            height: 200,
-            padding: const EdgeInsets.all(50),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.primaryColor,
-                  AppColors.white,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: Image.asset(OtherImages.logo),
-          ),
-          AppBar(
-            backgroundColor: orangeColor,
-            automaticallyImplyLeading: true,
-            title: Text("GTIN Reporter"),
-            centerTitle: true,
-          ),
+          // Container(
+          //   height: 200,
+          //   padding: const EdgeInsets.all(50),
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: [
+          //         AppColors.primaryColor,
+          //         AppColors.white,
+          //       ],
+          //       begin: Alignment.topCenter,
+          //       end: Alignment.bottomCenter,
+          //     ),
+          //   ),
+          //   child: Image.asset(OtherImages.logo),
+          // ),
+          // AppBar(
+          //   backgroundColor: orangeColor,
+          //   automaticallyImplyLeading: true,
+          //   title: Text("GTIN Reporter"),
+          //   centerTitle: true,
+          // ),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Screen(
@@ -94,9 +101,25 @@ class _ScreenState extends State<Screen> {
   // List of Images
   List<File>? imageList = [];
   List<String>? imageListUrl = [];
+
+  // Blocs
+  GtinCubit gtinCubit = GtinCubit();
+
+  @override
+  void initState() {
+    super.initState();
+    gtinCubit.getGtinData(context, widget.gtin);
+  }
+
   @override
   void dispose() {
     _commentController.dispose();
+    reportBarcodeController.dispose();
+    mobileNoController.dispose();
+    emailController.dispose();
+
+    gtinCubit.close();
+
     super.dispose();
   }
 
@@ -112,69 +135,118 @@ class _ScreenState extends State<Screen> {
           subtitle: Text("This number is registered to company:"),
         ),
         SizedBox(height: 20),
-        FutureBuilder(
-            future: BaseApiService.getData(context, gtin: widget.gtin),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (!snapshot.hasData) {
-                return Center(
-                  child: Column(
+        BlocBuilder(
+          bloc: gtinCubit,
+          builder: (context, state) {
+            if (state is GtinLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is GtinLoadedState) {
+              data = state.productContentsListModel;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      Image.asset('assets/images/404.jpeg'),
-                      const SizedBox(height: 10),
-                      Text("It seems like there is no data for this GTIN"),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {});
-                            },
-                            child: const Text('Reload'),
-                          ),
-                          // Back button
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Go back'),
-                          ),
-                        ],
+                      Expanded(
+                        flex: 2,
+                        child:
+                            CustomImageWidget(imageUrl: data?.productImageUrl),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          children: [
+                            QRImage(data: data?.productImageUrl ?? ""),
+                            Text("${data?.gtin} | ${data?.brandName}"),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                );
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                data = snapshot.data;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  SizedBox(height: 20),
+                  SizedBox(height: 10),
+                  PrimaryButtonWidget(
+                    caption: 'Scan another barcode'.tr,
+                    onPressed: () {
+                      AppNavigator.goToPage(
+                        context: context,
+                        screen: BarcodeScanningScreen(
+                          icon: "gtin-reporter",
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  GridWidget(
+                    gtinNumber: data?.gtin.toString(),
+                    productBrand: data?.brandName,
+                    productDescription: data?.productDescription,
+                    productImageUrl: data?.productImageUrl,
+                    globalProductCategory: data?.gpcCategoryCode,
+                    netContent: data?.gcpGLNID,
+                    countryOfSale: data?.countryOfSaleCode,
+                  ),
+                  Divider(thickness: 2),
+                ],
+              );
+            } else if (state is GtinErrorState) {
+              return Center(
+                child: Column(
                   children: [
+                    Image.asset('assets/images/404.jpeg'),
+                    SizedBox(height: 10),
+                    Text("It seems like there is no data for this GTIN"),
+                    SizedBox(height: 10),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: CustomImageWidget(
-                              imageUrl: data?.productImageUrl),
+                        ElevatedButton(
+                          onPressed: () {
+                            gtinCubit.getGtinData(context, widget.gtin);
+                          },
+                          child: Text('Reload'),
                         ),
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            children: [
-                              QRImage(data: data?.productImageUrl ?? ""),
-                              Text("${data?.gtin} | ${data?.brandName}"),
-                            ],
-                          ),
+                        // Back button
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Go back'),
                         ),
+                        // scan new barcode
+                        ElevatedButton(
+                          onPressed: () {
+                            AppNavigator.goToPage(
+                              context: context,
+                              screen: BarcodeScanningScreen(
+                                icon: "gtin-reporter",
+                              ),
+                            );
+                          },
+                          child: Text('Scan another barcode'.tr),
+                        )
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    const SizedBox(height: 10),
-                    PrimaryButtonWidget(
-                      caption: 'Scan another barcode'.tr,
+                  ],
+                ),
+              );
+            } else {
+              return Center(
+                  child: Column(children: [
+                Image.asset('assets/images/404.jpeg'),
+                SizedBox(height: 10),
+                Text("The page you are trying to access does not exist"),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        gtinCubit.getGtinData(context, widget.gtin);
+                      },
+                      child: Text('Reload'),
+                    ),
+                    ElevatedButton(
                       onPressed: () {
                         AppNavigator.goToPage(
                           context: context,
@@ -183,72 +255,14 @@ class _ScreenState extends State<Screen> {
                           ),
                         );
                       },
+                      child: Text('Scan another barcode'.tr),
                     ),
-                    const SizedBox(height: 10),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.all(10.0),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Text(
-                    //         "${data?.productName} - ${data?.productDescription}",
-                    //         style: const TextStyle(
-                    //           fontSize: 20,
-                    //           fontWeight: FontWeight.bold,
-                    //         ),
-                    //       ),
-                    //       const SizedBox(height: 10),
-                    //       // gtin
-                    //       Text(
-                    //         "GTIN".tr + ": ${data?.gtin}",
-                    //         style: const TextStyle(fontSize: 18),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                    GridWidget(
-                      gtinNumber: data?.gtin.toString(),
-                      productBrand: data?.brandName,
-                      productDescription: data?.productDescription,
-                      productImageUrl: data?.productImageUrl,
-                      globalProductCategory: data?.gpcCategoryCode,
-                      netContent: data?.gcpGLNID,
-                      countryOfSale: data?.countryOfSaleCode,
-                    ),
-                    const Divider(thickness: 2),
                   ],
-                );
-              } else {
-                return Center(
-                  child: Column(
-                    children: [
-                      Image.asset('assets/images/404.jpeg'),
-                      const SizedBox(height: 10),
-                      Text("The page you are trying to access does not exist"),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {});
-                            },
-                            child: const Text('Reload'),
-                          ),
-                          // Back button
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Go back'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              }
-            }),
+                )
+              ]));
+            }
+          },
+        ),
 
         const SizedBox(height: 10),
         // Comments section
@@ -453,7 +467,7 @@ class ProceedButton extends StatelessWidget {
   onPressed() async {
     Common.showToast("Just a moment...");
     try {
-      await GtinReporterServices.proceesGtin(
+      await GtinReporterServices.proceedGtin(
         email: email,
         gtinComment: comments,
         gtinReportAction: option,

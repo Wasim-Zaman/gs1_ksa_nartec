@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gs1_v2_project/cubits/gtin_cubit.dart';
 import 'package:gs1_v2_project/models/product_contents_list_model.dart';
 import 'package:gs1_v2_project/utils/colors.dart';
 import 'package:gs1_v2_project/view-model/base-api/base_api_service.dart';
@@ -20,11 +21,14 @@ class ProductContentsScreen extends StatefulWidget {
 
 class _ProductContentsScreenState extends State<ProductContentsScreen> {
   String? gtin;
+  GtinCubit gtinCubit = GtinCubit();
+
   @override
   void initState() {
     // get gtin from arguments as string
     Future.delayed(Duration(seconds: 1), () {
       gtin = ModalRoute.of(context)?.settings.arguments as String;
+      gtinCubit.getGtinData(context, gtin.toString());
     });
     super.initState();
   }

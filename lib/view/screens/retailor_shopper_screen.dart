@@ -33,7 +33,6 @@ class _RetailorShopperScreenState extends State<RetailorShopperScreen> {
     // get gtin from arguments as string
     Future.delayed(Duration.zero, () {
       gtin = ModalRoute.of(context)?.settings.arguments as String;
-      print("gtin" + gtin.toString());
     });
     super.initState();
   }
